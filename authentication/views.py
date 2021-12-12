@@ -1,7 +1,7 @@
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import UserRegisterForm
@@ -9,6 +9,8 @@ from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
+from .models import NewUser
+User = get_user_model()
 ########### register here #####################################
 
 
@@ -46,12 +48,24 @@ def Login(request):
 
         email = request.POST.get('email')
         password = request.POST.get('password')
-        user = authenticate(request, email=email, password=password)
-        if user is not None:
-            form = login(request, user)
-            messages.success(request, f' wecome {email} !!')
-            return redirect('home')
+        user = NewUser.objects.filter(email=email)
+
+        if user:
+            user = authenticate(request, email=email, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                print("errrr")
+                messages.error(
+                    request, 'Password is incorrect for the email address entered ')
         else:
-            messages.info(request, f'account done not exit plz sign in')
-    form = AuthenticationForm()
-    return render(request, 'authentication/login.html', {'form': form, 'title': 'log in'})
+            messages.error(request, 'Email is not registered')
+
+    
+    return render(request, 'authentication/login.html', { 'title': 'log in'})
+
+
+def logout(request):
+    logout(request)
+    return redirect('home')
