@@ -12,6 +12,10 @@ class Competition(models.Model):
   location = models.CharField(max_length = 63)
   prize_worth = models.IntegerField()
   image = models.ImageField(upload_to="image_uploads/", default='event_default.png')
+  
+  def __str__(self):
+      return str(self.event_name)
+
 
 
 class CompTeam(models.Model):
@@ -21,6 +25,10 @@ class CompTeam(models.Model):
     members = models.ManyToManyField(
         "authentication.NewUser", related_name="compteams",null=False,blank=False)
     teamname = models.CharField(max_length=255, blank=False, null=True)
+    
+    def __str__(self):
+        return str(self.teamname)
+
     
 
 
