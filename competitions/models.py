@@ -14,7 +14,14 @@ class Competition(models.Model):
   image = models.ImageField(upload_to="image_uploads/", default='event_default.png')
 
 
-
+class CompTeam(models.Model):
+    id = models.SlugField(primary_key=True, default=uuid.uuid4)
+    event = models.ForeignKey(
+        Competition, related_name="teams_particiaptedd", on_delete=models.CASCADE)
+    members = models.ManyToManyField(
+        "authentication.NewUser", related_name="compteams",null=False,blank=False)
+    teamname = models.CharField(max_length=255, blank=False, null=True)
+    
 
 
 

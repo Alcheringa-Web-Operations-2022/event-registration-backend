@@ -8,9 +8,10 @@
 </head>
 
 <body>
-  <a href="{% url 'showallcompetitions' %}">comp</a>
-  <a href="{% url 'logout' %}">logout</a>
-  
+    <form method="POST">{% csrf_token %}
+        {{form}}
+        <input type="submit" value="Submit">
+    </form>
 
 </body>
 
