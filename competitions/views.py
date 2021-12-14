@@ -17,7 +17,8 @@ def registercompetition(request, slug):
     if request.method == 'POST':
         form = CreateTeamForm(request.POST)
         if form.is_valid():
-            if (len(request.POST.get('members'))>comp.max_members):
+            if (len(request.POST.get('members'))<=comp.max_members):
+                print(comp.max_members)
                 messages.error(request,'Maxmimum member limit exceeded')
             else:
                 result=form.save(commit=False)
