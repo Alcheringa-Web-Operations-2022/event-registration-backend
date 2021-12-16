@@ -1,18 +1,10 @@
-<!DOCTYPE html>
-<html>
+{% extends '../basic.html'%}
+{%block title%}Profile | Alcheringa {%endblock%}
+{% block body %}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Alc</title>
-</head>
+<form method="POST">{% csrf_token %}
+    {{form}}
+    <input type="submit" value="Submit">
+</form>
 
-<body>
-    <form method="POST">{% csrf_token %}
-        {{form}}
-        <input type="submit" value="Submit">
-    </form>
-
-</body>
-
-</html>
+{% endblock %}

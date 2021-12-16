@@ -1,21 +1,13 @@
-<!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <title>Alc</title>
-</head>
+{% extends '../basic.html'%}
+{%block title%}Register to {{ comp.event_name }} {%endblock%}
+{% block body %}
 
-<body>
-               Event name - {{ comp.event_name }}
+            Event name - {{ comp.event_name }}
             
-<form method="POST">{% csrf_token %}
-    {{form}}
-    <input type="submit" value="Submit">
-</form>
+            <form method="POST">{% csrf_token %}
+                {{form}}
+                <input type="submit" value="Submit">
+            </form>
 
-</body>
-
-</html>
+{% endblock %}

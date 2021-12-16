@@ -1,28 +1,20 @@
-<!DOCTYPE html>
-<html>
+{% extends '../basic.html'%}
+{%block title%}Competitions | Alcheringa {%endblock%}
+{% block body %}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <title>Alc</title>
-</head>
+{% for comp in allcomp %}
+<div class=" bg-white shadow-md w-full h-full flex flex-col">
+    <img src="{{ comp.image.url }}" alt="image" border="0" class="my-4 w-full h-1/2">
+    <center>
+        <div class=" py-3 px-4 font-medium" style="word-wrap: break-word;">
+            {{ comp.event_name }}
+        </div>
+    </center>
 
-<body>
-    {% for comp in allcomp %}
-    <div class=" bg-white shadow-md w-full h-full flex flex-col">
-        <img src="{{ comp.image.url }}" alt="image" border="0" class="my-4 w-full h-1/2">
-        <center>
-            <div class=" py-3 px-4 font-medium" style="word-wrap: break-word;">
-                {{ comp.event_name }}
-            </div>
-        </center>
-    
-        <a href="{% url 'registercomp' slug=comp.id %}">Register</a>
-        <hr />
-    </div>
-    {% endfor%}
+    <a href="{% url 'registercomp' slug=comp.id %}">Register</a>
+    <hr />
+</div>
+{% endfor%}
 
-</body>
+{% endblock %}
 
-</html>
