@@ -11,10 +11,15 @@
     {% endif %}
 </head>
 <body>
+    {% if messages %}
+        {% for message in messages %}
+            {{message}}
+        {% endfor %}
+    {% endif %}
     <h1>Team</h1>
     <ul>
         {% for member in team %}
-            <li>{{member.name}} | {{member.email}} | {{member.phone}}</li>
+            <li><a href = "{% url 'update-member' member.pk %}">{{member.name}} | {{member.email}} | {{member.phone}}</a></li>
         {% endfor %}
     </ul>
     <form method = "POST">
