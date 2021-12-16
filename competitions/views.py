@@ -26,7 +26,6 @@ def registercompetition(request, slug):
                     print(len(form.cleaned_data['members']))
                     print(comp.max_members)
                     messages.error(request, 'Not a valid range')
-                    return render(request, 'competitions/compreg.html', {'comp': comp, 'form': form})
                 else:
                     result = form.save(commit=False)
                     result.event = comp
