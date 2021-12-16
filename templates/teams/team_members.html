@@ -19,7 +19,7 @@
     <h1>Team</h1>
     <ul>
         {% for member in team %}
-            <li><a href = "{% url 'update-member' member.pk %}">{{member.name}} | {{member.email}} | {{member.phone}}</a></li>
+            <li><a href = "{% url 'update-member' member.id %}">{{member.name}} | {{member.email}} | {{member.phone}}</a></li>
         {% endfor %}
     </ul>
     <form method = "POST">
