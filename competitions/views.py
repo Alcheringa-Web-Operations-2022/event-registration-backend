@@ -15,7 +15,7 @@ def registercompetition(request, slug):
     comp = Competition.objects.get(id=slug)
     
     if request.method == 'POST':
-        form = CreateTeamForm(request.POST)
+        form = CreateTeamForm(request.user,request.POST)
         if form.is_valid():
             if (len(request.POST.get('members'))<=comp.max_members):
                 print(comp.max_members)
@@ -29,5 +29,5 @@ def registercompetition(request, slug):
                 return redirect(request.META['HTTP_REFERER'])
         
     else:
-        form = CreateTeamForm()
+        form = CreateTeamForm(request.user)
     return render(request, 'competitions/compreg.html', {'comp': comp, 'form': form})

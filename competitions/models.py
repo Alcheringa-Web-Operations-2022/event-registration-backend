@@ -23,7 +23,7 @@ class CompTeam(models.Model):
     event = models.ForeignKey(
         Competition, related_name="teams_particiaptedd", on_delete=models.CASCADE)
     members = models.ManyToManyField(
-        "authentication.NewUser", related_name="compteams",null=False,blank=False)
+        "teams.TeamMembers", related_name="compteams", null=False, blank=False)
     teamname = models.CharField(max_length=255, blank=False, null=True)
     
     def __str__(self):
