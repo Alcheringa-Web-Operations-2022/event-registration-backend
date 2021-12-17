@@ -1,11 +1,49 @@
 {% extends '../basic.html'%}
+{% load static %}
 {%block title%}Login | Alcheringa {%endblock%}
-{% block body %}
+{% block ext_style %}<link rel="stylesheet" href={% static "css/registration_login.css" %}> {% endblock %}
 
-<form method="POST">{% csrf_token %}
-    <input type="text" name="email" id="email" placeholder="Enter Email" required />
-    <input type="password" name="password" id="password" placeholder="Enter password" required />
-    <input type="submit" value="Submit">
-</form>
+{%block body%}
 
+<div class="video-background">
+    <div class="video-foreground">
+        <iframe src="https://www.youtube.com/embed/P79WeFLdR1U?autoplay=1&cc_load_policy=1&loop=1" allow="autoplay"
+            frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>
+<div class="flex center_ele">
+    <img class="logo_img" src={% static "imgs/alcher_logo.png" %} alt="">
+</div>
+<div class="flex center_ele flex_col">
+    <h2 class="heading">Registration Portal</h2>
+    <div class="form__wrapper">
+        <form class="form_border form__group field" method="POST">
+            <div class="border_bottom">
+                <p class="sub-heading">Login</p>
+                <br>
+            </div>
+            <div class="pad">
+                <p>Field marked * are mandatory</p>
+                <div class="flex flex_col ">
+                   {% csrf_token %}
+                    <input type="text" class="form__field" name="email" id="email" placeholder="Enter Email ID*"
+                        required>
+                    <input type="password" class="form__field" name="password" id="password"
+                        placeholder="Enter Password*" required>
+                    <div class="flex left_ele">
+                        <p class="fontfam">Forgot password?</p>
+                    </div>
+                    <div class="flex center_ele">
+                        <input class="btn_sub" type="submit" value="Login" />
+                    </div>
+                </div>
+                <div class="flex center_ele font">
+                    <p>Don't have an account?
+                    <p>
+                        <a href="{%url 'register'%}"> Sign Up</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}

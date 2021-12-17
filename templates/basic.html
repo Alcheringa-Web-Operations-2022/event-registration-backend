@@ -1,10 +1,19 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
+
+    <!-- Title -->
     <title>{% block title %} {% endblock %}</title>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+    <!-- External stylesheet -->
+    {% block ext_style %} {% endblock %}
 </head>
 
 <body>

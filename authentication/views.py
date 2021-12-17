@@ -1,7 +1,8 @@
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth import authenticate, login,get_user_model
+from django.contrib.auth import logout as django_logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import UserRegisterForm
@@ -47,19 +48,22 @@ def Login(request):
         # AuthenticationForm_can_also_be_used__
 
         email = request.POST.get('email')
+        print(email)
         password = request.POST.get('password')
+        print(password)
         user = NewUser.objects.filter(email=email)
 
         if user:
             user = authenticate(request, email=email, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('home')
+                return redirect(request.GET.get('next', 'home'))
             else:
                 print("errrr")
                 messages.error(
                     request, 'Password is incorrect for the email address entered ')
         else:
+            print("email not registered")
             messages.error(request, 'Email is not registered')
 
     
@@ -67,5 +71,5 @@ def Login(request):
 
 
 def logout(request):
-    logout(request)
+    django_logout(request)
     return redirect('home')

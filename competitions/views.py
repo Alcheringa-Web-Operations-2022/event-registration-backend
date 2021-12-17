@@ -2,15 +2,17 @@ from django.shortcuts import render, redirect
 from competitions.forms import CreateTeamForm
 from django.contrib import messages
 from competitions.models import CompTeam, Competition
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
+@login_required(login_url='login')
 def showallcompetitions(request):
     allcomp = Competition.objects.all()
     return render(request, 'competitions/allcomp.html', {'allcomp': allcomp})
 
 
+@login_required(login_url='login')
 def registercompetition(request, slug):
     comp = Competition.objects.get(id=slug)
     check_unique = CompTeam.objects.filter(leader=request.user, event=comp)

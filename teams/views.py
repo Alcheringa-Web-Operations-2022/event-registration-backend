@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-@login_required
+@login_required(login_url='login')
 def team_members(request):
     team = Team.objects.filter(leader=request.user).first()
     if request.method == 'POST':
@@ -33,7 +33,7 @@ def team_members(request):
     return render(request,'teams/team_members.html',{'title':'Alcheringa | Teams','form':form,'team':all_members})
 
 
-@login_required
+@login_required(login_url='login')
 def update_member(request,pk):
     member = TeamMembers.objects.get(pk=pk)
     if request.method == 'POST':
