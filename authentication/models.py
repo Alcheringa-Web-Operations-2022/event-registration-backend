@@ -32,7 +32,7 @@ class CustomAccountManager(BaseUserManager):
 class NewUser(AbstractBaseUser, PermissionsMixin):
     id = models.SlugField(primary_key=True, default=uuid.uuid4)
     email = models.EmailField(_('email address'), unique=True)
-    username = models.CharField(max_length=150, unique=False)
+    username = models.CharField(max_length=150, unique=True)
     collegename = models.CharField(max_length=150, unique=False)
     city = models.CharField(max_length=150, unique=False)
     fullname = models.CharField(max_length=150, blank=True)
@@ -46,7 +46,7 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     objects = CustomAccountManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['username']
 
     def __str__(self):
         return str(self.email)

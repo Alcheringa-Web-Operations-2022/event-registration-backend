@@ -25,6 +25,20 @@
             </div>
             <div class="pad">
                 <p>Field marked * are mandatory</p>
+                <ul class="font fontfam">
+                    {% if form.non_field_errors %}
+                    <li>{{ form.non_field_errors }}</li>
+                    {% endif %}
+                    {% for field in form %}
+                    {% if field.errors %}
+                    <ul class="errorlist">
+                        {% for error in field.errors %}
+                        {{ error }}
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
                 <div class="flex flex_col ">
                     {% csrf_token %}
                     {{ form.fullname}}
@@ -33,6 +47,8 @@
                     {{ form.phone}}
                     {{ form.collegename}}
                     {{ form.city}}
+                    {{ form.password1}}
+                    {{ form.password2}}
                     <div class="flex center_ele">
                         <input class="btn_sub" type="submit" value="Register" />
                     </div>

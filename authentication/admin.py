@@ -9,15 +9,15 @@ from authentication.models import NewUser
 
 class UserAdminConfig(UserAdmin):
     model = NewUser
-    search_fields = ('email', 'collegename', 'fullname',)
-    list_filter = ('email', 'collegename', 'fullname',
+    search_fields = ('email','username', 'fullname',)
+    list_filter = ('email',  'username','fullname',
                    'is_active', 'is_staff', 'id')
     ordering = ('-date_joined',)
-    list_display = ('email', 'collegename', 'fullname',
+    list_display = ('email', 'username', 'fullname',
                     'is_active', 'is_staff', 'id',)
     fieldsets = (
-        (None, {'fields': ('email', 'collegename',
-         'fullname', 'id')}),
+        (None, {'fields': ('email', 'collegename', 'username',
+         'fullname', 'id','city')}),
         ('Permissions', {'fields': ('is_staff', 'is_active')}),
         ('Personal', {'fields': ('about', 'phone', 'provider')}),
     )

@@ -31,7 +31,7 @@
                     <input type="password" class="form__field" name="password" id="password"
                         placeholder="Enter Password*" required>
                     <div class="flex left_ele">
-                        <p class="fontfam">Forgot password?</p>
+                        <a class="fontfam" href="{% url 'password_reset' %}">Forgot password?</a>
                     </div>
                     <div class="flex center_ele">
                         <input class="btn_sub" type="submit" value="Login" />
