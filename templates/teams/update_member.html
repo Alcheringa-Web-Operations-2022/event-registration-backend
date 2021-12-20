@@ -1,27 +1,228 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% if title %}
-    <title>{{title}}</title>
-    {% else %}
-    <title>Alc</title>
-    {% endif %}
-</head>
-<body>
+{% extends '../basic.html'%}
+{% load static %}
+{%block title%}Teams | Alcheringa {%endblock%}
+{% block ext_style %}
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"> {% endblock %}
+
+{%block body%}
+<style>
+    .edit-delete-parent:hover .edit-delete {
+        display: flex
+    }
+
+    .edit-delete-parent:hover .add-member-form-small {
+        display: flex
+    }
+</style>
+<div class="bg-blue-50">
+    {% include 'navbar.html' %}
     {% if messages %}
-        {% for message in messages %}
-            {{message}}
-        {% endfor %}
+    {% for message in messages %}
+    {{message}}
+    {% endfor %}
     {% endif %}
-    {{member.name}} | {{member.email}} | {{member.phone}}
-    <form method = "POST">
-        {% csrf_token %}
-        {{form}}
-        <button type="submit" name='_save'>Save</button>
-        <button type="submit" name='_remove'>Remove</button>
-    </form>
-</body>
-</html>
+    <div class="grid grid-flow-col">
+        <!-- left_nav -->
+        <div class="w-80 bg-white h-screen hidden md:block"></div>
+        <div>
+            <div class="m-3 font-medium text-2xl">Team Members<span
+                    class="mx-3 p-1 bg-gray-600 rounded-sm font-normal text-white text-sm">23</span></div>
+            <div class="grid grid-flow-col">
+                <!-- members -->
+                <div class="m-3 bg-white rounded-lg shadow">
+                    <div class="py-2 px-4 font-medium text-lg border-b">Members</div>
+                    <div class="m-4 bg-blue-50 rounded-sm">
+                        <span class="float-left p-1">
+                            <svg width="20" height="20" viewBox="0 0 20 21" fill="none"
+                                xmlns="http://www.w3.org/2000/svg" class="mt-1">
+                                <path
+                                    d="M12.9167 12.1667H12.2583L12.025 11.9417C12.8417 10.9917 13.3333 9.75833 13.3333 8.41667C13.3333 5.425 10.9083 3 7.91667 3C4.925 3 2.5 5.425 2.5 8.41667C2.5 11.4083 4.925 13.8333 7.91667 13.8333C9.25833 13.8333 10.4917 13.3417 11.4417 12.525L11.6667 12.7583V13.4167L15.8333 17.575L17.075 16.3333L12.9167 12.1667ZM7.91667 12.1667C5.84167 12.1667 4.16667 10.4917 4.16667 8.41667C4.16667 6.34167 5.84167 4.66667 7.91667 4.66667C9.99167 4.66667 11.6667 6.34167 11.6667 8.41667C11.6667 10.4917 9.99167 12.1667 7.91667 12.1667Z"
+                                    fill="#C2CFE0" />
+                            </svg>
+                        </span>
+                        <span>
+                            <input type="search" class="py-1 bg-blue-50 font-light text-base"
+                                placeholder="search member" />
+                        </span>
+                    </div>
+                    <div class="mx-3 flex flex-wrap justify-around">
+                        <!-- single-card-add_member -->
+                        <button onclick="toggleOpen(this.id)" id="addMemberButton"
+                            class="m-1 h-28 border-blue-400 border-2 border-dashed grid grid-flow-col items-center justify-center lg:w-80 w-full rounded-md">
+                            <div class="text-blue-400 font-semibold text-4xl">+</div>
+                            <div class="mt-2 text-blue-400 font-medium">Add member</div>
+                        </button>
+                        <!-- add_members_form-upto_large_screens -->
+                        <div class="lg:hidden m-1 bg-white rounded-lg shadow">
+                            <div id="addMemberCardSmall" class="hidden">
+                                <div class="py-2 px-4 font-medium text-lg border-b">Add Member</div>
+                                <img class="my-9 mx-auto" width="120" src="https://i.ibb.co/r6BfngJ/image.png"
+                                    alt="profile" border="0" />
+                                <form class="px-4 space-y-5" action="">
+                                    <input class="border-b w-full" type="text" size="25" placeholder="Enter Name" />
+                                    <input class="border-b w-full" type="text" size="25"
+                                        placeholder="Enter Phone Number" />
+                                    <input class="border-b w-full" type="text" size="25" placeholder="Enter Email" />
+                                    <select class="border-b w-full text-gray-400 pr-36">
+                                        <option disabled selected hidden>Gender</option>
+                                        <option value="male">male</option>
+                                        <option value="female">female</option>
+                                    </select>
+                                    <div class="flex justify-end pb-4">
+                                        <button class="text-blue-500 mx-5 text-sm">Cancel</button>
+                                        <button class="bg-blue-500 text-white py-1 px-2 text-sm rounded">Add</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- single-card-yellow_border -->
+                        <div class="m-1 p-4 h-28 flex bg-white border-yellow-400 lg:w-80 w-full border-2 rounded-md">
+                            <img width="75" src="https://i.ibb.co/r6BfngJ/image.png" alt="profile" border="0" />
+                            <div class="mx-5 my-auto">
+                                <div class="font-medium text-base">{{user.fullname}}</div>
+                                <div class="font-light text-sm">{{user.email}}</div>
+                            </div>
+                        </div>
+                        <!-- single-card -->
+                        {% for member in team %}
+                        <div
+                            class="m-1 p-4 lg:h-28 bg-blue-50 border-blue-50 border rounded-md hover:bg-white hover:shadow-md lg:w-80 w-full edit-delete-parent">
+                            <div class="flex">
+                                <img width="78" height="78" src="https://i.ibb.co/r6BfngJ/image.png" alt="profile" />
+                                <div class="mx-5 my-auto">
+                                    <div class="font-medium text-base">{{member.name}}</div>
+                                    <div class="font-light text-sm">{{member.email}}</div>
+                                </div>
+                                <div class="my-auto float-right hidden edit-delete">
+                                    <div class="lg:flex hidden">
+                                        <a href="{% url 'update-member' member.id %}"><button
+                                                onclick="toggleOpen(this.id)" id="editButton" class="-ml-2">
+                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M2 11.5V14H4.5L11.8733 6.62665L9.37333 4.12666L2 11.5ZM13.8067 4.69332C14.0667 4.43332 14.0667 4.01332 13.8067 3.75332L12.2467 2.19332C11.9867 1.93332 11.5667 1.93332 11.3067 2.19332L10.0867 3.41332L12.5867 5.91332L13.8067 4.69332V4.69332Z"
+                                                        fill="#C2CFE0" />
+                                                </svg>
+                                            </button></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hidden add-member-form-small">
+                                <div class="lg:hidden mt-5">
+                                    <form class="px-2 space-y-5" action="">
+                                        <input class="bg-transparent border-b w-full" type="text" size="25"
+                                            placeholder="Enter Name" />
+                                        <input class="bg-transparent border-b w-full" type="text" size="25"
+                                            placeholder="Enter Phone Number" />
+                                        <input class="bg-transparent border-b w-full" type="text" size="25"
+                                            placeholder="Enter Email" />
+                                        <select class="bg-transparent border-b w-full text-gray-400 pr-36">
+                                            <option disabled selected hidden>Gender</option>
+                                            <option value="male">male</option>
+                                            <option value="female">female</option>
+                                        </select>
+                                        <div class="flex justify-between">
+                                            <button class="text-blue-500 mx-1 text-sm" onclick="toggleOpen(this.id)"
+                                                id="deleteButton">Remove</button>
+                                            <div><button class="text-blue-500 mx-2 text-sm">Cancel</button>
+                                                <button
+                                                    class="bg-blue-500 text-white py-1 px-2 text-sm rounded">Add</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+
+                    </div>
+                </div>
+                <div class="hidden lg:block">
+                    <div style="height: 460px;" id="emptyCard"
+                        class="mr-3 mt-3 w-80 flex flex-col justify-center bg-white rounded-lg shadow gap-2 hidden">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
+                            class="mx-auto">
+                            <path
+                                d="M2 11.5V14H4.5L11.8733 6.62665L9.37333 4.12666L2 11.5ZM13.8067 4.69332C14.0667 4.43332 14.0667 4.01332 13.8067 3.75332L12.2467 2.19332C11.9867 1.93332 11.5667 1.93332 11.3067 2.19332L10.0867 3.41332L12.5867 5.91332L13.8067 4.69332Z"
+                                fill="#C2CFE0" />
+                        </svg>
+                        <div class="text-gray-300 font-light mx-auto">Select a member to edit details</div>
+                    </div>
+                    <div style="height: 480px;" id="addMemberCard"
+                        class="mr-3 mt-3 w-80 bg-white rounded-lg shadow hidden">
+                        <div class="py-2 px-4 font-medium text-lg border-b">Add Member</div>
+                        <img class="my-9 mx-auto" width="120" src="https://i.ibb.co/r6BfngJ/image.png" alt="profile"
+                            border="0" />
+                        <form class="px-4 space-y-5" method="POST">
+                            <div class="flex justify-end pb-4">
+                                <button class="text-blue-500 mx-5 text-sm">Cancel</button>
+                                <button type="submit"
+                                    class="bg-blue-500 text-white py-1 px-2 text-sm rounded">Add</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div style="height: 480px;" id="editProfileCard" class="mr-3 mt-3 w-80 bg-white rounded-lg shadow">
+                        <div class="py-2 px-4 font-medium text-lg border-b">Edit Profile</div>
+                        <img class="my-9 mx-auto" width="120" src="https://i.ibb.co/LpL40sM/image.png" alt="profile"
+                            border="0" />
+                        <form class="px-4 space-y-5" method="POST">
+                            {% csrf_token %}
+                            {{form.name}} {{form.phone}} {{form.email}} {{form.gender}}
+                            <div class="flex justify-between pb-4">
+                                <button type="button" class="text-blue-500 mx-1 text-sm" onclick="toggleOpen(this.id)"
+                                    id="deleteButton">Remove</button>
+                                <div><button class="text-blue-500 mx-5 text-sm">Cancel</button>
+                                    <button type="submit" name='_save'
+                                        class="bg-blue-500 text-white py-1 px-2 text-sm rounded">Add</button>
+
+                                    <div class="fixed hidden inset-0 bg-gray-600 bg-opacity-60 overflow-y-auto h-full w-full"
+                                        id="modalBackground">
+                                        <div
+                                            class="relative top-2/4 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+                                            Are you sure you want to remove the member
+                                            <div class="flex justify-end pt-4">
+                                                <button class="text-red-500 mx-5 text-sm" id="modalCancel"
+                                                    onclick="toggleOpen(this.id)">Cancel</button>
+                                                <button type="submit" name="_remove"
+                                                    class="bg-red-500 text-white py-1 px-2 text-sm rounded">Remove</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<h1>Team</h1>
+</div>
+<script>
+    function toggleOpen(id) {
+        var emptyCard = document.getElementById("emptyCard");
+        var addMemberCard = document.getElementById("addMemberCard");
+        var addMemberCardSmall = document.getElementById("addMemberCardSmall");
+        var editProfileCard = document.getElementById("editProfileCard");
+        if (id == "addMemberButton") {
+            emptyCard.style.display = 'none';
+            addMemberCard.style.display = 'block';
+            addMemberCardSmall.style.display = 'block';
+            editProfileCard.style.display = 'none';
+        }
+        if (id == "editButton") {
+            emptyCard.style.display = 'none';
+            addMemberCard.style.display = 'none';
+            editProfileCard.style.display = 'block';
+        }
+        if (id == "deleteButton") {
+            document.getElementById("modalBackground").style.display = 'block';
+        }
+        if (id == "modalCancel") {
+            document.getElementById("modalBackground").style.display = 'none';
+        }
+    }
+</script>
+{% endblock %}

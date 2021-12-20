@@ -7,8 +7,9 @@ class Competition(models.Model):
   module = models.CharField(choices = competition_choices, max_length=127)
   event_name = models.CharField(max_length = 255)
   event_desc = models.CharField(max_length = 255) 
-  # event_rules = models
+  event_rules = models.TextField(blank=True, null=True)
   max_members = models.IntegerField(default = 1)
+  min_members = models.IntegerField(default = 1)
   location = models.CharField(max_length = 63)
   prize_worth = models.IntegerField()
   image = models.ImageField(upload_to="image_uploads/", default='event_default.png')

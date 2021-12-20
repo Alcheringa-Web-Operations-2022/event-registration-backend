@@ -25,20 +25,20 @@ SECRET_KEY = '&$e4i@0hkjrkp4!_p6up4u-o+h8-917ugi8-2##q)6g&cfkym!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["*"]
+INITIAL_ROUTE='home'
 
 # Application definition
 
 INSTALLED_APPS = [
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'authentication', 'home', 'teams' ,  'competitions' ,
+    'authentication',  'teams' ,  'competitions' ,
 ]
 
 MIDDLEWARE = [
@@ -123,6 +123,17 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
 MEDIA_URL = '/image_uploads/'
+
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'image_uploads')
 AUTH_USER_MODEL = 'authentication.NewUser'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'schedulerevent9@gmail.com'
+EMAIL_HOST_PASSWORD = 'qigpglvkwjrldryy'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

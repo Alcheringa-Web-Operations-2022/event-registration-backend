@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-@login_required
+@login_required(login_url='login')
 def team_members(request):
     team = Team.objects.filter(leader=request.user).first()
     if request.method == 'POST':
@@ -33,9 +33,13 @@ def team_members(request):
     return render(request,'teams/team_members.html',{'title':'Alcheringa | Teams','form':form,'team':all_members})
 
 
-@login_required
-def update_member(request,pk):
-    member = TeamMembers.objects.get(pk=pk)
+@login_required(login_url='login')
+def update_member(request,id):
+    team = Team.objects.filter(leader=request.user).first()
+    all_members = []
+    for member in team.members.all():
+        all_members.append(member)
+    member = TeamMembers.objects.filter(id=id).first()
     if request.method == 'POST':
         if '_remove' in request.POST:
             member.delete()
@@ -53,4 +57,4 @@ def update_member(request,pk):
         form.fields['email'].widget.attrs['value'] = member.email
         form.fields['phone'].widget.attrs['value'] = member.phone
         form.fields['gender'].widget.attrs['value'] = member.gender
-    return render(request,'teams/update_member.html',{'title':'Alcheringa | Teams','form':form,'member':member})
+    return render(request,'teams/update_member.html',{'title':'Alcheringa | Teams','form':form,'member':member,'team':all_members})
