@@ -25,6 +25,7 @@ def team_members(request):
             new_member.save()
             team.members.add(new_member)
             team.save()
+            return redirect('team')
     else:
         form = MemberForm()
     all_members = []
