@@ -1,22 +1,45 @@
 {% extends '../basictailwind.html'%}
-{%block title%}Competitions | Alcheringa {%endblock%}
-{% block body %}
+{% load static %}
+{%block title%}Teams | Alcheringa {%endblock%}
 
-{% for comp in allcomp %}
-<div class=" bg-white shadow-md w-full h-full flex flex-col">
-    <img src="{{ comp.image.url }}" alt="image" border="0" class="my-4 w-full h-1/2">
-    <center>
-        <div class=" py-3 px-4 font-medium" style="word-wrap: break-word;">
-            {{ comp.event_name }}
-            MAx member {{comp.max_members}}
-            Min member {{comp.min_members}}
+{%block body%}
+<style>
+    .edit-delete-parent:hover .edit-delete {
+        display: flex
+    }
+
+    .edit-delete-parent:hover .add-member-form-small {
+        display: flex
+    }
+</style>
+<div class="bg-blue-50">
+    {% include 'navbar.html' %}
+    
+
+   
+    <div class="grid grid-flow-col">
+        <div class="w-80 bg-white h-screen hidden md:block"></div>
+
+        <!-- put content here -->
+        <div>
+            <div class="m-3 font-medium text-2xl">Competitions</div>
+            {% for comp in allcomp %}
+            <div class="">
+                <img src="{{ comp.image.url }}" alt="image" border="0" class="">
+                <center>
+                    <div class=" py-3 px-4 font-medium" style="word-wrap: break-word;">
+                        {{ comp.event_name }}
+                        MAx member {{comp.max_members}}
+                        Min member {{comp.min_members}}
+                    </div>
+                </center>
+            
+                <a href="{% url 'registercomp' slug=comp.id %}">Register</a>
+                <hr />
+            </div>
+            {% endfor%}
         </div>
-    </center>
-
-    <a href="{% url 'registercomp' slug=comp.id %}">Register</a>
-    <hr />
-</div>
-{% endfor%}
-
+    </div>
+    
+  
 {% endblock %}
-
