@@ -116,7 +116,7 @@
                 </div>
                 <div class="p-3 grid grid-cols-1 sm:grid-cols-2">
                     <!-- single-card-orange_border -->
-                    <div class="m-1 p-3 flex bg-white bg-blue-50 border-red-500 border-2 rounded-md relative">
+                    <div class="m-1 p-3 flex bg-white bg-blue-50 border-red-500 border-2 rounded-md relative cursor-pointer">
                         <img width="70" height="70" src="https://i.ibb.co/BzT98sw/image.png" alt="profile" border="0" />
                         <div class="absolute top-0 right-0 h-16 w-16 text-right px-2" id="{{member.id}}"><i class="fa fa-check"
                                 aria-hidden="true" style="color:green;"></i></div>
@@ -128,7 +128,7 @@
                     </div>
                     <!-- single-card -->
                     {%for member in team_members%}
-                    <div class="m-1 p-3 flex border-2 rounded-md relative" id="card{{member.id}}"onclick="select('{{member.id}}')">
+                    <div class="m-1 p-3 flex border-2 rounded-md relative cursor-pointer" id="card{{member.id}}"onclick="select('{{member.id}}')">
                         <img width="70" height="70" src="https://i.ibb.co/BzT98sw/image.png" alt="profile" border="0" />
                         <div class="absolute top-0 right-0 h-16 w-16 text-right px-2 invisible"  id="{{member.id}}"><i class="fa fa-check" aria-hidden="true" style="color:green;"></i></div>
                         <div class="mx-5 my-auto">

@@ -43,16 +43,14 @@ def registercompetition(request, slug):
             #         result.save()
 
             #         form.save_m2m()
-            
-            compteams = CompTeam(event=comp, leader=request.user, teamname=request.POST['teamname'])
+            print(request.user)
+            print(request.POST.get('members'))
+            compteams = CompTeam.objects.create(event=comp, leader=request.user, teamname=request.POST['teamname'])
             team_members=[]
             for member in json.loads(request.POST.get('members')):
-                print(member['id'])
-                team_members.append(TeamMembers.objects.get(id=str(member['id'])))
-            compteams.members.add(*team_members)
-            compteams.save()
+                print(str(member['id']))
+                compteams.members.add(TeamMembers.objects.get(id=str(member['id'])))
+                compteams.save()
             messages.success(request, 'You have registered your team for this event successfully')
             return HttpResponse("OK")
-        
     return render(request, 'competitions/compreg.html', {'comp': comp,'team_members': team_members})
- 
