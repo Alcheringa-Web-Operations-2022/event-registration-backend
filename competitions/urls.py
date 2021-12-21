@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 urlpatterns = [
-    path('all/', views.showallcompetitions, name='showallcompetitions'),
+    path('', views.showallcompetitions, name='showallcompetitions'),
     path('register/<slug>',
          views.registercompetition, name='registercomp'),
 ]

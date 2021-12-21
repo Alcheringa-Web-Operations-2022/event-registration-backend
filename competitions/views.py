@@ -3,6 +3,7 @@ from competitions.forms import CreateTeamForm
 from django.contrib import messages
 from competitions.models import CompTeam, Competition
 from django.contrib.auth.decorators import login_required
+from teams.models import Team
 # Create your views here.
 
 
@@ -21,6 +22,7 @@ def showallcompetitions(request):
 def registercompetition(request, slug):
     comp = Competition.objects.get(id=slug)
     check_unique = CompTeam.objects.filter(leader=request.user, event=comp)
+    team_members = Team.objects.get(leader=request.user).members.all()
     if request.method != 'POST' and len(check_unique) > 0:
         messages.error(
             request, 'You have already registered your team for this event')
@@ -46,4 +48,4 @@ def registercompetition(request, slug):
 
         else:
             form = CreateTeamForm(request.user)
-    return render(request, 'competitions/compreg.html', {'comp': comp, 'form': form})
+    return render(request, 'competitions/compreg.html', {'comp': comp, 'form': form, 'team_members': team_members})
