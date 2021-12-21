@@ -160,9 +160,9 @@
         team=[]
         var elements = document.getElementsByClassName("selected");
         for (var i = 0, len = elements.length; i < len; i++) {
-            team.push({'id':elements[i].id.slice(5),'image':elements[i].getElementsByTagName('img')[0].src,'name':elements[i].getElementsByTagName('div')[1].getElementsByTagName('div')[0].innerHTML,'email':elements[i].getElementsByTagName('div')[1].getElementsByTagName('div')[1].innerHTML})
+            team.push({'id':elements[i].id.slice(4),'image':elements[i].getElementsByTagName('img')[0].src,'name':elements[i].getElementsByTagName('div')[1].getElementsByTagName('div')[0].innerHTML,'email':elements[i].getElementsByTagName('div')[1].getElementsByTagName('div')[1].innerHTML})
         }
-        console.log(team)
+        // console.log(team)
         addchip(team)
     }
 
@@ -187,25 +187,26 @@
         event.preventDefault();
         if(team.length==0){
             notifyError("ERROR", "Members can't be zero")
+            return
         }
         if((team.length+1)<{{comp.min_members}} || (team.length+1)>{{comp.max_members}}){
             notifyError("ERROR", "Members not within valid range")
+            return
         }
-        var formData = {
-            teamname: $("#teamname").val(),
-            team: team
-        };
-     
         $.ajax({
             type: "POST",
-            data: formData,
-            dataType: "json",
+            data: {
+                'members':JSON.stringify(team),
+                'teamname':$("#teamname").val(),
+            },
+
             headers: {
                 "X-CSRFTOKEN": "{{ csrf_token }}"
             },
-        }).done(function (data) {
-            console.log(data);
-        });
+            success:(data)=>{
+                window.location.reload()
+            }
+        })
 
         
     });

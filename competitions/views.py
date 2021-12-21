@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,HttpResponse
 from competitions.forms import CreateTeamForm
 from django.contrib import messages
 from competitions.models import CompTeam, Competition
 from django.contrib.auth.decorators import login_required
-from teams.models import Team
+from teams.models import Team, TeamMembers
+import json
 # Create your views here.
 
 
@@ -29,23 +30,29 @@ def registercompetition(request, slug):
         return redirect('showallcompetitions')
     else:
         if request.method == 'POST':
-            form = CreateTeamForm(request.user, request.POST)
-            if form.is_valid():
-                if ((len(form.cleaned_data['members'])+1) > comp.max_members or (len(form.cleaned_data['members'])+1) < comp.min_members):
-                    print(len(form.cleaned_data['members']))
-                    print(comp.max_members)
-                    messages.error(request, 'Not a valid range')
-                else:
-                    result = form.save(commit=False)
-                    result.event = comp
-                    result.leader = request.user
-                    result.save()
+            # form = CreateTeamForm(request.user, request.POST)
+            # if form.is_valid():
+            #     if ((len(form.cleaned_data['members'])+1) > comp.max_members or (len(form.cleaned_data['members'])+1) < comp.min_members):
+            #         print(len(form.cleaned_data['members']))
+            #         print(comp.max_members)
+            #         messages.error(request, 'Not a valid range')
+            #     else:
+            #         result = form.save(commit=False)
+            #         result.event = comp
+            #         result.leader = request.user
+            #         result.save()
 
-                    form.save_m2m()
-                    messages.success(
-                        request, 'You have registered your team for this event successfully')
-                    return redirect('showallcompetitions')
-
-        else:
-            form = CreateTeamForm(request.user)
-    return render(request, 'competitions/compreg.html', {'comp': comp, 'form': form, 'team_members': team_members})
+            #         form.save_m2m()
+            
+            compteams = CompTeam(event=comp, leader=request.user, teamname=request.POST['teamname'])
+            team_members=[]
+            for member in json.loads(request.POST.get('members')):
+                print(member['id'])
+                team_members.append(TeamMembers.objects.get(id=str(member['id'])))
+            compteams.members.add(*team_members)
+            compteams.save()
+            messages.success(request, 'You have registered your team for this event successfully')
+            return HttpResponse("OK")
+        
+    return render(request, 'competitions/compreg.html', {'comp': comp,'team_members': team_members})
+ 
