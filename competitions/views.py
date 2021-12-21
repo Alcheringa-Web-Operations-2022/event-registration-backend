@@ -8,8 +8,13 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='login')
 def showallcompetitions(request):
-    allcomp = Competition.objects.all()
-    return render(request, 'competitions/allcomp.html', {'allcomp': allcomp})
+    # print(request.GET.get('module'))
+    if(request.GET.get('module')):
+        module_comp = Competition.objects.filter(module = request.GET.get('module'))
+    else:
+        module_comp = Competition.objects.filter(module = 'Dance')
+    
+    return render(request, 'competitions/allcomp.html', {'allcomp': module_comp, 'modulename' : request.GET.get('module')})
 
 
 @login_required(login_url='login')
