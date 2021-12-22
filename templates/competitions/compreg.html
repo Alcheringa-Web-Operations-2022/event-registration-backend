@@ -2,12 +2,13 @@
 {%block title%}Register for {{comp.event_name}} {%endblock%}
 {% block body %}
 <style>
-    input{
+    input,textarea{
        border: none;
        border-bottom: 1px solid rgb(214, 206, 206);
        margin: 16px 0px;
+       width:100%;
    }
-   input:focus{
+   input,textarea:focus{
     outline: none;
     }
 </style>
@@ -64,8 +65,12 @@
                                                 <!-- Chips -->
                                                 <div class="flex flex-wrap justify-start space-x-2 items-end" id="chip-team"></div>
                                                 <div class="py-3 px-6 my-3 border-dotted border-2 font-normal w-full text-center cursor-pointer" @click="showModal = true">Add/Remove member(s)</div>
-                                                <input type="submit"
-                                                    class="bg-red-600 hover:bg-red-700 text-white inline-block py-2 px-4 rounded shadow-sm font-semibold text-base"/>
+                                                <div class="font-normal text-gray-600 text-base">Previous Performance(s)</div>
+                                                <input type="text" name="link" placeholder="Enter link.." id="link">
+                                                <div class="font-normal text-gray-600 text-base">Description</div>
+                                                <textarea name="description" cols="40" rows="10" placeholder="Write a suitable caption explaining your performance.." id="description"></textarea>
+                                                <button type="submit"
+                                                    class="bg-red-600 hover:bg-red-700 text-white inline-block py-2 px-4 rounded shadow-sm font-semibold text-base">Submit</button>
                                                 
                                             </div>
                                         </form>
@@ -193,6 +198,7 @@
 
     $("#add-member-form").submit(function (event) {
         event.preventDefault();
+        
         if(team.length==0){
             notifyError("ERROR", "Members can't be zero")
             return
@@ -208,6 +214,8 @@
             data: {
                 'members':JSON.stringify(team),
                 'teamname':$("#teamname").val(),
+                'link':$("#link").val(),
+                'description':$("#description").val(),
             },
 
             headers: {

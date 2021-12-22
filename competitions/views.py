@@ -1,9 +1,8 @@
 from django.http.response import BadHeaderError
 from django.shortcuts import render, redirect,HttpResponse
 from django.template.loader import render_to_string
-from competitions.forms import CreateTeamForm
 from django.contrib import messages
-from competitions.models import CompTeam, Competition
+from competitions.models import CompTeam, Competition, PreviousPerformance
 from django.contrib.auth.decorators import login_required
 from teams.models import Team, TeamMembers
 from django.core.mail import send_mail
@@ -33,8 +32,8 @@ def registercompetition(request, slug):
         return redirect('showallcompetitions')
     else:
         if request.method == 'POST':
-            print(request.user)
-            print(request.POST.get('members'))
+            ######################### saving team ####################################
+            
             compteams = CompTeam.objects.create(event=comp, leader=request.user, teamname=request.POST['teamname'])
             team_members=[]
             for member in json.loads(request.POST.get('members')):
@@ -42,8 +41,11 @@ def registercompetition(request, slug):
                 compteams.members.add(TeamMembers.objects.get(id=str(member['id'])))
                 compteams.save()
                 
+            ######################### saving previpus performance form ####################################
+            if request.POST.get('link') or request.POST.get('description'):
+                prev=PreviousPerformance.objects.create(event=comp, team=compteams, link=request.POST.get('link'), description=request.POST.get('description'))
+                prev.save()
             ######################### mail system ####################################
-            # emailsend(comp, request.POST.get('members'))
             for user in json.loads(request.POST.get('members')):
                 subject = "Event Registration Successful"
                 email_template_name = "competitions/registration_email.txt"
@@ -61,9 +63,9 @@ def registercompetition(request, slug):
                 except BadHeaderError:
                     return HttpResponse('Invalid header found.')
             ##################################################################
-            
+        
             messages.success(request, 'You have registered your team for this event successfully')
             return HttpResponse("OK")
-    return render(request, 'competitions/compreg.html', {'comp': comp,'team_members': team_members})
+    return render(request, 'competitions/compreg.html', {'comp': comp,'team_members': team_members,})
 
 

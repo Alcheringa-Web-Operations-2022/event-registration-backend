@@ -22,16 +22,23 @@ class Competition(models.Model):
 class CompTeam(models.Model):
     id = models.SlugField(primary_key=True, default=uuid.uuid4)
     event = models.ForeignKey(
-        Competition, related_name="teams_particiaptedd", on_delete=models.CASCADE)
+        Competition, related_name="event_name1", on_delete=models.CASCADE)
     leader = models.ForeignKey(
-        NewUser, related_name="teams_leader", on_delete=models.CASCADE,blank=True,null=True)
+        NewUser, related_name="teams_leader", on_delete=models.CASCADE)
     members = models.ManyToManyField(
-        "teams.TeamMembers", related_name="compteams", null=False, blank=False)
+        "teams.TeamMembers", related_name="compteams")
     teamname = models.CharField(max_length=255, blank=False, null=True)
     
     def __str__(self):
         return str(self.teamname)
 
+class PreviousPerformance(models.Model):
+    event = models.ForeignKey(
+        Competition, related_name="event_name2", on_delete=models.CASCADE)
+    team = models.ForeignKey(
+        CompTeam, related_name="compteams2", on_delete=models.CASCADE)
+    link = models.CharField(max_length=2000,null=True,blank=True)
+    description = models.TextField(null=True, blank=True)
     
 
 
