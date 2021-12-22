@@ -37,15 +37,14 @@ class UserRegisterForm(UserCreationForm):
 
 
 class UserUpdateForm(forms.ModelForm):
-    
+
     phone = PhoneNumberField(widget=forms.TextInput(
     ), label="Phone number (e.g. +12125552368)", required=False)
 
     class Meta:
         model = User
-        fields = ['fullname',
+        fields = ['img', 'fullname',
                   'username',
-                  'email',
                   'phone',
                   'collegename',
                   'city'
