@@ -26,6 +26,7 @@
 </head>
 
 <body>
+    {% include 'loading.html' %}
     {% block body %} {% endblock %}
 </body>
 
@@ -33,4 +34,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 {% include 'messages.html' %}
+
 </html>

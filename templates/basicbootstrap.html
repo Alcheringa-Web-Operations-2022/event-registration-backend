@@ -33,6 +33,7 @@
 </head>
 
 <body>
+    {% include 'loading.html' %}
     {% block body %}{% endblock body %}
     
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -48,6 +49,6 @@
     {% block script %}{% endblock %}
     <br /><br /><br />
 </body>
+{% include 'messages.html' %}
 
 </html>
-{% include 'messages.html' %}

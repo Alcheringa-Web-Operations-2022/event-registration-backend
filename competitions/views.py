@@ -1,9 +1,12 @@
+from django.http.response import BadHeaderError
 from django.shortcuts import render, redirect,HttpResponse
+from django.template.loader import render_to_string
 from competitions.forms import CreateTeamForm
 from django.contrib import messages
 from competitions.models import CompTeam, Competition
 from django.contrib.auth.decorators import login_required
 from teams.models import Team, TeamMembers
+from django.core.mail import send_mail
 import json
 # Create your views here.
 
@@ -30,19 +33,6 @@ def registercompetition(request, slug):
         return redirect('showallcompetitions')
     else:
         if request.method == 'POST':
-            # form = CreateTeamForm(request.user, request.POST)
-            # if form.is_valid():
-            #     if ((len(form.cleaned_data['members'])+1) > comp.max_members or (len(form.cleaned_data['members'])+1) < comp.min_members):
-            #         print(len(form.cleaned_data['members']))
-            #         print(comp.max_members)
-            #         messages.error(request, 'Not a valid range')
-            #     else:
-            #         result = form.save(commit=False)
-            #         result.event = comp
-            #         result.leader = request.user
-            #         result.save()
-
-            #         form.save_m2m()
             print(request.user)
             print(request.POST.get('members'))
             compteams = CompTeam.objects.create(event=comp, leader=request.user, teamname=request.POST['teamname'])
@@ -51,6 +41,29 @@ def registercompetition(request, slug):
                 print(str(member['id']))
                 compteams.members.add(TeamMembers.objects.get(id=str(member['id'])))
                 compteams.save()
+                
+            ######################### mail system ####################################
+            # emailsend(comp, request.POST.get('members'))
+            for user in json.loads(request.POST.get('members')):
+                subject = "Event Registration Successful"
+                email_template_name = "competitions/registration_email.txt"
+                c = {
+                        "name": user['name'],
+                        "event": comp.event_name
+                    }
+                print(user['name'])
+                print(comp.event_name)
+                email = render_to_string(email_template_name, c)
+                try:
+                    send_mail(subject, email, 'Alcheringa Registration Portal', [
+                                    user['email']], fail_silently=False)
+                    print("done")
+                except BadHeaderError:
+                    return HttpResponse('Invalid header found.')
+            ##################################################################
+            
             messages.success(request, 'You have registered your team for this event successfully')
             return HttpResponse("OK")
     return render(request, 'competitions/compreg.html', {'comp': comp,'team_members': team_members})
+
+

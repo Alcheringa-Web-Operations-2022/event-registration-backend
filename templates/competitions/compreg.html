@@ -11,6 +11,7 @@
     outline: none;
     }
 </style>
+
 <body x-data="{ showModal: false}" :class="{'overflow-y-hidden': showModal}">
     <div class="bg-blue-50 flex">
         {% include "../navbar.html" %}
@@ -65,6 +66,7 @@
                                                 <div class="py-3 px-6 my-3 border-dotted border-2 font-normal w-full text-center cursor-pointer" @click="showModal = true">Add/Remove member(s)</div>
                                                 <input type="submit"
                                                     class="bg-red-600 hover:bg-red-700 text-white inline-block py-2 px-4 rounded shadow-sm font-semibold text-base"/>
+                                                
                                             </div>
                                         </form>
 
@@ -148,6 +150,8 @@
     </div>
 </body>
 <script>
+
+
     var team = [];
     function select(id){
         document.getElementById(id).classList.toggle("invisible");
@@ -155,6 +159,8 @@
         document.getElementById("card" + id).classList.toggle("border-red-500") 
         document.getElementById("card" + id).classList.toggle("selected") 
     }
+
+
     document.getElementById('confirm-select').addEventListener("click", confirmselect);
     function confirmselect(){
         team=[]
@@ -165,6 +171,8 @@
         // console.log(team)
         addchip(team)
     }
+
+
 
     function addchip(team){
         $('#chip-team').empty()
@@ -193,6 +201,8 @@
             notifyError("ERROR", "Members not within valid range")
             return
         }
+        //Enable Loading
+        document.getElementById("loading-dot").classList.remove("invisible")
         $.ajax({
             type: "POST",
             data: {
@@ -204,11 +214,11 @@
                 "X-CSRFTOKEN": "{{ csrf_token }}"
             },
             success:(data)=>{
-                window.location.reload()
+                window.location.replace("{%url 'showallcompetitions'%}")
+                notifySuccess('You have registered your team for this event successfully')
+                document.getElementById("loading-dot").classList.add("invisible")
             }
         })
-
-        
     });
 </script>
 
