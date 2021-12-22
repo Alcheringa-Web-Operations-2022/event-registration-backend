@@ -42,7 +42,8 @@
     <div class="w-80 h-screen flex flex-col justify-center bg-white border-gray-400 px-12 fixed float-left">
       <a href="#"><img src="https://i.ibb.co/28C2v0b/image.png" class="mt-24 mx-auto pb-3 border-b" width="150px" height="40px" alt="logo" border="0" /></a>
       <div class="flex flex-col justify-center my-5">
-        <img src="https://i.ibb.co/jhNQdns/image.png" width="80px" alt="profile pic" border="0" class="mx-auto" />
+        <img src="{{request.user.img.url}}" width="90px" alt="profile pic" border="0"
+                class="mx-auto rounded-full" />
         <div class="pt-4 font-medium text-lg text-center">Akash Dubey</div>
         <div class="text-gray-500 text-base font-normal text-center">Bronze</div>
       </div>

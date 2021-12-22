@@ -31,13 +31,15 @@ class CustomAccountManager(BaseUserManager):
 
 class NewUser(AbstractBaseUser, PermissionsMixin):
     id = models.SlugField(primary_key=True, default=uuid.uuid4)
+    img = models.ImageField(upload_to="image_uploads/userdp/",
+                            default='user-default.png')
     email = models.EmailField(_('email address'), unique=True)
     username = models.CharField(max_length=150, unique=True)
     collegename = models.CharField(max_length=150, unique=False)
     city = models.CharField(max_length=150, unique=False)
     fullname = models.CharField(max_length=150, blank=True)
     phone = PhoneNumberField(unique=False, blank=True)
-
+    
     date_joined = models.DateTimeField(default=timezone.now)
     provider = models.CharField(max_length=200, unique=False, default="email")
     about = models.TextField(_('about'), max_length=500, blank=True)

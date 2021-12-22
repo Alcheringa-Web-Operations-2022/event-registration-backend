@@ -76,8 +76,8 @@ function addchip(team){
         $('#chip-team').append(templateString);
         if(i==team.length-1){
             var templateString2 = `<span 
-                id="add_member_new"  @click="showModal = true;modalstart();" class="mx-4 my-2 rounded-full text-white bg-red-500 font-semibold text-sm flex align-center cursor-pointer active:bg-gray-300 transition duration-300 ease w-max">
-                <div class="rounded-full w-14 h-14 max-w-none text-center" >+</div>
+                id="add_member_new"  @click="showModal = true;modalstart();" class="mx-4 my-2 rounded-full text-white bg-gray-300 font-semibold text-sm flex align-center cursor-pointer active:bg-gray-300 transition duration-300 ease w-max">
+                <div class="rounded-full w-14 h-14 max-w-none text-center" ><i class="fa fa-plus centered" aria-hidden="true"></i></div>
             </span>`;
                 $('#chip-team').append(templateString2);
         }
@@ -102,7 +102,7 @@ function deletechip(id_team){
 //Add member form
 $("#add-member-form").submit(function (event) {
     event.preventDefault();
-    
+     window.scrollTo(0, 0);
     if(team.length==0){
         notifyError("ERROR", "Members can't be zero")
         return
@@ -111,6 +111,7 @@ $("#add-member-form").submit(function (event) {
         notifyError("ERROR", "Members not within valid range")
         return
     }
+
     //Enable Loading
     document.getElementById("loading-dot").classList.remove("invisible")
     $.ajax({

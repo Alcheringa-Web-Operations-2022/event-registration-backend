@@ -12,6 +12,12 @@
    input,textarea:focus{
     outline: none;
     }
+    .centered{
+        position:relative;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%)
+    }
 </style>
 
 <body x-data="{ showModal: false}" :class="{'overflow-y-hidden': showModal}">
@@ -62,7 +68,16 @@
                                             <div class="p-3 mx-auto border border-white bg-white">
                                                 <div class="font-normal text-gray-600 text-base">Team Name *</div>
                                                 <input type="text" class="w-full" name="teamname" id="teamname" placeholder="Enter Team Name*" required>
-                                                <div class="font-normal text-gray-600 text-base">Add members (Min. {{comp.min_members}} - Max. {{comp.max_members}}) *</div>
+                                                <div class="font-normal text-gray-600 text-base">Team Leader *</div>
+                                                <span
+                                                    class="mx-4 my-2 rounded-full text-white bg-red-500 font-semibold text-sm flex align-center cursor-pointer active:bg-gray-300 transition duration-300 ease w-max">
+                                                    <img class="rounded-full w-14 h-14 max-w-none" alt="A"
+                                                    src="{{request.user.img.url}}" />
+                                                    <span class="flex items-center px-3 py-2">
+                                                    {{request.user.username}}<br>{{request.user.email}}
+                                                    </span>
+                                                </span>
+                                                <div class="font-normal text-gray-600 text-base">Add members *</div>
                                                 <!-- Chips -->
                                                 <div class="flex flex-wrap justify-start space-x-2 items-end" id="chip-team"></div>
                                                 <div class="py-3 px-6 my-3 border-dotted border-2 font-normal w-full text-center cursor-pointer" @click="showModal = true;modalstart();"id="add_members_old">Add/Remove member(s)</div>
