@@ -1,9 +1,11 @@
+{%load static%}
 <nav class="grid grid-flow-col grid-cols-5 bg-white shadow border-t-2 w-full fixed bottom-0 sm:hidden">
     <a href="">
       <div class="py-6 pl-8 rounded-full">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M6.08 8.08H1.92V1.92H6.08V8.08ZM6.08 16.08V13.92H1.92V16.08H6.08ZM16.08 16.08V9.92H11.92V16.08H16.08ZM11.92 4.08H16.08V1.92H11.92V4.08ZM0.8 10C0.358172 10 0 9.64183 0 9.2V0.8C0 0.358172 0.358172 0 0.8 0H7.2C7.64183 0 8 0.358172 8 0.8V9.2C8 9.64183 7.64183 10 7.2 10H0.8ZM0.8 18C0.358172 18 0 17.6418 0 17.2V12.8C0 12.3582 0.358172 12 0.8 12H7.2C7.64183 12 8 12.3582 8 12.8V17.2C8 17.6418 7.64183 18 7.2 18H0.8ZM10.8 18C10.3582 18 10 17.6418 10 17.2V8.8C10 8.35817 10.3582 8 10.8 8H17.2C17.6418 8 18 8.35817 18 8.8V17.2C18 17.6418 17.6418 18 17.2 18H10.8ZM10 0.8C10 0.358172 10.3582 0 10.8 0H17.2C17.6418 0 18 0.358172 18 0.8V5.2C18 5.64183 17.6418 6 17.2 6H10.8C10.3582 6 10 5.64183 10 5.2V0.8Z" fill="#109CF1" />
-        </svg>
+        </svg> -->
+        <!-- <img src="{% static 'imgs/alcher_orange.svg'%}" /> -->
       </div>
     </a>
     <a href="">
@@ -40,7 +42,7 @@
   <nav class="w-80 hidden sm:block bg-white rounded shadow-md">
     <div class="w-80"></div>
     <div class="w-80 h-screen flex flex-col justify-center bg-white border-gray-400 px-12 fixed float-left">
-      <a href="#"><img src="https://i.ibb.co/28C2v0b/image.png" class="mt-24 mx-auto pb-3 border-b" width="150px" height="40px" alt="logo" border="0" /></a>
+      <a href="#"><img src="{% static 'imgs/alcher_orange.svg'%}" class="mt-24 mx-auto pb-3 border-b" width="150px" height="40px" alt="logo" border="0" /></a>
       <div class="flex flex-col justify-center my-5">
         <img src="{{request.user.img.url}}" width="90px" alt="profile pic" border="0"
                 class="mx-auto rounded-full" />
@@ -60,19 +62,14 @@
           </svg>
           <p class="pl-4 -mt-1">Team Members</p>
         </div></a>
-        <a href="{%url 'showallcompetitions'%}"><div class="rounded-full flex flex-nowrap my-2 py-2 w-60 pl-6 hover:border-0 hover:bg-gray-100">
-          <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M15 3.75L22.5 10.4167M15 3.75L7.5 10.4167M15 3.75V21.25" stroke="#C2CFE0" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M27.5 21.25V26.25H2.5V21.25" stroke="#C2CFE0" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-          <p class="pl-4">Submissions</p>
-        </div></a>
+        <a href='{%url 'profile'%}' >
         <div class="rounded-full flex flex-nowrap my-2 py-2 w-60 pl-6 hover:border-0 hover:bg-gray-100 mb-3">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M7.56665 6.16663C7.56665 3.71691 9.55026 1.7333 12 1.7333C14.4497 1.7333 16.4333 3.71691 16.4333 6.16663C16.4333 8.61635 14.4497 10.6 12 10.6C9.55026 10.6 7.56665 8.61635 7.56665 6.16663ZM1.73331 19.2916C1.73331 18.836 1.95042 18.3334 2.55819 17.7724C3.17547 17.2027 4.09758 16.6724 5.22711 16.2199C7.48842 15.314 10.2281 14.8583 12 14.8583C13.7718 14.8583 16.5115 15.314 18.7728 16.2199C19.9024 16.6724 20.8245 17.2027 21.4418 17.7724C22.0495 18.3334 22.2666 18.836 22.2666 19.2916V22.2666H1.73331V19.2916Z" stroke="#C2CFE0" stroke-width="2.8" />
           </svg>
           <p class="pl-4 -mt-1">Profile</p>
         </div>
+        </a>
         <hr class="my-4 border bg-gray-200" />
         <div class="rounded-full flex flex-nowrap my-2 py-2 w-60 pl-6 hover:border-0 hover:bg-gray-100 mt-3">
           <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -94,6 +91,7 @@
           </svg>
           <p class="pl-4 -mt-1">Contact Us</p>
         </div>
+        <a href='{% url 'logout'%}'>
         <div class="rounded-full flex flex-nowrap py-2 pl-6 w-60 hover:border-0 hover:bg-gray-100">
           <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M2.8531 15.7972C2.44895 15.3425 2.44895 14.6574 2.8531 14.2027L9.51976 6.7027C9.96006 6.20736 10.7186 6.16275 11.2139 6.60305C11.7092 7.04335 11.7538 7.80183 11.3135 8.29717L6.4222 13.7999L21.25 13.7999C21.9127 13.7999 22.45 14.3372 22.45 14.9999C22.45 15.6627 21.9127 16.1999 21.25 16.1999L6.4222 16.1999L11.3135 21.7027C11.7538 22.198 11.7092 22.9565 11.2139 23.3968C10.7186 23.8371 9.96006 23.7925 9.51976 23.2972L2.8531 15.7972Z" fill="#C2CFE0" />
@@ -101,6 +99,7 @@
           </svg>
           <p class="pl-4 -mt-1">Logout</p>
         </div>
+    </a>    
       </div>
     </div>
   </nav>
