@@ -76,8 +76,8 @@ function addchip(team){
         $('#chip-team').append(templateString);
         if(i==team.length-1){
             var templateString2 = `<span 
-                id="add_member_new"  @click="showModal = true;modalstart();" class="mx-4 my-2 rounded-full text-white bg-gray-300 font-semibold text-sm flex align-center cursor-pointer active:bg-gray-300 transition duration-300 ease w-max">
-                <div class="rounded-full w-14 h-14 max-w-none text-center" ><i class="fa fa-plus centered" aria-hidden="true"></i></div>
+                id="add_member_new"  @click="showModal = true;modalstart();" class="mx-4 my-2 rounded-full text-white bg-gray-300 font-semibold text-sm flex align-center justify-center cursor-pointer active:bg-gray-300 transition duration-300 ease w-max">
+                <div class="rounded-full w-14 h-14 max-w-none text-center flex align-center justify-center " ><i class="fa fa-plus my-auto" style="font-size:1.2rem; color:black;" aria-hidden="true"></i></div>
             </span>`;
                 $('#chip-team').append(templateString2);
         }
