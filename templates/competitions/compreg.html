@@ -45,7 +45,10 @@
                                                     <div class="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3">
                                                         
                                                         <h3 class="font-medium md:text-3xl text-xl">{{comp.event_name}}</h3>
-                                                        <p class="md:text-lg text-gray-500 text-base">{{comp.module}} &#xb7; <span style="color: #EE6337;text-decoration:none;"><a href="www.facebook.com" class="cursor-pointer">View Rules</a></span></p>
+                                                        <p class="md:text-lg text-gray-500 text-base">{{comp.module}} &#xb7; <span style="color: #EE6337;text-decoration:none;"><a href="{% url 'viewrules' slug=comp.id %}" target="_blank"><span class="text-xs text-zinc-500 text-amber-600 font-medium">
+                                                                View Rules
+                                                            </span>
+                                                        </a></span></p>
                                                         <p class="md:text-lg text-gray-500 text-base">
                                                             {%if comp.min_members == 1 and comp.max_members == 1 %}
                                                             <i class="fa fa-user" aria-hidden="true"></i> Single
