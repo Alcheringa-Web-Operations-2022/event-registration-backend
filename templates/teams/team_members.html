@@ -38,7 +38,7 @@
                                 placeholder="search member" />
                         </span>
                     </div>
-                    <div class="mx-3 flex flex-wrap justify-center">
+                    <div class="mx-2 flex flex-wrap ">
                         <!-- single-card-add_member -->
                         <button onclick="toggleOpen(this.id)" id="addMemberButton"
                             class="m-1 h-28 border-blue-400 border-2 border-dashed grid grid-flow-col items-center justify-center lg:w-80 w-full rounded-md">
@@ -206,6 +206,9 @@
         if (id == "modalCancel") {
             document.getElementById("modalBackground").style.display = 'none';
         }
+    }
+    window.onload = function(){
+        toggleOpen('addMemberButton');
     }
 </script>
 {% endblock %}
