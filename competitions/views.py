@@ -18,7 +18,7 @@ def showallcompetitions(request):
     else:
         module_comp = Competition.objects.filter(module = 'Dance')
     
-    return render(request, 'competitions/allcomp.html', {'allcomp': module_comp, 'modulename' : request.GET.get('module')})
+    return render(request, 'competitions/allcomp.html', {'allcomp': module_comp, 'modulename': request.GET.get('module') or 'dance'})
 
 @login_required(login_url='login')
 def viewrules(request, slug):
