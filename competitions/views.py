@@ -20,6 +20,11 @@ def showallcompetitions(request):
     
     return render(request, 'competitions/allcomp.html', {'allcomp': module_comp, 'modulename' : request.GET.get('module')})
 
+@login_required(login_url='login')
+def viewrules(request, slug):
+    rules = Competition.objects.get(id = slug)
+    print(rules)
+    return render(request, 'competitions/rules.html', {'pdf' : rules})
 
 @login_required(login_url='login')
 def registercompetition(request, slug):

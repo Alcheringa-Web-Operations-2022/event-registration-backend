@@ -6,4 +6,6 @@ urlpatterns = [
     path('', views.showallcompetitions, name='showallcompetitions'),
     path('register/<slug>',
          views.registercompetition, name='registercomp'),
+    path('viewrules/<slug>',
+         views.viewrules, name='viewrules'),
 ]

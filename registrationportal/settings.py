@@ -137,3 +137,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'schedulerevent9@gmail.com'
 EMAIL_HOST_PASSWORD = 'qigpglvkwjrldryy'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+SECURE_REFERRER_POLICY = "no-referrer-when-downgrade"
+X_FRAME_OPTIONS = "SAMEORIGIN"

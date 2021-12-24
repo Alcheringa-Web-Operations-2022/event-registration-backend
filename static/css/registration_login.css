@@ -128,3 +128,152 @@ input:focus{
     height: 100%;
     pointer-events: none;
   }
+  body{
+    margin: 0%;
+   
+}
+.space_bet{
+    justify-content: space-between;
+}
+.rule_head{
+    padding: 4px 28px;
+}
+.rule_back{
+    background-color: #F3F6F8;
+    width: 80%;
+  height: 80%;
+}
+.rule_body{
+    background-color: white;
+    margin: 2px 4rem;
+  
+    border-radius: 12px;
+}
+.btn_pdf{
+  font-family: 'Poppins', sans-serif;
+  font-size: 10px;
+ border: none;
+  width: 91px;
+  height: 26px;
+  border-radius: 4px;
+  background-color: #EE6337;
+  color: white;
+  cursor: pointer;
+  box-shadow:  rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;;
+}
+
+.rule_wrapper{
+    padding: 1rem 4rem;
+}
+.color_head{
+  background-color: rgb(240, 76, 11);
+  color: white;
+  height: 5rem;
+padding-left: 2px;
+  align-items: center;
+}
+.color_head h2{
+  font-size: 4rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 200;
+}
+.underlined_border{
+  
+  border-bottom: 2px solid black;
+  height: 38px;
+}
+.more_size{
+font-size: 22px;
+font-weight: 600;
+}
+.underlined_border h3{
+  font-family: 'Poppins', sans-serif;
+  font-size: 30px;
+}
+.rule_content_head>p{
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+}
+.rule_content_body{
+  font-family: 'Poppins', sans-serif;
+font-weight: 500;
+}
+.rule_head>p{
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  
+}
+
+@media screen and (max-width: 952px) {
+  .color_head h2{
+      font-size: 3rem;
+  }
+  .underlined_border h3{
+      font-size: 22px;
+  }
+  .rule_content_head>p{
+     
+      font-size: 15px; 
+  }
+  .rule_content_body>p{
+      font-size: 13px;
+  }
+  
+}
+@media screen and (max-width: 783px) {
+  .color_head h2{
+      font-size: 2rem;
+  }
+  .underlined_border h3{
+      font-size: 18px;
+  }
+  .rule_content_head>p{
+     
+      font-size: 13px; 
+  }
+  .rule_content_body>p{
+      font-size: 10px;
+  }
+  .rule_head{
+      height: 2rem;
+  }
+}
+@media screen and (max-width: 506px) {
+  .color_head h2{
+      font-size: 1rem;
+  }
+  .color_head{
+      height: 3rem;
+  }
+  .underlined_border h3{
+      font-size: 13px;
+  }
+  .rule_content_head>p{
+     
+      font-size: 11px; 
+  }
+  .rule_content_body>p{
+      font-size: 10px;
+  }
+}
+@media screen and (max-width: 438px) {
+  .rule_wrapper{
+      padding: 1rem 0px;
+  }
+ .rule_body{
+     margin: 7px 4px;
+ }
+ .btn_pdf{
+  font-size: 7px;
+
+   width: 71px;
+   height: 18px;
+ }
+ .rule_head>p{
+  font-size: 14px;
+}
+.rule_head{
+  height: 1rem;
+}
+}

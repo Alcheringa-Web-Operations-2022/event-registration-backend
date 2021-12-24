@@ -1,0 +1,33 @@
+{% extends '../basictailwind.html'%}
+{% load static %}
+{%block title%}Profile | Alcheringa {%endblock%}
+{% block body %}
+<link rel="stylesheet" href={% static "css/registration_login.css" %}> 
+
+<body>
+    <div class="bg-blue-50 flex">
+        {% include "../navbar.html" %}
+        <div class="rule_back">
+            <div class="rule_head flex space_bet center_ele">
+                <p class="more_size">Rule Booklet</p>
+                <i class="fa fa-bell-o" aria-hidden="true"></i>
+            </div>
+            <div class="rule_body">
+                <div class="rule_head border_bottom flex space_bet center_ele">
+                    <p>Rule Booklet</p>
+                    <!-- <button class="btn_pdf">Downoad PDF</button> -->
+                </div>
+                <div class="rule_wrapper">
+                    <div class="rule_content">
+                        <div class="rule_content_body">
+                            <div style = "overflow: hidden;">
+                                <iframe src="{{ pdf.event_rules.url }}" width="800px" height="2100px" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</body>
+{% endblock %}
