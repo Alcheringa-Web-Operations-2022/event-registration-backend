@@ -1,3 +1,6 @@
+from django.db.models.signals import m2m_changed
+from django.db.models.signals import pre_delete, pre_save
+from authentication.models import NewUser
 from django.db import models
 from authentication.models import NewUser
 from django.db.models.signals import post_save
@@ -32,5 +35,8 @@ class Team(models.Model) :
 
 @receiver(post_save,sender=NewUser)
 def create_profile(sender,instance,created,*args,**kwargs) :
-    if created :
+    if created:
         Team(leader=instance).save()
+
+        
+

@@ -17,7 +17,7 @@ class UserAdminConfig(UserAdmin):
                     'is_active', 'is_staff', 'id',)
     fieldsets = (
         (None, {'fields': ('email', 'collegename', 'username',
-         'fullname', 'img', 'id', 'city')}),
+         'fullname', 'img', 'id', 'city', 'team_members', 'no_of_events_registered','interest')}),
         ('Permissions', {'fields': ('is_staff', 'is_active')}),
         ('Personal', {'fields': ('about', 'phone', 'provider')}),
     )
