@@ -80,13 +80,13 @@
                                                     {{request.user.email}}
                                                     </span>
                                                 </span>
-                                                {%if comp.min_members != 1 and comp.max_members != 1 %}
+                                            
                                                 <div class="font-normal text-gray-600 text-base">Add members *</div>
                                                 
                                                 <!-- Chips -->
                                                 <div class="flex flex-wrap" id="chip-team"></div>
                                                 <div class="py-3 px-6 my-3 border-dotted border-2 font-normal w-full text-center cursor-pointer" @click="showModal = true;modalstart();"id="add_members_old">Add/Remove member(s)</div>
-                                                {%endif%}
+                                             
                                                 <div class="font-normal text-gray-600 text-base">Previous Performance(s)</div>
                                                 <input type="text" name="link" placeholder="Enter link.." id="link">
                                                 <div class="font-normal text-gray-600 text-base">Description</div>
