@@ -38,7 +38,7 @@
                                 placeholder="search member" />
                         </span>
                     </div>
-                    <div class="mx-2 flex flex-wrap ">
+                    <div class="flex flex-wrap justify-between" style="margin:5px 10%;">
                         <!-- single-card-add_member -->
                         <button onclick="toggleOpen(this.id)" id="addMemberButton"
                             class="m-1 h-28 border-blue-400 border-2 border-dashed grid grid-flow-col items-center justify-center lg:w-80 w-full rounded-md">
@@ -208,14 +208,8 @@
             document.getElementById("modalBackground").style.display = 'none';
         }
     }
-<<<<<<< HEAD
     window.onload = function() {
         toggleOpen('addMemberButton')
     };
-=======
-    window.onload = function(){
-        toggleOpen('addMemberButton');
-    }
->>>>>>> 28118ef11d1fb51ed59408419e376313345fd1ac
 </script>
 {% endblock %}

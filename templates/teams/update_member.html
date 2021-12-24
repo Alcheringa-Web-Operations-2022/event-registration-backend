@@ -38,7 +38,7 @@
                                 placeholder="search member" />
                         </span>
                     </div>
-                    <div class="mx-2 flex flex-wrap ">
+                    <div class="flex flex-wrap justify-between" style="margin:5px 10%;">
                         <!-- single-card-add_member -->
                         <button onclick="toggleOpen(this.id)" id="addMemberButton"
                             class="m-1 h-28 border-blue-400 border-2 border-dashed grid grid-flow-col items-center justify-center lg:w-80 w-full rounded-md">
@@ -165,11 +165,9 @@
                             <div class="flex justify-between pb-4">
                                 <button type="button" class="text-blue-500 mx-1 text-sm" onclick="toggleOpen(this.id)"
                                     id="deleteButton">Remove</button>
-<<<<<<< HEAD
+
                                 <div><button class="text-blue-500 mx-5 text-sm" id="cancel-edit">Cancel</button>
-=======
-                                <div><button class="text-blue-500 mx-5 text-sm" id = "cancel-edit">Cancel</button>
->>>>>>> 28118ef11d1fb51ed59408419e376313345fd1ac
+
                                     <button type="submit" name='_save'
                                         class="bg-blue-500 text-white py-1 px-2 text-sm rounded">Add</button>
 
@@ -204,11 +202,7 @@
         var addMemberCardSmall = document.getElementById("addMemberCardSmall");
         var editProfileCard = document.getElementById("editProfileCard");
         if (id == "addMemberButton") {
-<<<<<<< HEAD
              document.getElementById("cancel-edit").click()
-=======
-            document.getElementById('cancel-edit').click()
->>>>>>> 28118ef11d1fb51ed59408419e376313345fd1ac
             emptyCard.style.display = 'none';
             addMemberCard.style.display = 'block';
             addMemberCardSmall.style.display = 'block';
