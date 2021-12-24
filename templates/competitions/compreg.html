@@ -53,7 +53,7 @@
                                                             <i class="fa fa-users" aria-hidden="true"></i> Group {{comp.min_members}}-{{comp.max_members}} members
                                                             {%endif%}
                                                                 &#xb7; 
-                                                            <i class="fas fa-map-marker-alt" aria-hidden="true" style="color:green;"></i><span class="text-gray-600"> {{comp.location}}</span>
+                                                            <i class="fas fa-map-marker-alt" aria-hidden="true" style="color:green;"></i><span style="text-gray-600"> {{comp.location}}</span>
                                                             
                                                         </p>
                                                         <p class="text-xl text-gray-800">
@@ -71,15 +71,15 @@
                                                 <div class="font-normal text-gray-600 text-base">Team Leader *</div>
                                                 <span
                                                     class="mx-4 my-2 rounded-full text-white bg-red-500 font-semibold text-sm flex align-center cursor-pointer active:bg-gray-300 transition duration-300 ease w-max">
-                                                    <img class="rounded-full w-14 h-14 max-w-none" alt="A"
-                                                    src="{{request.user.img.url}}" />
+                                                    <!-- <img class="rounded-full w-14 h-14 max-w-none" alt="A"
+                                                    src="{{request.user.img.url}}" /> -->
                                                     <span class="flex items-center px-3 py-2">
-                                                    {{request.user.username}}<br>{{request.user.email}}
+                                                    {{request.user.email}}
                                                     </span>
                                                 </span>
                                                 <div class="font-normal text-gray-600 text-base">Add members *</div>
                                                 <!-- Chips -->
-                                                <div class="flex flex-wrap justify-start space-x-2 items-end" id="chip-team"></div>
+                                                <div class="flex flex-wrap" id="chip-team"></div>
                                                 <div class="py-3 px-6 my-3 border-dotted border-2 font-normal w-full text-center cursor-pointer" @click="showModal = true;modalstart();"id="add_members_old">Add/Remove member(s)</div>
                                                 <div class="font-normal text-gray-600 text-base">Previous Performance(s)</div>
                                                 <input type="text" name="link" placeholder="Enter link.." id="link">
