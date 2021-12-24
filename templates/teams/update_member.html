@@ -12,19 +12,19 @@
         display: flex
     }
 </style>
-<div class="bg-blue-50">
+<div  style="background-color: #F3F6F8;">
     {% include 'navbar.html' %}
     <div class="grid grid-flow-col">
         <!-- left_nav -->
         <div class="w-80 bg-white h-screen hidden md:block"></div>
         <div>
             <div class="m-3 font-medium text-2xl">Team Members<span
-                    class="mx-3 p-1 bg-gray-600 rounded-sm font-normal text-white text-sm">23</span></div>
+                    class="mx-3 p-1 bg-gray-600 rounded-sm font-normal text-white text-sm">{{team|length}}</span></div>
             <div class="grid grid-flow-col">
                 <!-- members -->
                 <div class="m-3 bg-white rounded-lg shadow">
                     <div class="py-2 px-4 font-medium text-lg border-b">Members</div>
-                    <div class="m-4 bg-blue-50 rounded-sm">
+                    <div class="m-4 rounded-sm"  style="background-color: #F3F6F8;">
                         <span class="float-left p-1">
                             <svg width="20" height="20" viewBox="0 0 20 21" fill="none"
                                 xmlns="http://www.w3.org/2000/svg" class="mt-1">
@@ -34,22 +34,22 @@
                             </svg>
                         </span>
                         <span>
-                            <input type="search" class="py-1 bg-blue-50 font-light text-base"
+                            <input type="search" class="py-1 font-light text-base" style="background-color: #F3F6F8;"
                                 placeholder="search member" />
                         </span>
                     </div>
                     <div class="flex flex-wrap justify-between" style="margin:5px 10%;">
                         <!-- single-card-add_member -->
                         <button onclick="toggleOpen(this.id)" id="addMemberButton"
-                            class="m-1 h-28 border-blue-400 border-2 border-dashed grid grid-flow-col items-center justify-center lg:w-80 w-full rounded-md">
-                            <div class="text-blue-400 font-semibold text-4xl">+</div>
-                            <div class="mt-2 text-blue-400 font-medium">Add member</div>
+                            class="m-1 h-28 border-red-400 border-2 border-dashed grid grid-flow-col items-center justify-center lg:w-80 w-full rounded-md">
+                            <div class="text-red-400 font-semibold text-4xl">+</div>
+                            <div class="mt-2 text-red-400 font-medium">Add member</div>
                         </button>
                         <!-- add_members_form-upto_large_screens -->
                         <div class="lg:hidden m-1 bg-white rounded-lg shadow">
                             <div id="addMemberCardSmall" class="hidden">
                                 <div class="py-2 px-4 font-medium text-lg border-b">Add Member</div>
-                                <img class="my-9 mx-auto" width="120" src="https://i.ibb.co/r6BfngJ/image.png"
+                                <img class="my-9 mx-auto" width="120" src="{%static 'imgs/user-default.png'%"
                                     alt="profile" border="0" />
                                 <form class="px-4 space-y-5" action="">
                                     <input class="border-b w-full" type="text" size="25" placeholder="Enter Name" />
@@ -62,15 +62,15 @@
                                         <option value="female">female</option>
                                     </select>
                                     <div class="flex justify-end pb-4">
-                                        <button class="text-blue-500 mx-5 text-sm">Cancel</button>
-                                        <button class="bg-blue-500 text-white py-1 px-2 text-sm rounded">Add</button>
+                                        <button class="text-red-500 mx-5 text-sm">Cancel</button>
+                                        <button class="bg-red-500 text-white py-1 px-2 text-sm rounded">Add</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                         <!-- single-card-yellow_border -->
                         <div class="m-1 p-4 h-28 flex bg-white border-yellow-400 lg:w-80 w-full border-2 rounded-md">
-                            <img width="75" src="https://i.ibb.co/r6BfngJ/image.png" alt="profile" border="0" />
+                            <img width="75" src="{%static 'imgs/user-default.png'%}" alt="profile" border="0" />
                             <div class="mx-5 my-auto">
                                 <div class="font-medium text-base">{{user.fullname}}</div>
                                 <div class="font-light text-sm">{{user.email}}</div>
@@ -79,9 +79,9 @@
                         <!-- single-card -->
                         {% for member in team %}
                         <div
-                            class="m-1 p-4 lg:h-28 bg-blue-50 border-blue-50 border rounded-md hover:bg-white hover:shadow-md lg:w-80 w-full edit-delete-parent">
+                             style="background-color: #F3F6F8;" class="m-1 p-4 lg:h-28 border-red-50 border rounded-md hover:bg-white hover:shadow-md lg:w-80 w-full edit-delete-parent">
                             <div class="flex">
-                                <img width="78" height="78" src="https://i.ibb.co/r6BfngJ/image.png" alt="profile" />
+                                <img width="78" height="78" src="{%static 'imgs/user-default.png'%}" alt="profile" />
                                 <div class="mx-5 my-auto">
                                     <div class="font-medium text-base">{{member.name}}</div>
                                     <div class="font-light text-sm">{{member.email}}</div>
@@ -115,11 +115,11 @@
                                             <option value="female">female</option>
                                         </select>
                                         <div class="flex justify-between">
-                                            <button class="text-blue-500 mx-1 text-sm" onclick="toggleOpen(this.id)"
+                                            <button class="text-red-500 mx-1 text-sm" onclick="toggleOpen(this.id)"
                                                 id="deleteButton">Remove</button>
-                                            <div><button class="text-blue-500 mx-2 text-sm">Cancel</button>
+                                            <div><button class="text-red-500 mx-2 text-sm">Cancel</button>
                                                 <button
-                                                    class="bg-blue-500 text-white py-1 px-2 text-sm rounded">Add</button>
+                                                    class="bg-red-500 text-white py-1 px-2 text-sm rounded">Add</button>
                                             </div>
                                         </div>
                                     </form>
@@ -132,7 +132,7 @@
                     </div>
                 </div>
                 <div class="hidden lg:block">
-                    <div style="height: 460px;" id="emptyCard"
+                    <!-- <div style="height: 460px;" id="emptyCard"
                         class="mr-3 mt-3 w-80 flex flex-col justify-center bg-white rounded-lg shadow gap-2 hidden">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
                             class="mx-auto">
@@ -141,35 +141,35 @@
                                 fill="#C2CFE0" />
                         </svg>
                         <div class="text-gray-300 font-light mx-auto">Select a member to edit details</div>
-                    </div>
+                    </div> -->
                     <div style="height: 480px;" id="addMemberCard"
                         class="mr-3 mt-3 w-80 bg-white rounded-lg shadow hidden">
                         <div class="py-2 px-4 font-medium text-lg border-b">Add Member</div>
-                        <img class="my-9 mx-auto" width="120" src="https://i.ibb.co/r6BfngJ/image.png" alt="profile"
+                        <img class="my-9 mx-auto" width="120" src="{%static 'imgs/user-default.png'%}" alt="profile"
                             border="0" />
                         <form class="px-4 space-y-5" method="POST">
                             <div class="flex justify-end pb-4">
-                                <button class="text-blue-500 mx-5 text-sm" >Cancel</button>
+                                <button class="text-red-500 mx-5 text-sm" >Cancel</button>
                                 <button type="submit"
-                                    class="bg-blue-500 text-white py-1 px-2 text-sm rounded">Add</button>
+                                    class="bg-red-500 text-white py-1 px-2 text-sm rounded">Add</button>
                             </div>
                         </form>
                     </div>
                     <div style="height: 480px;" id="editProfileCard" class="mr-3 mt-3 w-80 bg-white rounded-lg shadow">
                         <div class="py-2 px-4 font-medium text-lg border-b">Edit Profile</div>
-                        <img class="my-9 mx-auto" width="120" src="https://i.ibb.co/LpL40sM/image.png" alt="profile"
+                        <img class="my-9 mx-auto" width="120" src="{%static 'imgs/user-default.png'%}" alt="profile"
                             border="0" />
                         <form class="px-4 space-y-5" method="POST">
                             {% csrf_token %}
                             {{form.name}} {{form.phone}} {{form.email}} {{form.gender}}
                             <div class="flex justify-between pb-4">
-                                <button type="button" class="text-blue-500 mx-1 text-sm" onclick="toggleOpen(this.id)"
+                                <button type="button" class="text-red-500 mx-1 text-sm" onclick="toggleOpen(this.id)"
                                     id="deleteButton">Remove</button>
 
-                                <div><button class="text-blue-500 mx-5 text-sm" id="cancel-edit">Cancel</button>
+                                <div><button class="text-red-500 mx-5 text-sm" id="cancel-edit">Cancel</button>
 
                                     <button type="submit" name='_save'
-                                        class="bg-blue-500 text-white py-1 px-2 text-sm rounded">Add</button>
+                                        class="bg-red-500 text-white py-1 px-2 text-sm rounded">Add</button>
 
                                     <div class="fixed hidden inset-0 bg-gray-600 bg-opacity-60 overflow-y-auto h-full w-full"
                                         id="modalBackground">

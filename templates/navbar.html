@@ -42,9 +42,9 @@
   <nav class="w-80 hidden sm:block bg-white rounded shadow-md">
     <div class="w-80"></div>
     <div class="w-80 h-screen flex flex-col justify-center bg-white border-gray-400 px-12 fixed float-left">
-      <a href="#"><img src="{% static 'imgs/alcher_orange.svg'%}" class="mt-24 mx-auto pb-3 border-b" width="150px" height="40px" alt="logo" border="0" /></a>
+      <a href="/"><img src="{% static 'imgs/alcher_orange.svg'%}" class="mt-24 mx-auto pb-3 border-b" width="150px" height="40px" alt="logo" border="0" /></a>
       <div class="flex flex-col justify-center my-5">
-        <img style="height : 70px; width : 70px; border-radius: 50%;" src="{{request.user.img.url}}" alt="profile pic" border="0"
+        <img style="height : 90px; width : 90px; border-radius: 50%;" src="{{request.user.img.url}}" alt="profile pic" border="0"
                 class="mx-auto rounded-full" />
         <div class="pt-4 font-medium text-lg text-center">{{request.user.username}}</div>
         <div class="text-gray-500 text-base font-normal text-center">{{request.user.email}}</div>
@@ -70,20 +70,14 @@
           <p class="pl-4 -mt-1">Profile</p>
         </div>
         </a>
-        <hr class="my-4 border bg-gray-200" />
+        <hr class="border bg-gray-200" />
         <div class="rounded-full flex flex-nowrap my-2 py-2 w-60 pl-6 hover:border-0 hover:bg-gray-100 mt-3">
           <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M15 3.9C16.4577 3.9 17.9011 4.18711 19.2478 4.74494C20.5945 5.30276 21.8182 6.12038 22.8489 7.15112C23.8796 8.18185 24.6972 9.4055 25.2551 10.7522C25.8129 12.0989 26.1 13.5423 26.1 15C26.1 16.4577 25.8129 17.9011 25.2551 19.2478C24.6972 20.5945 23.8796 21.8182 22.8489 22.8489C21.8182 23.8796 20.5945 24.6972 19.2478 25.2551C17.9011 25.8129 16.4577 26.1 15 26.1C13.5423 26.1 12.0989 25.8129 10.7522 25.2551C9.4055 24.6972 8.18184 23.8796 7.15111 22.8489C6.12038 21.8182 5.30276 20.5945 4.74494 19.2478C4.18711 17.9011 3.9 16.4577 3.9 15C3.9 13.5423 4.18711 12.0989 4.74494 10.7522C5.30277 9.40549 6.12039 8.18184 7.15112 7.15111C8.18185 6.12038 9.40551 5.30276 10.7522 4.74493C12.0989 4.18711 13.5423 3.9 15 3.9L15 3.9Z" stroke="#C2CFE0" stroke-width="2.8" stroke-linecap="round" />
             <line x1="13.9" y1="13.9" x2="13.9" y2="19.85" stroke="#C2CFE0" stroke-width="2.8" stroke-linecap="round" />
             <circle cx="14.25" cy="9.25" r="1.75" fill="#C2CFE0" />
           </svg>
-          <p class="pl-4 -mt-1">Guidelines</p>
-        </div>
-        <div class="rounded-full flex flex-nowrap my-2 py-2 w-60 pl-6 hover:border-0 hover:bg-gray-100">
-          <svg width="20" height="20" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M13 1.9C15.1954 1.9 17.3414 2.551 19.1668 3.77069C20.9922 4.99037 22.4149 6.72395 23.2551 8.75221C24.0952 10.7805 24.315 13.0123 23.8867 15.1655C23.4584 17.3187 22.4012 19.2965 20.8489 20.8489C19.2965 22.4012 17.3187 23.4584 15.1655 23.8867C13.0123 24.315 10.7805 24.0952 8.75221 23.2551C6.72395 22.4149 4.99037 20.9922 3.77069 19.1668C2.551 17.3414 1.9 15.1954 1.9 13" stroke="#C2CFE0" stroke-width="2.8" stroke-linecap="round" />
-          </svg>
-          <p class="pl-4 -mt-1">Point System</p>
+          <p class="pl-4 -mt-1">Rule Booklet</p>
         </div>
         <div class="rounded-full flex flex-nowrap my-2 py-2 w-60 pl-6 hover:border-0 hover:bg-gray-100">
           <svg width="20" height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -99,7 +93,41 @@
           </svg>
           <p class="pl-4 -mt-1">Logout</p>
         </div>
-    </a>    
+        </a> 
+        <br>
+        <br> 
+        <div>
+            <div style="text-align:center">
+                <p class="px-10">Follow us on</p>
+                <div class=" flex justify-center space-x-4 m-4">
+                  <a style="cursor:pointer;" href="https://www.facebook.com/alcheringaiitg" target="_blank"><svg
+                          width="44" height="45" viewBox="0 0 44 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M1.22217 22.616C1.22217 32.946 8.72468 41.5359 18.537 43.2778V28.271H13.3425V22.5H18.537V17.8821C18.537 12.6877 21.8839 9.80305 26.6178 9.80305C28.1173 9.80305 29.7345 10.0333 31.2339 10.2636V15.5741H28.5796C26.0395 15.5741 25.4629 16.8433 25.4629 18.4605V22.5H31.0037L30.0808 28.271H25.4629V43.2778C35.2752 41.5359 42.7777 32.9478 42.7777 22.616C42.7777 11.1242 33.4277 1.72223 21.9999 1.72223C10.5722 1.72223 1.22217 11.1242 1.22217 22.616Z"
+                              fill="#1877F2" />
+                      </svg></a>
+                  <a style="cursor:pointer;" href="https://www.instagram.com/alcheringaiitg/" target="_blank"><svg
+                          class="instagram" fill="#000000" height="44" viewBox="0 0 24 24" width="45"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                              d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z" />
+                      </svg></a>
+                  <a style="cursor:pointer;" href="https://twitter.com/alcheringaiitg" target="_blank"><svg width="44"
+                          height="45" viewBox="0 0 44 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <g clip-path="url(#clip0)">
+                              <path
+                                  d="M16.415 40.5505C14.5123 40.5505 12.5539 40.3964 10.5837 40.0876C7.11365 39.5431 3.60097 37.728 2.60698 37.1845L0 35.7592L2.8225 34.831C5.90784 33.8165 7.7847 33.1871 10.108 32.2015C7.78168 31.0749 5.98875 29.0483 5.12568 26.4286L4.46907 24.4352L5.00752 24.5175C4.49693 24.0028 4.09376 23.4805 3.78123 23.0055C2.66976 21.3173 2.08129 19.2545 2.2065 17.4867L2.33004 15.7468L3.37169 16.1503C2.93227 15.3205 2.6147 14.4342 2.42806 13.5054C1.9732 11.2401 2.35387 8.83354 3.50026 6.72908L4.40764 5.06337L5.62116 6.52095C9.45913 11.1314 14.3203 13.8663 20.0898 14.6669C19.8542 13.0425 20.0307 11.4748 20.6152 10.0696C21.2956 8.43339 22.5061 7.04597 24.1148 6.05702C25.9013 4.95897 28.0679 4.42689 30.2153 4.55882C32.4936 4.6988 34.5622 5.55247 36.2051 7.02919C37.0074 6.82072 37.5985 6.59816 38.3975 6.29737C38.8782 6.11644 39.4233 5.91099 40.1055 5.67601L42.6191 4.80992L40.9799 9.4915C41.088 9.48243 41.1995 9.47471 41.316 9.46968L44.0002 9.34816L42.4137 11.5164C42.3227 11.6406 42.2995 11.6759 42.2673 11.7245C42.1394 11.9172 41.9803 12.1569 39.8027 15.0647C39.2575 15.7928 38.9853 16.7411 39.0359 17.7355C39.229 21.514 38.7654 24.9327 37.6573 27.8962C36.6092 30.6999 34.9851 33.1055 32.8307 35.0462C30.1646 37.447 26.7651 39.0909 22.726 39.9315C20.7448 40.3437 18.6171 40.5505 16.415 40.5505V40.5505Z"
+                                  fill="#1DA1F2" />
+                          </g>
+                          <defs>
+                              <clipPath id="clip0">
+                                  <rect width="44" height="44" fill="white" transform="translate(0 0.5)" />
+                              </clipPath>
+                          </defs>
+                      </svg></a>
+                </div>
+            </div>
+        </div>  
       </div>
     </div>
   </nav>
