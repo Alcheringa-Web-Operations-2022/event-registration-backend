@@ -2,7 +2,7 @@ from django.db import models
 import uuid
 from authentication.models import NewUser
 class Competition(models.Model):
-  competition_choices = [('Dance', 'Dance'), ('Music','Music'), ('Stagecraft','Stagecraft'), ('Fashion','Fashion'),( 'Class Appart','Class Appart'), ('Art Talkies','Art Talkies'), ('Literacy','Literacy'), ('Digital Dextirity','Digital Dextirity'), ('Lights Camera Action','Lights Camera Action'), ('Informals','Informals')] 
+  competition_choices = [('dance', 'Dance'), ('music','Music'), ('stagecraft','Stagecraft'), ('fashion','Fashion'),( 'classapart','Class Apart'), ('arttalkies','Art Talkies'), ('literacy','Literacy'), ('digitaldextirity','Digital Dextirity'), ('lightscameraaction','Lights Camera Action'), ('informals','Informals')] 
   id = models.SlugField(primary_key=True, default=uuid.uuid4)
   module = models.CharField(choices = competition_choices, max_length=127)
   event_name = models.CharField(max_length = 255)

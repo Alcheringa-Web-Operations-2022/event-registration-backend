@@ -7,27 +7,36 @@
 <body>
     <div class="bg-blue-50 flex w-full">
         {% include "../navbar.html" %}
-        <div class="rule_back flex-grow">
-            <div class="rule_head flex space_bet center_ele" >
-                <p class="more_size">Rule Booklet</p>
-                <i class="fa fa-bell-o" aria-hidden="true"></i>
-            </div>
-            <div class="rule_body">
-                <!-- <div class="rule_head border_bottom flex space_bet center_ele">
-                    <p>Rule Booklet</p>
-                    <button class="btn_pdf" onclick="download_file('{{ pdf.event_rules.url }}','Rules of event')">Downoad PDF</button>
-                </div> -->
-                <div class="rule_wrapper">
-                    <div class="rule_content">
-                        <div class="rule_content_body">
-                            <div style = "overflow: hidden;">
-                                <iframe frameborder="0" src="{{ pdf.event_rules.url }}#scrollbar=0&navpanes=0&view=FitH" width="100%;" height="2100px" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="rule_back">
+      <div class="rule_head flex space_bet center_ele">
+        <p class="more_size">Rule Booklet</p>
+        <i class="fa fa-bell-o" aria-hidden="true"></i>
+      </div>
+      <div class="rule_body">
+        <div class="rule_head border_bottom flex space_bet center_ele">
+            <p>Rule Booklet</p>
+            {%if comp.event_rules.url%}
+            <a href="{{comp.event_rules.url}}" download="{{comp.event_name}}"><button class="btn_pdf">Downoad PDF</button></a>
+            {%endif%}
         </div>
+        <div class="rule_wrapper">
+          <div class="color_head  flex">
+            <h2>{{comp.event_name}}</h2>
+          </div>
+          <div class="underlined_border">
+   <h3>HOW TO USE PDF FILES ON THE INTERNET</h3>
+          </div>
+          <div class="rule_content"> 
+<div class="rule_content_head">
+<p>Viewing PDF Files On-Line</p>
+</div>
+<div class="rule_content_body">
+<p>{{comp.event_desc}}
+</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
 </body>
 <script>

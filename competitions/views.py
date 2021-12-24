@@ -16,15 +16,14 @@ def showallcompetitions(request):
     if(request.GET.get('module')):
         module_comp = Competition.objects.filter(module = request.GET.get('module'))
     else:
-        module_comp = Competition.objects.filter(module = 'Dance')
+        module_comp = Competition.objects.filter(module = 'dance')
     
     return render(request, 'competitions/allcomp.html', {'allcomp': module_comp, 'modulename': request.GET.get('module') or 'dance'})
 
 @login_required(login_url='login')
 def viewrules(request, slug):
-    rules = Competition.objects.get(id = slug)
-    print(rules)
-    return render(request, 'competitions/rules.html', {'pdf' : rules})
+    comp = Competition.objects.get(id = slug)
+    return render(request, 'competitions/rules.html', {'comp':comp})
 
 @login_required(login_url='login')
 def registercompetition(request, slug):

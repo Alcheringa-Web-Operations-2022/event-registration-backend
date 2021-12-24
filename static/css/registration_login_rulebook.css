@@ -133,12 +133,12 @@ body {
 .rule_back {
   background-color: #f3f6f8;
   width: 80%;
-  height: 80%;
+  height: 100vh;
 }
 .rule_body {
   background-color: white;
   margin: 2px 4rem;
-
+  height: 100vh;
   border-radius: 12px;
 }
 .btn_pdf {
