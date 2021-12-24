@@ -185,6 +185,7 @@
 </div>
 <script>
     function toggleOpen(id) {
+
         var emptyCard = document.getElementById("emptyCard");
         var addMemberCard = document.getElementById("addMemberCard");
         var addMemberCardSmall = document.getElementById("addMemberCardSmall");
@@ -207,5 +208,8 @@
             document.getElementById("modalBackground").style.display = 'none';
         }
     }
+    window.onload = function() {
+        toggleOpen('addMemberButton')
+    };
 </script>
 {% endblock %}
