@@ -61,7 +61,7 @@
             }
 
             .moduleslist {
-                display: none;
+                display: inline-block;
             }
         }
 
@@ -104,7 +104,8 @@
                         <div>
                             <p class="pl-5 pt-3 font-medium hideitems">Modules</p>
                         </div>
-                        <div class="mb-0 text-white mb-3 h-10 orcolor flex align-middle moduleslist changecoloritem md:hidden justify-between"
+
+                        <div class="mb-0 text-white mb-3 h-10 orcolor flex align-middle changecoloritem md:hidden justify-between"
                             id="headmob">
                             <img src="{% static 'images/competition/dance.png' %}" alt="dance" class="h-4/6 m-1">
                             <span class="inline align-middle mt-2 pl-4 tracking-wide align-middle"
@@ -113,12 +114,11 @@
                                 <img src="{% static 'images/competition/dropdownbtn.png' %}" alt="drowdown"
                                     class="h-2/6 m-3 mr-4" id="arrow">
                             </button>
-
                         </div>
                         <div class="flex flex-col flex-nowrap overflow-auto competitions-list mydropdown">
                             <a href="?module=Dance" class="hideitems moduleitems" id="qwerty"
                                 onclick="mobchange('item9'); changecolor('item9')">
-                                <div class="h-10 orcolor text-white m-3 mt-3 rounded-md flex align-middle moduleslist changecoloritem"
+                                <div class="h-10 orcolor text-white m-3 mt-3 rounded-md flex align-middle changecoloritem"
                                     id="item9">
                                     <img src="{%  static 'images/competition/dance.png' %}" alt="dance"
                                         class="h-4/6 m-1">
@@ -127,7 +127,7 @@
                             </a>
                             <a href="?module=Music" class="hideitems moduleitems"
                                 onclick="mobchange('item10'); changecolor('item10')">
-                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle moduleslist"
+                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle"
                                     id="item10">
                                     <img src="{%  static 'images/competition/music.png' %}" alt="dance"
                                         class="h-4/6 ml-3 m-2">
@@ -136,7 +136,7 @@
                             </a>
                             <a href="?module=Stagecraft" class="hideitems moduleitems"
                                 onclick="mobchange('item1'); changecolor('item1')">
-                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle moduleslist"
+                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle"
                                     id="item1">
                                     <img src="{% static 'images/competition/stagecraft.png' %}" alt="dance"
                                         class="h-4/6 m-3">
@@ -144,7 +144,7 @@
                                 </div>
                             </a>
                             <a class="hideitems moduleitems" onclick="mobchange('item2'); changecolor('item2')">
-                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle moduleslist"
+                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle"
                                     id="item2">
                                     <img src="{% static 'images/competition/voguenation.png' %}" alt="dance"
                                         class="h-4/6 m-3">
@@ -153,7 +153,7 @@
                             </a>
                             <a href="?module=Class Appart" class="hideitems moduleitems"
                                 onclick="mobchange('item3'); changecolor('item3')">
-                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle moduleslist"
+                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle"
                                     id="item3">
                                     <img src="{% static 'images/competition/classapart.png' %}" alt="dance"
                                         class="h-4/6 m-3">
@@ -161,7 +161,7 @@
                                 </div>
                             </a>
                             <a class="hideitems moduleitems" onclick="mobchange('item4'); changecolor('item4')">
-                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle moduleslist"
+                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle"
                                     id="item4">
                                     <img src="{% static 'images/competition/classapart.png' %}" alt="dance"
                                         class="h-4/6 m-3">
@@ -169,7 +169,7 @@
                                 </div>
                             </a>
                             <a class="hideitems moduleitems" onclick="mobchange('item5'); changecolor('item5')">
-                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle moduleslist"
+                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle"
                                     id="item5">
                                     <img src="{% static 'images/competition/literaray.png' %}" alt="dance"
                                         class="h-4/6 m-3">
@@ -177,7 +177,7 @@
                                 </div>
                             </a>
                             <a class="hideitems moduleitems" onclick="mobchange('item6'); changecolor('item6')">
-                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle moduleslist"
+                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle"
                                     id="item6">
                                     <img src="{% static 'images/competition/digital.png' %}" alt="dance"
                                         class="h-4/6 m-3">
@@ -186,7 +186,7 @@
                                 </div>
                             </a>
                             <a class="hideitems moduleitems" onclick="mobchange('item7'); changecolor('item7')">
-                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle moduleslist"
+                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle"
                                     id="item7">
                                     <img src="{% static 'images/competition/lightscamact.png' %}" alt="dance"
                                         class="h-4/6 m-3">
@@ -195,7 +195,7 @@
                                 </div>
                             </a>
                             <a class="hideitems moduleitems" onclick="mobchange('item8'); changecolor('item8')">
-                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle moduleslist"
+                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle"
                                     id="item8">
                                     <img src="{% static 'images/competition/informal.png' %}" alt="dance"
                                         class="h-4/6 m-3">
@@ -205,7 +205,7 @@
                         </div>
                     </div>
                     <div class="m-0 pr-3 rounded-md bg-white md:w-2/3 h-full inline ml-3 sm:w-full">
-                        <div class="justify-between flex">
+                        <div class="justify-between flex hideitems">
                             <p class="pl-5 pt-3 font-medium inline-block" id="mod">{{modulename}}</p>
                             <span class="pt-3 inline-block mr-4 text-sm">Module Bounty: 200</span>
                         </div>
@@ -262,6 +262,7 @@
             function inversion(id) {
                 // console.log($("#" + id).attr("src", "arrow-inverted.png' %}"));
                 if ($("#" + id).attr("src") == "dropdownbtn.png' %}") {
+                    console.log("hello")
                     $("#" + id).attr("src", "arrow-inverted.png' %}");
                 } else {
                     $("#" + id).attr("src", "dropdownbtn.png' %}");
