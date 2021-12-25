@@ -119,15 +119,39 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static')
+# ]
+
+
+# MEDIA_URL = '/image_uploads/'
+
+
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'image_uploads')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-MEDIA_URL = '/image_uploads/'
+# STATIC_ROOT = './static_files/'
+
+DEFAULT_FILE_STORAGE = "minio_storage.storage.MinioMediaStorage"
+STATICFILES_STORAGE = "minio_storage.storage.MinioStaticStorage"
+MINIO_STORAGE_ENDPOINT =os.environ.get('minio_endpoint')
+MINIO_STORAGE_ACCESS_KEY = os.environ.get('minio_access')
+MINIO_STORAGE_SECRET_KEY = os.environ.get('minio_secret')
+MINIO_STORAGE_USE_HTTPS = True
+MINIO_STORAGE_MEDIA_BUCKET_NAME = 'alcherregistrationsmedia'
+MINIO_STORAGE_AUTO_CREATE_MEDIA_BUCKET = True
+MINIO_STORAGE_STATIC_BUCKET_NAME = 'alcherregistratiosstatic'
+MINIO_STORAGE_AUTO_CREATE_STATIC_BUCKET = True
 
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'image_uploads')
+MEDIA_URL = '/image-uploads/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'image-uploads')
+
+
 AUTH_USER_MODEL = 'authentication.NewUser'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
