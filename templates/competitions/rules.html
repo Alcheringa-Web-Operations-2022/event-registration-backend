@@ -15,7 +15,7 @@
       <div class="rule_body">
         <div class="rule_head border_bottom flex space_bet center_ele">
             <p>Rule Booklet</p>
-            {%if comp.event_rules.url%}
+            {%if comp.event_rules_pdf.url%}
             <a href="{{comp.event_rules.url}}" download="{{comp.event_name}}"><button class="btn_pdf">Downoad PDF</button></a>
             {%endif%}
         </div>
@@ -24,14 +24,14 @@
             <h2>{{comp.event_name}}</h2>
           </div>
           <div class="underlined_border">
-   <h3>HOW TO USE PDF FILES ON THE INTERNET</h3>
+   <h3>{{comp.event_desc}}</h3>
           </div>
           <div class="rule_content"> 
 <div class="rule_content_head">
 <p>Viewing PDF Files On-Line</p>
 </div>
 <div class="rule_content_body">
-<p>{{comp.event_desc}}
+<p>{{comp.event_rules}}
 </p>
           </div>
         </div>

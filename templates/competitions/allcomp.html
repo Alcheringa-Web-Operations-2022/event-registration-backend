@@ -84,10 +84,6 @@
 
             <span class="content bg-slate-100 h-screen">
                 <span class="flex flex-row items-end h-10 mt-3 mb-3">
-                    <div class="mt-10">
-                        <img src="{% static 'icons/avatar.png' %}" alt=""
-                            class="ml-3 rounded-full border-4 border-orange-500 md:hidden">
-                    </div>
                     <span
                         class="competition-title font-poppins inline w-11/12 align-middle md:pl-5 font-bold text-2xl sm:justify-center sm:text-center">
                         <p class="text-center pl-5 md:text-left md:pl-0"> Competitions</p>
@@ -116,93 +112,17 @@
                             </button>
                         </div>
                         <div class="flex flex-col flex-nowrap overflow-auto competitions-list mydropdown">
-                            <a href="?module=dance" id="music"class="hideitems moduleitems"
-                                onclick="mobchange('item1'); changecolor('item1')">
+                            {% for module in allmod %}
+                            <a href="?module={{module.module_query_name_without_spaces_all_small}}" class="hideitems moduleitems"
+                                onclick="mobchange('{{module.module_query_name_without_spaces_all_small}}'); changecolor('{{module.module_query_name_without_spaces_all_small}}')">
                                 <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle"
-                                    id="item1">
-                                    <img src="{%  static 'icons/dance.png' %}" alt="dance"
+                                    id="{{module.module_query_name_without_spaces_all_small}}">
+                                    <img src="{{module.module_icon.url}}" alt="dance"
                                         class="h-4/6 ml-3 m-2">
-                                    <span class="inline-block align-middle mt-2 tracking-wide">Dance</span>
+                                    <span class="inline-block align-middle mt-2 tracking-wide">{{module.module}}</span>
                                 </div>
                             </a>
-                            <a href="?module=music" id="music"class="hideitems moduleitems"
-                                onclick="mobchange('item2'); changecolor('item2')">
-                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle"
-                                    id="item2">
-                                    <img src="{%  static 'icons/music.png' %}" alt="dance"
-                                        class="h-4/6 ml-3 m-2">
-                                    <span class="inline-block align-middle mt-2 tracking-wide">Music</span>
-                                </div>
-                            </a>
-                            <a href="?module=stagecraft" id="music"class="hideitems moduleitems"
-                                onclick="mobchange('item3'); changecolor('item3')">
-                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle"
-                                    id="item3">
-                                    <img src="{%  static 'icons/stagecraft.png' %}" alt="dance"
-                                        class="h-4/6 ml-3 m-2">
-                                    <span class="inline-block align-middle mt-2 tracking-wide">Stagecraft</span>
-                                </div>
-                            </a>
-                            <a href="?module=voguenation" id="voguenation"class="hideitems moduleitems" 
-                            onclick="mobchange('item4'); changecolor('item4')">
-                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle"
-                                    id="item4">
-                                    <img src="{% static 'icons/voguenation.png' %}" alt="dance"
-                                        class="h-4/6 ml-3 m-2">
-                                    <span class="inline-block align-middle mt-2 tracking-wide">Vogue Nation</span>
-                                </div>
-                            </a>
-                            <a href="?module=classapart" id="classapart" class="hideitems moduleitems"
-                                onclick="mobchange('item5'); changecolor('item5')">
-                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle"
-                                    id="item5">
-                                    <img src="{% static 'icons/classapart.png' %}" alt="dance"
-                                        class="h-4/6 ml-3 m-2">
-                                    <span class="inline-block align-middle mt-2 tracking-wide">Class Apart</span>
-                                </div>
-                            </a>
-                            <a href="?module=arttalkies" id="arttalkies"class="hideitems moduleitems" onclick="mobchange('item6'); changecolor('item6')">
-                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle"
-                                    id="item6">
-                                    <img src="{% static 'icons/classapart.png' %}" alt="dance"
-                                        class="h-4/6 ml-3 m-2">
-                                    <span class="inline-block align-middle mt-2 tracking-wide">Art Talkies</span>
-                                </div>
-                            </a>
-                            <a href="?module=literacy" id="literacy" class="hideitems moduleitems" onclick="mobchange('item7'); changecolor('item7')">
-                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle"
-                                    id="item7">
-                                    <img src="{% static 'icons/literaray.png' %}" alt="dance"
-                                        class="h-4/6 ml-3 m-2">
-                                    <span class="inline-block align-middle mt-2 tracking-wide">Literary</span>
-                                </div>
-                            </a>
-                            <a  href="?module=digitaldexterity" id="digitaldexterity" class="hideitems moduleitems" onclick="mobchange('item8'); changecolor('item8')">
-                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle"
-                                    id="item8">
-                                    <img src="{% static 'icons/digital.png' %}" alt="dance"
-                                        class="h-4/6 ml-3 m-2">
-                                    <span class="inline-block align-middle mt-2 tracking-wide">Digital
-                                        Dexterity</span>
-                                </div>
-                            </a>
-                            <a href="?module=lightscameraaction" id="lightscameraaction" class="hideitems moduleitems" onclick="mobchange('item9'); changecolor('item9')">
-                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle"
-                                    id="item9">
-                                    <img src="{% static 'icons/lightscamact.png' %}" alt="dance"
-                                        class="h-4/6 ml-3 m-2">
-                                    <span class="inline-block align-middle mt-2 tracking-wide">Lights Camera
-                                        Action</span>
-                                </div>
-                            </a>
-                            <a href="?module=informals" id="informals"class="hideitems moduleitems" onclick="mobchange('item10'); changecolor('item10')">
-                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle"
-                                    id="item10">
-                                    <img src="{% static 'icons/informal.png' %}" alt="dance"
-                                        class="h-4/6 ml-3 m-2">
-                                    <span class="inline-block align-middle mt-2 tracking-wide">Informals</span>
-                                </div>
-                            </a>
+                            {%endfor%}
                         </div>
                     </div>
                     <div class="m-0 pr-3 rounded-md bg-white md:w-2/3 h-full inline ml-3 sm:w-full">
@@ -279,9 +199,6 @@
                 }
             }
             function changecolor(id) {
-                // $("#" + item).css("background-color", "rgb(241 245 249)");
-                // $("#" + item).css("color", "black");
-                // $("#" + mod).text("hello");
                 var txt = $("#" + id).find("span").text();
                 $("#" + m).text(txt);
                 console.log('clicked');
@@ -296,7 +213,6 @@
             }
 
             var element = 'Dance';
-            var competitionslist = ['dance', 'music', 'stagecraft', 'voguenation', 'classapart', 'arttalkies', 'literacy', 'digitaldexterity', 'lightscameraaction', 'informals']
             function dropdown() {
                 if ($(window).width() > 768) {
                     $('.moduleitems').css('display', 'inline-block');
@@ -313,10 +229,8 @@
             window.onload = function() {
                 var modulename='{{modulename}}'
                 if(modulename.length>0){
-                    item=`item${competitionslist.indexOf('{{modulename}}')+1}`
-                    changecolor(`item${competitionslist.indexOf('{{modulename}}')+1}`)
-                    mobchange(item)
-                    console.log('modi')
+                    changecolor(modulename)
+                    mobchange(modulename)
                 }
                 
             };

@@ -39,8 +39,6 @@ class CustomAccountManager(BaseUserManager):
 
 
 class NewUser(AbstractBaseUser, PermissionsMixin):
-    interest_choices = [('dance', 'Dance'), ('music', 'Music'), ('stagecraft', 'Stagecraft'), ('fashion', 'Fashion'), ('classapart', 'Class Apart'), ('arttalkies',
-                                                                                                                                                         'Art Talkies'), ('literacy', 'Literacy'), ('digitaldextirity', 'Digital Dextirity'), ('lightscameraaction', 'Lights Camera Action'), ('informals', 'Informals')]
     alcherid = models.CharField(
         max_length=255, blank=True, unique=True)
     id = models.SlugField(primary_key=True, default=uuid.uuid4)
@@ -52,7 +50,8 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     city = models.CharField(max_length=150, unique=False)
     fullname = models.CharField(max_length=150, blank=True)
     phone = PhoneNumberField(unique=False, blank=True)
-    interest = models.CharField(choices=interest_choices, max_length=127,blank=True,null=True)
+    interest = models.ManyToManyField(
+        "competitions.Module", related_name="interest")
     team_members=models.IntegerField(default=0)
     no_of_events_registered=models.IntegerField(default=0)
 
