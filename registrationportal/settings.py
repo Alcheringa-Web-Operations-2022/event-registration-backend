@@ -147,9 +147,9 @@ MINIO_STORAGE_AUTO_CREATE_MEDIA_BUCKET = True
 MINIO_STORAGE_STATIC_BUCKET_NAME = 'alcherregistratiosstatic'
 MINIO_STORAGE_AUTO_CREATE_STATIC_BUCKET = True
 
-
-MEDIA_URL = '/image-uploads/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'image-uploads')
+# not hyphen its underscore
+MEDIA_URL = '/image_uploads/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'image_uploads')
 
 
 AUTH_USER_MODEL = 'authentication.NewUser'
