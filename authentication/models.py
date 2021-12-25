@@ -50,6 +50,7 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     city = models.CharField(max_length=150, unique=False)
     fullname = models.CharField(max_length=150, blank=True)
     phone = PhoneNumberField(unique=False, blank=True)
+    alternate_phone = PhoneNumberField(unique=False, blank=True,null=True)
     interest = models.ManyToManyField(
         "competitions.Module", related_name="interest")
     team_members=models.IntegerField(default=0)

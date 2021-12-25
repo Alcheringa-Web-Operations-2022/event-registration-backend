@@ -1,4 +1,4 @@
-
+from competitions.models import Module
 from django.utils.html import strip_tags
 from django.db.models.query_utils import Q
 from django.contrib.auth.tokens import default_token_generator
@@ -20,10 +20,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
 from .forms import UserRegisterForm, UserUpdateForm
 from django.core.mail import send_mail
-from django.core.mail import EmailMultiAlternatives
-from django.template.loader import get_template
-from django.template import Context
 from .models import NewUser
+
 User = get_user_model()
 ########### register here #####################################
 
@@ -119,6 +117,7 @@ def password_reset_request(request):
 
 @login_required(login_url='login')
 def profile(request):
+    modules=Module.objects.all()
     if request.method == 'POST':
         u_form = UserUpdateForm(
             request.POST, request.FILES, instance=request.user)
@@ -129,7 +128,7 @@ def profile(request):
         print(u_form.errors)
     else:
         u_form = UserUpdateForm(instance=request.user)
-    return render(request, 'authentication/profile.html', {'heading': 'Profile', 'form': u_form,})
+    return render(request, 'authentication/profile.html', {'heading': 'Profile', 'form': u_form,'modules':modules,'totalmodules':modules.count()})
 
 def logout(request):
     django_logout(request)

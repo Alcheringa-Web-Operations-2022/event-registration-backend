@@ -2,8 +2,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
-from authentication.models import NewUser
 from phonenumber_field.formfields import PhoneNumberField
+from competitions.models import Module
 User = get_user_model()
 
 
@@ -39,7 +39,12 @@ class UserRegisterForm(UserCreationForm):
 class UserUpdateForm(forms.ModelForm):
 
     phone = PhoneNumberField(widget=forms.TextInput(
+    ), label="Phone number (e.g. +12125552368)")
+    alternate_phone = PhoneNumberField(widget=forms.TextInput(
     ), label="Phone number (e.g. +12125552368)", required=False)
+    interest = forms.ModelMultipleChoiceField(
+        queryset=Module.objects.all(),
+        widget=forms.CheckboxSelectMultiple, required=False)
 
     class Meta:
         model = User
@@ -47,5 +52,6 @@ class UserUpdateForm(forms.ModelForm):
                   'username',
                   'phone',
                   'collegename',
-                  'city'
+                  'city',
+                  'alternate_phone', 'interest'
                   ]
