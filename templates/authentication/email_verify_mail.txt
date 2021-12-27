@@ -1,0 +1,5 @@
+{% autoescape off %}
+Hello! {{username}}!
+Click on this link to verify your account.
+https://{{domain}}{{link}}
+{% endautoescape %}

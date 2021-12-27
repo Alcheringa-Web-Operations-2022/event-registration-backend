@@ -60,7 +60,7 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     provider = models.CharField(max_length=200, unique=False, default="email")
     about = models.TextField(_('about'), max_length=500, blank=True)
     is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
     objects = CustomAccountManager()
 
     USERNAME_FIELD = 'email'

@@ -21,6 +21,7 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
 from .forms import UserRegisterForm, UserUpdateForm
 from django.core.mail import send_mail
 from .models import NewUser
+from django.urls import reverse
 
 User = get_user_model()
 ########### register here #####################################
@@ -32,7 +33,26 @@ def register(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
+            user = NewUser.objects.get(email=request.POST.get('email'))
             email = form.cleaned_data.get('email')
+            uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
+            domain = get_current_site(request).domain
+            link = reverse('activate', kwargs={
+                            'uidb64': uidb64, 'token': token_generator.make_token(user)})
+            subject = "Activate your account"
+            email_template_name = "authentication/email_verify_mail.txt"
+            c = {
+                "username": username,
+                "domain": domain,
+                "link": link,
+            }
+
+            email = render_to_string(email_template_name, c)
+            try:
+                send_mail(subject, email, 'Alcheringa Registration Portal', [email], fail_silently=False)
+                print("done")
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
             ######################### mail system ####################################
             # htmly = get_template('authentication/Email.html')
             # d = {'username': username}
@@ -133,3 +153,23 @@ def profile(request):
 def logout(request):
     django_logout(request)
     return redirect('home')
+
+
+class VerificationView(View):
+
+    def get(self, request, uidb64, token, *args, **kwargs):
+        try:
+            uid = force_text(urlsafe_base64_decode(uidb64))
+            user = NewUser.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, NewUser.DoesNotExist):
+            user = None
+        if user is not None and token_generator.check_token(user, token):
+            user.is_active = True
+            user.save()
+            messages.success(request, ('Your account have been confirmed.'))
+            return redirect('home')
+        else:
+            messages.warning(
+                request, ('The confirmation link was invalid, possibly because it has already been used.'))
+            print("err")
+            return redirect('home')
