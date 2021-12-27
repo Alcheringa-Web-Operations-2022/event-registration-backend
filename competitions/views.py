@@ -4,9 +4,10 @@ from django.template.loader import render_to_string
 from django.contrib import messages
 from competitions.models import CompTeam, Competition, Module, PreviousPerformance
 from django.contrib.auth.decorators import login_required
-from teams.models import Team, TeamMembers
 from django.core.mail import send_mail
 import json
+from teams.models import Team, TeamMembers
+
 # Create your views here.
 
 
