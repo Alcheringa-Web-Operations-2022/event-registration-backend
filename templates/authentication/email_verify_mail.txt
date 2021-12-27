@@ -1,5 +1,11 @@
 {% autoescape off %}
-Hello! {{username}}!
+
+Hello {{username}},
+
 Click on this link to verify your account.
 https://{{domain}}{{link}}
+
+Sincerely,
+Alcheringa Web Operations
+
 {% endautoescape %}

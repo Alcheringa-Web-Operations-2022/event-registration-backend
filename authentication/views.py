@@ -42,14 +42,15 @@ def register(request):
             subject = "Activate your account"
             email_template_name = "authentication/email_verify_mail.txt"
             c = {
-                "username": username,
-                "domain": domain,
-                "link": link,
+                'username': username,
+                'domain': domain,
+                'link': link,
             }
 
-            email = render_to_string(email_template_name, c)
+            emailtemplate = render_to_string(email_template_name, c)
             try:
-                send_mail(subject, email, 'Alcheringa Registration Portal', [email], fail_silently=False)
+                send_mail(subject, emailtemplate, 'Alcheringa Registration Portal', [
+                          email], fail_silently=False)
                 print("done")
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
@@ -64,7 +65,7 @@ def register(request):
             # msg.send()
             ##################################################################
             messages.success(
-                request, f'Your account has been created ! You are now able to log in')
+                request, f'Check your mail for the link to activate your account')
             return redirect('login')
     else:
         form = UserRegisterForm()
