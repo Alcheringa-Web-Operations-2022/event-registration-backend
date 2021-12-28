@@ -80,7 +80,7 @@
                                     <div class="font-light text-sm">{{member.email}}</div>
                                 </div>
                                 <div class="my-auto float-right hidden edit-delete">
-                                    <div class="lg:flex hidden">
+                                    <div class="lg:flex hidden ">
                                         <a href="{% url 'update-member' member.id %}"><button
                                                 onclick="toggleOpen(this.id)" id="editButton" class="-ml-2">
                                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
@@ -89,7 +89,16 @@
                                                         d="M2 11.5V14H4.5L11.8733 6.62665L9.37333 4.12666L2 11.5ZM13.8067 4.69332C14.0667 4.43332 14.0667 4.01332 13.8067 3.75332L12.2467 2.19332C11.9867 1.93332 11.5667 1.93332 11.3067 2.19332L10.0867 3.41332L12.5867 5.91332L13.8067 4.69332V4.69332Z"
                                                         fill="#C2CFE0" />
                                                 </svg>
-                                            </button></a>
+                                            </button>
+                                        </a>
+                                        <a><button
+                                                onclick="removeMember('{{member.id}}')" id="deleteButton" class="ml-2">
+                                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M6.00342 19.3989C6.00342 20.4989 6.90342 21.3989 8.00342 21.3989H16.0034C17.1034 21.3989 18.0034 20.4989 18.0034 19.3989V7.39893H6.00342V19.3989ZM19.0034 4.39893H15.5034L14.5034 3.39893H9.50342L8.50342 4.39893H5.00342V6.39893H19.0034V4.39893Z" fill="#FF4433"/>
+                                                    </svg>
+                                                    
+                                            </button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -177,7 +186,7 @@
         Are you sure you want to remove the member
         <div class="flex justify-end pt-4">
             <button class="text-red-500 mx-5 text-sm" id="modalCancel" onclick="toggleOpen(this.id)">Cancel</button>
-            <button class="bg-red-500 text-white py-1 px-2 text-sm rounded">Remove</button>
+            <button class="bg-red-500 text-white py-1 px-2 text-sm rounded" id="modalCancelConfirm" onclick="toggleOpen(this.id)">Remove</button>
         </div>
     </div>
 </div>
@@ -213,7 +222,33 @@
         }
         if (id == "modalCancel") {
             document.getElementById("modalBackground").style.display = 'none';
+            console.log(id)
         }
+        if( id == "modalCancelConfirm"){
+            // console.log(remId);
+            $.ajax({
+                type: "POST",
+                data: {
+                    'id':remId ,
+                },
+                url: `{% url 'remove-member'%}` ,
+
+                headers: {
+                    "X-CSRFTOKEN": "{{ csrf_token }}"
+                },
+                success:(data)=>{
+                    notifySuccess('Member removed successfully')
+                    window.location.reload();
+                }
+            })
+        }
+    }
+    var remId = '';
+    function removeMember(id){
+        // console.log(id)
+        remId = id;
+        document.getElementById("modalBackground").style.display = 'block';
+
     }
     // window.onload = function() {
     //     toggleOpen('addMemberButton')

@@ -1,3 +1,4 @@
+from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import MemberForm
 from .models import TeamMembers, Team
@@ -42,7 +43,7 @@ def update_member(request,id):
         all_members.append(member)
     member = TeamMembers.objects.filter(id=id).first()
     if request.method == 'POST':
-        if '_remove' in request.POST:
+        if '_remove' in request.POST :
             member.delete()
         else:
             form = MemberForm(request.POST)
@@ -59,3 +60,10 @@ def update_member(request,id):
         form.fields['phone'].widget.attrs['value'] = member.phone
         form.fields['gender'].widget.attrs['value'] = member.gender
     return render(request,'teams/update_member.html',{'form':form,'member':member,'team':all_members})
+
+@login_required(login_url='login')
+def remove_member(request):
+    if request.POST["id"]:
+        member = TeamMembers.objects.filter(id=request.POST["id"]).first()
+        member.delete()
+        return HttpResponse("ok")
