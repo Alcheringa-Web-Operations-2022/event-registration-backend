@@ -55,7 +55,7 @@
                                     {% csrf_token %}
                                     {{form.name}} {{form.phone}} {{form.email}} {{form.gender}}
                                     <div class="flex justify-end pb-4">
-                                        <button class="text-red-500 mx-5 text-sm">Cancel</button>
+                                        <button class="text-red-500 mx-5 text-sm"  id="cancel-edit" onclick="toggleOpen(this.id)">Cancel</button>
                                         <button class="bg-red-500 text-white py-1 px-2 text-sm rounded">Add</button>
                                     </div>
                                 </form>
@@ -100,7 +100,7 @@
                                         {{form.name}} {{form.phone}} {{form.email}} {{form.gender}}
                                         <div class="flex justify-between">
                                             <button class="text-red-500 mx-1 text-sm">Remove</button>
-                                            <div><button class="text-red-500 mx-2 text-sm">Cancel</button>
+                                            <div><button class="text-red-500 mx-2 text-sm" id="cancel-edit" onclick="toggleOpen(this.id)" >Cancel</button>
                                                 <button
                                                     class="bg-red-500 text-white py-1 px-2 text-sm rounded">Add</button>
                                             </div>
@@ -139,7 +139,7 @@
                                 <option value="female">female</option>
                             </select> -->
                             <div class="flex justify-end pb-4">
-                                <button class="text-red-500 mx-5 text-sm">Cancel</button>
+                                <button class="text-red-500 mx-5 text-sm" id="cancel-edit" onclick="toggleOpen(this.id)">Cancel</button>
                                 <button type="submit"
                                     class="bg-red-500 text-white py-1 px-2 text-sm rounded">Add</button>
                             </div>
@@ -161,7 +161,7 @@
                             </select>
                             <div class="flex justify-between pb-4">
                                 <button class="text-red-500 mx-1 text-sm">Remove</button>
-                                <div><button class="text-red-500 mx-5 text-sm">Cancel</button>
+                                <div><button class="text-red-500 mx-5 text-sm" id="cancel-edit" onclick="toggleOpen(this.id)">Cancel</button>
                                     <button class="bg-red-500 text-white py-1 px-2 text-sm rounded">Add</button>
                                 </div>
                             </div>
@@ -191,9 +191,16 @@
         var addMemberCardSmall = document.getElementById("addMemberCardSmall");
         var editProfileCard = document.getElementById("editProfileCard");
         if (id == "addMemberButton") {
+            // document.getElementById("cancel-edit").click()
             emptyCard.style.display = 'none';
             addMemberCard.style.display = 'block';
             addMemberCardSmall.style.display = 'block';
+            editProfileCard.style.display = 'none';
+        }
+        if(id == "cancel-edit") {
+            emptyCard.style.display = 'flex';
+            addMemberCard.style.display = 'none';
+            addMemberCardSmall.style.display = 'none';
             editProfileCard.style.display = 'none';
         }
         if (id == "editButton") {
@@ -208,8 +215,8 @@
             document.getElementById("modalBackground").style.display = 'none';
         }
     }
-    window.onload = function() {
-        toggleOpen('addMemberButton')
-    };
+    // window.onload = function() {
+    //     toggleOpen('addMemberButton')
+    // };
 </script>
 {% endblock %}

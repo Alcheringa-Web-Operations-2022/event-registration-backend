@@ -13,6 +13,7 @@ html {
   display: flex;
   flex-direction: column;
   width: 472px;
+  padding: 20px;
 }
 .flex {
   display: flex;
@@ -35,8 +36,10 @@ html {
 }
 .form_border {
   position: relative;
-  background-color: white;
+  background-color: rgb(255,255,255);
   border-radius: 12px;
+  padding: 15px;
+  backdrop-filter: blur(5px);
 }
 .border_bottom {
   padding: 0px 12px;
