@@ -54,6 +54,10 @@ def create_profile_post_save(sender, instance,*args, **kwargs):
         team.save()
 
 
-@receiver(m2m_changed, sender=Team)
+@receiver(m2m_changed, sender=Team.members.through)
 def team_members_changed(sender, instance, *args, **kwargs):
-    print(instance.members.all().count())
+    print(instance)
+    user=NewUser.objects.get(email=instance.leader.email)
+    user.team_members=instance.members.all().count()
+    user.save()
+

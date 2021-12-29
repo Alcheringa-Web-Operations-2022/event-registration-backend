@@ -1,8 +1,11 @@
 from django.db import models
 import uuid
 from django.db.models.base import Model
+from django.db.models.signals import m2m_changed, post_save
+from django.dispatch import receiver
 from authentication.models import NewUser
 from competitions.validators import validate_file_extension
+from teams.models import TeamMembers
 
 
 class Module(models.Model):
@@ -53,5 +56,8 @@ class PreviousPerformance(models.Model):
     description = models.TextField(null=True, blank=True)
     
 
-
-
+@receiver(post_save, sender=CompTeam)
+def comp_register_signal(sender, instance, *args, **kwargs):
+    user = NewUser.objects.get(email=instance.leader.email)
+    user.no_of_events_registered+=1
+    user.save()
