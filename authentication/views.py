@@ -5,7 +5,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.template.loader import render_to_string
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import PasswordResetForm
-from django.core.mail import send_mail, BadHeaderError
+from django.core.mail import message, send_mail, BadHeaderError
 from django.http import HttpResponse
 from django.views import View
 from .utils import token_generator
@@ -84,16 +84,19 @@ def Login(request):
         password = request.POST.get('password')
         print(password)
         user = NewUser.objects.filter(email=email)
-
         if user:
-            user = authenticate(request, email=email, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect(request.GET.get('next', 'home'))
+            if user.is_active == False:
+                messages.error("Account not verified")
             else:
-                print("errrr")
-                messages.error(
-                    request, 'Password is incorrect for the email address entered ')
+                user = authenticate(request, email=email, password=password)
+                
+                if user is not None:
+                    login(request, user)
+                    return redirect(request.GET.get('next', 'home'))
+                else:
+                    print("errrr")
+                    messages.error(
+                        request, 'Password is incorrect for the email address entered ')
         else:
             print("email not registered")
             messages.error(request, 'Email is not registered')

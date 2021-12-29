@@ -13,23 +13,26 @@
         <i class="fa fa-bell-o" aria-hidden="true"></i>
       </div>
       <div class="rule_body flex-grow">
-        <div class="rule_head border_bottom flex space_bet center_ele">
-            <p>Rule Booklet</p>
-            {%if comp.event_rules_pdf.url%}
-            <a href="{{comp.event_rules.url}}" download="{{comp.event_name}}"><button class="btn_pdf">Downoad PDF</button></a>
-            {%endif%}
-        </div>
-        <div class="rule_wrapper">
-          <div class="color_head  flex">
-            <h2>{{comp.event_name}}</h2>
-          </div>
-          <div class="rule_content"> 
-            <div class="rule_content_head">
-            <p>Viewing PDF Files On-Line</p>
+          <div class="rule_head border_bottom flex space_bet center_ele">
+              <p>Rule Booklet</p>
+              {%if comp.event_rules_pdf.url%}
+              <a href="{{comp.event_rules.url}}" download="{{comp.event_name}}"><button class="btn_pdf">Downoad PDF</button></a>
+              {%endif%}
             </div>
-            <div class="rule_content_body">
-            <p>{{comp.event_rules}}
-            </p>
+            <div class="rule_wrapper">
+                <div class="color_head  flex">
+                    <h2>{{comp.event_name}}</h2>
+                </div>
+                <div class="rule_content"> 
+                    <div class="rule_content_head">
+                        <p>
+                            <!-- Viewing PDF Files On-Line -->
+                            <br>
+                        </p>
+                    </div>
+                    <div class="rule_content_body">
+                        <!-- <p>{{comp.event_rules}}</p> -->
+                        <iframe src="{{comp.event_rules_pdf.url}}" width="100%" style="height: 80vh;" frameborder="0"></iframe>
           </div>
         </div>
       </div>
