@@ -36,7 +36,10 @@ class Team(models.Model) :
 @receiver(post_save,sender=NewUser)
 def create_profile(sender,instance,created,*args,**kwargs) :
     if created:
-        Team(leader=instance).save()
+        TeamMembers(email=instance.email,name=instance.username,phone=instance.phone, gender='M').save()
+        team=Team.objects.create(leader=instance)
+        team.members.add(TeamMembers.objects.get(email=instance.email))
+        team.save()
 
         
 

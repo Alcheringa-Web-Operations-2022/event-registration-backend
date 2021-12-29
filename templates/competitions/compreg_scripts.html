@@ -57,7 +57,7 @@ function addchip(team){
     $('#chip-team').empty()
     $.each(team, function (i) {
         var templateString = `<span
-            id="chip${team[i].id}" class="mx-2 my-2 rounded-full text-white bg-red-500 font-semibold text-sm flex align-center cursor-pointer active:bg-gray-300 transition duration-300 ease w-max">
+            id="chip${team[i].id}" class="mx-2 my-2 rounded-full text-white  orcolor font-semibold text-sm flex align-center cursor-pointer active:bg-gray-300 transition duration-300 ease w-max">
             <span class="flex items-center px-3 py-2">
             ${team[i].email}
             </span>

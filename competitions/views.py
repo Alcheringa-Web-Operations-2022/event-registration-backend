@@ -43,7 +43,7 @@ def registercompetition(request, slug):
             ######################### saving team ####################################
 
             compteams = CompTeam.objects.create(
-                event=comp, leader=request.user, teamname=request.POST['teamname'])
+                event=comp, leader=request.user)
             team_members = []
             for member in json.loads(request.POST.get('members')):
                 print(str(member['id']))

@@ -40,10 +40,9 @@ class CompTeam(models.Model):
         NewUser, related_name="teams_leader", on_delete=models.CASCADE)
     members = models.ManyToManyField(
         "teams.TeamMembers", related_name="compteams")
-    teamname = models.CharField(max_length=255, blank=False, null=True)
     
     def __str__(self):
-        return str(self.teamname)
+        return str(self.leader)
 
 class PreviousPerformance(models.Model):
     event = models.ForeignKey(

@@ -21,8 +21,10 @@
                     <div class="flex m-1">
                         <div class=" bg-white max-w-4xl rounded-lg w-screen shadow-md">
                             <div >
-                                <div class="py-3 pl-6  text-xl border-b-2 font-normal">Edit profile <div style="float:right"><a href="{%url 'profileedit'%}"> <input type="button"
-                                                class="bg-red-500 hover:bg-red-700 text-white inline-block px-4 rounded-lg shadow-sm font-semibold text-base" value="Update Profile" /></a></div></div>
+                                <div class="py-3 pl-6 flex flex-row text-xl border-b-2 font-normal justify-between">
+                                    <div>Edit Profile</div>
+                                     <div><a href="{%url 'profileedit'%}"> <button
+                                            class="orcolor mr-4 text-white md:ml-5 pt-1 pb-1 pl-4 pr-4 rounded-md font-medium">Edit Profile</button></a></div></div>
                                 <br>
                                 <div class="mx-10">
                                     
@@ -102,7 +104,7 @@
     $("#chip-interest").empty();
     $.each(interests, function (i) {
       var templateString = `<span
-                id="chip${interests[i].id}" class="mx-2 my-2 rounded-full text-white bg-red-500 font-semibold text-sm flex align-center cursor-pointer active:bg-gray-300 transition duration-300 ease w-max">
+                id="chip${interests[i].id}" class="mx-2 my-2 rounded-full text-white orcolor font-semibold text-sm flex align-center cursor-pointer active:bg-gray-300 transition duration-300 ease w-max">
                 <span class="flex items-center px-3 py-2">
                 ${interests[i].name}
                 </span>

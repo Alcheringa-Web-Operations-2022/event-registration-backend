@@ -62,15 +62,18 @@
                             </div>
                         </div>
                         <!-- single-card-yellow_border -->
+                        
+                        <!-- single-card -->
+                        {% for member in team %}
+                        {%if member.email == user.email%}
                         <div class="m-1 p-4 h-28 flex bg-white border-yellow-400 lg:w-80 w-full border-2 rounded-md">
                             <img width="75" src="{%static 'imgs/user-default.png'%}" alt="profile" border="0" />
                             <div class="mx-5 my-auto">
-                                <div class="font-medium text-base">{{user.username}}</div>
+                                <div class="font-medium text-base">{{user.username}} (Leader)</div>
                                 <div class="font-light text-sm">{{user.email}}</div>
                             </div>
                         </div>
-                        <!-- single-card -->
-                        {% for member in team %}
+                        {%else%}
                         <div
                             style="background-color: #F3F6F8;" class="m-1 p-4 lg:h-28 border-red-50 border rounded-md hover:bg-white hover:shadow-md lg:w-80 w-full edit-delete-parent">
                             <div class="flex">
@@ -118,6 +121,7 @@
                                 </div>
                             </div>
                         </div>
+                        {%endif%}
                         {% endfor %}
 
 
