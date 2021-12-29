@@ -38,7 +38,7 @@ def register(request):
             uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
             domain = get_current_site(request).domain
             link = reverse('activate', kwargs={
-                            'uidb64': uidb64, 'token': token_generator.make_token(user)})
+                'uidb64': uidb64, 'token': token_generator.make_token(user)})
             subject = "Activate your account"
             email_template_name = "authentication/email_verify_mail.txt"
             c = {
@@ -83,13 +83,13 @@ def Login(request):
         print(email)
         password = request.POST.get('password')
         print(password)
-        user = NewUser.objects.filter(email=email)
+        user = NewUser.objects.filter(email=email).first()
         if user:
             if user.is_active == False:
-                messages.error("Account not verified")
+                messages.error(request, "Account not verified")
             else:
                 user = authenticate(request, email=email, password=password)
-                
+
                 if user is not None:
                     login(request, user)
                     return redirect(request.GET.get('next', 'home'))
@@ -141,7 +141,7 @@ def password_reset_request(request):
 
 @login_required(login_url='login')
 def profile(request):
-    modules=Module.objects.all()
+    modules = Module.objects.all()
     if request.method == 'POST':
         u_form = UserUpdateForm(
             request.POST, request.FILES, instance=request.user)
@@ -152,7 +152,24 @@ def profile(request):
         print(u_form.errors)
     else:
         u_form = UserUpdateForm(instance=request.user)
-    return render(request, 'authentication/profile.html', {'heading': 'Profile', 'form': u_form,'modules':modules,'totalmodules':modules.count()})
+    return render(request, 'authentication/profile.html', {'heading': 'Profile', 'form': u_form, 'modules': modules, 'totalmodules': modules.count()})
+
+
+@login_required(login_url='login')
+def profileedit(request):
+    modules = Module.objects.all()
+    if request.method == 'POST':
+        u_form = UserUpdateForm(
+            request.POST, request.FILES, instance=request.user)
+        if u_form.is_valid():
+            u_form.save()
+            messages.success(request, f'Your Profile has been updated!')
+            return redirect('profile')
+        print(u_form.errors)
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+    return render(request, 'authentication/profile_edit.html', {'heading': 'Profile', 'form': u_form, 'modules': modules, 'totalmodules': modules.count()})
+
 
 def logout(request):
     django_logout(request)
