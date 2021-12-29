@@ -6,6 +6,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+
+
 @login_required(login_url='login')
 def team_members(request):
     team = Team.objects.filter(leader=request.user).first()
@@ -15,14 +17,15 @@ def team_members(request):
         email = form['email'].value()
         phone = form['phone'].value()
         gender = form['gender'].value()
-        flag=0
+        flag = 0
         for member in team.members.all():
-            if member.email==email or member.phone==phone:
-                messages.error(request,"Member already exists in your team")
-                flag=1
-                break 
-        if flag==0:
-            new_member = TeamMembers(name=name,email=email,phone=phone,gender=gender)
+            if member.email == email or member.phone == phone:
+                messages.error(request, "Member already exists in your team")
+                flag = 1
+                break
+        if flag == 0:
+            new_member = TeamMembers(
+                name=name, email=email, phone=phone, gender=gender)
             new_member.save()
             team.members.add(new_member)
             team.save()
@@ -32,18 +35,18 @@ def team_members(request):
     all_members = []
     for member in team.members.all():
         all_members.append(member)
-    return render(request,'teams/team_members.html',{'form':form,'team':all_members})
+    return render(request, 'teams/team_members.html', {'form': form, 'team': all_members})
 
 
 @login_required(login_url='login')
-def update_member(request,id):
+def update_member(request, id):
     team = Team.objects.filter(leader=request.user).first()
     all_members = []
     for member in team.members.all():
         all_members.append(member)
     member = TeamMembers.objects.filter(id=id).first()
     if request.method == 'POST':
-        if '_remove' in request.POST :
+        if '_remove' in request.POST:
             member.delete()
         else:
             form = MemberForm(request.POST)
@@ -59,7 +62,8 @@ def update_member(request,id):
         form.fields['email'].widget.attrs['value'] = member.email
         form.fields['phone'].widget.attrs['value'] = member.phone
         form.fields['gender'].widget.attrs['value'] = member.gender
-    return render(request,'teams/update_member.html',{'form':form,'member':member,'team':all_members})
+    return render(request, 'teams/update_member.html', {'form': form, 'member': member, 'team': all_members})
+
 
 @login_required(login_url='login')
 def remove_member(request):

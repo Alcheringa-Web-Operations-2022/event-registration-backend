@@ -53,3 +53,7 @@ def create_profile_post_save(sender, instance,*args, **kwargs):
         team.gender='M'
         team.save()
 
+
+@receiver(m2m_changed, sender=Team)
+def team_members_changed(sender, instance, *args, **kwargs):
+    print(instance.members.all().count())
