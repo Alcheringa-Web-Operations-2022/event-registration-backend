@@ -7,8 +7,12 @@ function select(id){
     document.getElementById("card" + id).classList.toggle("bg-blue-50")
     document.getElementById("card" + id).classList.toggle("border-red-500") 
     document.getElementById("card" + id).classList.toggle("selected") 
+    selectedelements()
 }
 
+function selectedelements(){
+    document.getElementById('selectedelements').innerHTML=document.getElementsByClassName('selected').length
+}
 
 document.getElementById('confirm-select').addEventListener("click", function confirmselect(){
     team=[]
@@ -34,6 +38,7 @@ function modalstart(){
         document.getElementById("card" + team[i].id).classList.add("border-red-500") 
         document.getElementById("card" + team[i].id).classList.add("selected") 
     }
+    selectedelements()
 }
 
 //redesign chip

@@ -34,7 +34,7 @@ class Team(models.Model) :
 
 
 @receiver(post_save,sender=NewUser)
-def create_profile(sender,instance,created,*args,**kwargs) :
+def create_profile_post_save(sender,instance,created,*args,**kwargs) :
     if created:
         TeamMembers(email=instance.email,name=instance.username,phone=instance.phone, gender='M').save()
         team=Team.objects.create(leader=instance)
@@ -42,4 +42,14 @@ def create_profile(sender,instance,created,*args,**kwargs) :
         team.save()
 
         
+@receiver(pre_save, sender=NewUser)
+def create_profile_post_save(sender, instance,*args, **kwargs):
+    if instance is None:
+        pass
+    else:
+        team=TeamMembers.objects.get(email=instance.email)
+        team.name=instance.username
+        team.phone=instance.phone
+        team.gender='M'
+        team.save()
 
