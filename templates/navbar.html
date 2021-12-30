@@ -49,6 +49,11 @@
         <div class="pt-4 font-medium text-lg text-center">{{request.user.username}}</div>
         <div class="text-gray-500 text-base font-normal text-center">{{request.user.email}}</div>
       </div>
+
+      <div class="flex flex-col justify-center my-5">
+        <div class="pt-4 font-medium text-lg text-center">Alcher ID: {{request.user.alcherid}}</div>
+      </div>
+
       <div class="pt-2 mt-2 mb-28 flex flex-col justify-center">
         <a href="{%url 'showallcompetitions'%}"><div class="rounded-full flex flex-nowrap my-1 py-2 pl-6 w-60 hover:border-0 hover:bg-gray-100">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

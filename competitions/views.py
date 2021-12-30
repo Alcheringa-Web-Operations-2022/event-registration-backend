@@ -32,50 +32,52 @@ def viewrules(request, slug):
 @login_required(login_url='login')
 def registercompetition(request, slug):
     comp = Competition.objects.get(id=slug)
-    check_unique = CompTeam.objects.filter(leader=request.user, event=comp)
-    team_members = Team.objects.get(leader=request.user).members.all()
-    if request.method != 'POST' and len(check_unique) > 0:
-        messages.error(
-            request, 'You have already registered your team for this event')
-        return redirect('showallcompetitions')
-    else:
-        if request.method == 'POST':
-            ######################### saving team ####################################
+    reg_teams = CompTeam.objects.filter(leader=request.user, event=comp)
+    team = Team.objects.get(leader=request.user)
+    members_reg = []
+    for rteam in reg_teams.all():
+        members_reg += [member.id for member in rteam.members.all()]
 
-            compteams = CompTeam.objects.create(
-                event=comp, leader=request.user)
-            team_members = []
-            for member in json.loads(request.POST.get('members')):
-                print(str(member['id']))
-                compteams.members.add(
-                    TeamMembers.objects.get(id=str(member['id'])))
-                compteams.save()
+    members_reg = set(members_reg)
+    team_members = team.members.exclude(id__in=members_reg)
+    
+    if request.method == 'POST':
+        ######################### saving team ####################################
 
-            ######################### saving previpus performance form ####################################
-            if request.POST.get('link') or request.POST.get('description'):
-                prev = PreviousPerformance.objects.create(event=comp, team=compteams, link=request.POST.get(
-                    'link'), description=request.POST.get('description'))
-                prev.save()
-            ######################### mail system ####################################
-            for user in json.loads(request.POST.get('members')):
-                subject = "Event Registration Successful"
-                email_template_name = "competitions/registration_email.txt"
-                c = {
-                    "name": user['name'],
-                    "event": comp.event_name
-                }
-                print(user['name'])
-                print(comp.event_name)
-                email = render_to_string(email_template_name, c)
-                try:
-                    send_mail(subject, email, 'Alcheringa Registration Portal', [
-                        user['email']], fail_silently=False)
-                    print("done")
-                except BadHeaderError:
-                    return HttpResponse('Invalid header found.')
-            ##################################################################
+        compteams = CompTeam.objects.create(
+            event=comp, leader=request.user)
+        team_members = []
+        for member in json.loads(request.POST.get('members')):
+            print(str(member['id']))
+            compteams.members.add(
+                TeamMembers.objects.get(id=str(member['id'])))
+            compteams.save()
 
-            messages.success(
-                request, 'You have registered your team for this event successfully')
-            return HttpResponse("OK")
+        ######################### saving previpus performance form ####################################
+        if request.POST.get('link') or request.POST.get('description'):
+            prev = PreviousPerformance.objects.create(event=comp, team=compteams, link=request.POST.get(
+                'link'), description=request.POST.get('description'))
+            prev.save()
+        ######################### mail system ####################################
+        for user in json.loads(request.POST.get('members')):
+            subject = "Event Registration Successful"
+            email_template_name = "competitions/registration_email.txt"
+            c = {
+                "name": user['name'],
+                "event": comp.event_name
+            }
+            print(user['name'])
+            print(comp.event_name)
+            email = render_to_string(email_template_name, c)
+            try:
+                send_mail(subject, email, 'Alcheringa Registration Portal', [
+                    user['email']], fail_silently=False)
+                print("done")
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+        ##################################################################
+
+        messages.success(
+            request, 'You have registered your team for this event successfully')
+        return HttpResponse("OK")
     return render(request, 'competitions/compreg.html', {'comp': comp, 'team_members': team_members, })
