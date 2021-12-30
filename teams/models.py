@@ -47,11 +47,12 @@ def create_profile_post_save(sender, instance,*args, **kwargs):
     if instance is None:
         pass
     else:
-        team=TeamMembers.objects.get(email=instance.email)
-        team.name=instance.username
-        team.phone=instance.phone
-        team.gender='M'
-        team.save()
+        if(TeamMembers.objects.filter(email=instance.email).count()>0):
+            team=TeamMembers.objects.get(email=instance.email)
+            team.name=instance.username
+            team.phone=instance.phone
+            team.gender='M'
+            team.save()
 
 
 @receiver(m2m_changed, sender=Team.members.through)
