@@ -14,12 +14,16 @@ from teams.models import Team, TeamMembers
 @login_required(login_url='login')
 def showallcompetitions(request):
     modulequery = request.GET.get('module') or 'dance'
-    module = Module.objects.get(
-        module_query_name_without_spaces_all_small=modulequery)
+    module_comp = Competition.objects.all()
+    module = None
+    if modulequery:
+        module = Module.objects.get(
+            module_query_name_without_spaces_all_small=modulequery)
+        module_comp = module_comp.filter(module=module)
 
-    module_comp = Competition.objects.filter(module=module)
     modules = Module.objects.all()
-    modulename = module.module_query_name_without_spaces_all_small
+    if module:
+        modulename = module.module_query_name_without_spaces_all_small
     return render(request, 'competitions/allcomp.html', {'allmod': modules, 'allcomp': module_comp, 'modulename': modulename})
 
 
