@@ -9,7 +9,7 @@
                 x-transition:enter-end="scale-100" x-transition:leave="transition transform duration-300"
                 x-transition:leave-start="scale-100" x-transition:leave-end="scale-0">
                 <header class="flex items-center justify-between p-2">
-                    <h2 class="font-semibold">Add members from your team <span id="selectedelements"> </span> out of {{comp.max_members}} selected)</h2>
+                    <h2 class="font-semibold">Add members from your team (<span id="selectedelements"> </span> out of {{comp.max_members}} selected)</h2>
                     <button class="focus:outline-none p-2" @click="showModal = false">
                         <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
                             <path
@@ -34,9 +34,11 @@
                     
                     <!-- single-card -->
                     {%for member in team_members%}
-                    <div class="m-1 p-3 flex border-2 rounded-md relative cursor-pointer team_members_card" id="card{{member.id}}"onclick="select('{{member.id}}')">
+                    <div class="m-1 p-3 flex border-2 rounded-md shadow-md relative cursor-pointer team_members_card" id="card{{member.id}}"onclick="select('{{member.id}}')">
                         <img width="70" height="70" src="{%static 'imgs/user-default.png'%}" alt="profile" border="0" />
-                        <div class="absolute top-0 right-0 h-16 w-16 text-right px-2 invisible"  id="{{member.id}}"><i class="fa fa-check" aria-hidden="true" style="color:green;"></i></div>
+                        <div class="absolute right-0 text-right px-2 invisible" style="top:40%; bottom:40%;"id="{{member.id}}"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.7869 17.7692L2.22168 2.22173M2.22259 17.778L17.7789 2.22168" stroke="#FF4433" stroke-width="3" stroke-linecap="round"/>
+</svg></div>
                         <div class="mx-5 my-auto">
                             <div class="font-medium text-base">{{member.name}}  {%if member.email == request.user.email%}(Leader){%endif%}</div>
                             <div class="font-light text-sm">{{member.email}}</div>

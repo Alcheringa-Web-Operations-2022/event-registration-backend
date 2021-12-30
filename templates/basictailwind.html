@@ -27,6 +27,10 @@
         .orcolor {
             background-color: #EE6337;
         }
+        .border-orange{
+            --tw-border-opacity: 1!important;
+            border-color: #FF4433!important;
+        }
         
     </style>
 
@@ -40,13 +44,14 @@
 </head>
 
 <body>
-    {% include 'loading.html' %}
+    
     {% block body %} {% endblock %}
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+{% include 'loading.html' %}
 {% include 'messages.html' %}
 
 </html>

@@ -46,7 +46,7 @@ class CompTeam(models.Model):
     def __str__(self):
         return str(self.leader)
 
-class PreviousPerformance(models.Model):
+class SubmitPerformance(models.Model):
     event = models.ForeignKey(
         Competition, related_name="event_name2", on_delete=models.CASCADE)
     team = models.ForeignKey(

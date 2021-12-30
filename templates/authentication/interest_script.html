@@ -10,8 +10,7 @@
   interests = [];
   function select(id) {
     document.getElementById(id).classList.toggle("invisible");
-    document.getElementById("card" + id).classList.toggle("bg-blue-50");
-    document.getElementById("card" + id).classList.toggle("orcolor");
+    document.getElementById("card" + id).classList.toggle("border-orange");
     document.getElementById("card" + id).classList.toggle("selected");
   }
 
@@ -29,6 +28,7 @@
         });
       }
       console.log(interests);
+      if(interests.length>0)
       addchip(interests);
     });
 
@@ -89,24 +89,24 @@
         .getElementsByClassName("team_members_card")
         [i].getElementsByTagName("div")[0]
         .classList.add("invisible");
+      // document
+      //   .getElementsByClassName("team_members_card")
+      //   [i].classList.remove("bg-blue-50");
       document
         .getElementsByClassName("team_members_card")
-        [i].classList.remove("bg-blue-50");
-      document
-        .getElementsByClassName("team_members_card")
-        [i].classList.remove("orcolor");
+        [i].classList.remove("border-orange");
       document
         .getElementsByClassName("team_members_card")
         [i].classList.remove("selected");
     }
     for (var i = 0; i < interests.length; i++) {
       document.getElementById(interests[i].id).classList.remove("invisible");
+      // document
+      //   .getElementById("card" + interests[i].id)
+      //   .classList.add("bg-blue-50");
       document
         .getElementById("card" + interests[i].id)
-        .classList.add("bg-blue-50");
-      document
-        .getElementById("card" + interests[i].id)
-        .classList.add("orcolor");
+        .classList.add("border-orange");
       document
         .getElementById("card" + interests[i].id)
         .classList.add("selected");

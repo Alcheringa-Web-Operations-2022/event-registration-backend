@@ -4,7 +4,6 @@ var team = [];
 //select
 function select(id){
     document.getElementById(id).classList.toggle("invisible");
-    document.getElementById("card" + id).classList.toggle("bg-blue-50")
     document.getElementById("card" + id).classList.toggle("border-red-500") 
     document.getElementById("card" + id).classList.toggle("selected") 
     selectedelements()
@@ -28,13 +27,12 @@ document.getElementById('confirm-select').addEventListener("click", function con
 function modalstart(){
     for (var i = 0; i < document.getElementsByClassName("team_members_card").length; i++) {
         document.getElementsByClassName("team_members_card")[i].getElementsByTagName('div')[0].classList.add('invisible')
-        document.getElementsByClassName("team_members_card")[i].classList.remove("bg-blue-50")
+        
         document.getElementsByClassName("team_members_card")[i].classList.remove("border-red-500") 
         document.getElementsByClassName("team_members_card")[i].classList.remove("selected")
     }
     for (var i = 0; i < team.length; i++) {
         document.getElementById(team[i].id).classList.remove("invisible");
-        document.getElementById("card" + team[i].id).classList.add("bg-blue-50")
         document.getElementById("card" + team[i].id).classList.add("border-red-500") 
         document.getElementById("card" + team[i].id).classList.add("selected") 
     }
@@ -64,7 +62,7 @@ function addchip(team){
         var templateString = `<span
             id="chip${team[i].id}" class="mx-2 my-2 rounded-full text-white  orcolor font-semibold text-sm flex align-center cursor-pointer active:bg-gray-300 transition duration-300 ease w-max">
             <span class="flex items-center px-3 py-2">
-            ${team[i].email}
+            ${team[i].name}
             </span>
             <button type="button" class="bg-transparent hover focus:outline-none" onclick="deletechip('${team[i].id}')">
             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times"

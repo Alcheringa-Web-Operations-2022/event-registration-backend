@@ -2,7 +2,7 @@ from django.http.response import BadHeaderError
 from django.shortcuts import render, redirect, HttpResponse
 from django.template.loader import render_to_string
 from django.contrib import messages
-from competitions.models import CompTeam, Competition, Module, PreviousPerformance
+from competitions.models import CompTeam, Competition, Module, SubmitPerformance
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 import json
@@ -59,7 +59,7 @@ def registercompetition(request, slug):
 
         ######################### saving previpus performance form ####################################
         if request.POST.get('link') or request.POST.get('description'):
-            prev = PreviousPerformance.objects.create(event=comp, team=compteams, link=request.POST.get(
+            prev = SubmitPerformance.objects.create(event=comp, team=compteams, link=request.POST.get(
                 'link'), description=request.POST.get('description'))
             prev.save()
         ######################### mail system ####################################
