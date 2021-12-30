@@ -54,6 +54,36 @@
         .changecolor1 {
             background-color: #C2CFE0;
         }
+        .rules-modal{
+            height: 90vh;
+            width: 90vw;
+            position: absolute;
+            top: 5vh;
+            left: 5vw;
+            display: none;
+            background-color: aliceblue;
+            overflow-y: scroll;
+            padding: 20px;
+            border-radius: 5px;
+            border: 2px solid red;
+            z-index: 99;
+        }
+        .rules{
+            white-space: pre-wrap;
+        }
+        .cancel-rules-modal{
+            position: fixed;
+            top: 5vh;
+            right: 5vw;
+            height: 20px;
+            width: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: red;
+            color: #fff;
+            border-radius: 2px;
+        }
 
         @media (max-width: 768px) {
             .hideitems {
@@ -141,7 +171,7 @@
                                     <div class="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3  bg-gray-100 rounded-md ">
                                         
                                         <h3 class="font-medium md:text-xl text-xl" style="font-weight: 700;">{{comp.event_name}}</h3>
-                                        <p class="md:text-sm text-gray-500 text-base">{{comp.module}} &#xb7; <span style="color: #EE6337;text-decoration:none;"><a href="{% url 'viewrules' slug=comp.id %}"><span class="md:text-sm text-zinc-500 text-amber-600 font-medium">
+                                        <p class="md:text-sm text-gray-500 text-base">{{comp.module}} &#xb7; <span style="color: #EE6337;text-decoration:none;"><a onclick="showrules()"><span class="md:text-sm text-zinc-500 text-amber-600 font-medium">
                                                 View Rules
                                             </span>
                                         </a></span></p>
@@ -165,6 +195,16 @@
                                             class="orcolor text-white md:ml-5 pt-1 pb-1 pl-4 pr-4 rounded-md font-medium">Register</button></a>
                                     </div>
                                 </div>
+                                <div class="absolute rules-modal" id="rules_modal">
+                                    <div class="cancel-rules-modal" onclick="hiderules()">
+                                        X
+                                    </div>
+                                    <h1>Rules</h1>
+                                    <p class="rules" >
+                                        {{comp.event_rules}}
+                                    </p>
+
+                                </div>
                             </div>
                             {% endfor%}
                         </div>
@@ -172,6 +212,7 @@
                 </div>
             </span>
         </div>
+
 
 
         <!-- js code -->
@@ -235,6 +276,12 @@
                 }
                 
             };
+            function showrules(){
+                document.getElementById('rules_modal').style.display = 'block';
+            }
+            function hiderules(){
+                document.getElementById('rules_modal').style.display = 'none';
+            }
         </script>
     </body>
 

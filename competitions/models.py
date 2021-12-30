@@ -23,7 +23,7 @@ class Competition(models.Model):
   event_name = models.CharField(max_length = 255)
   event_desc = models.CharField(max_length = 255) 
   event_rules=models.TextField()
-  event_rules_pdf = models.FileField(upload_to="image_uploads/rulebooks/", validators=[validate_file_extension],  blank=True, null=True)
+#   event_rules_pdf = models.FileField(upload_to="image_uploads/rulebooks/", validators=[validate_file_extension],  blank=True, null=True)
   min_members = models.IntegerField(default=1)
   max_members = models.IntegerField(default = 1)
   location = models.CharField(max_length = 63)
