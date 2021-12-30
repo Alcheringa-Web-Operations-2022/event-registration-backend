@@ -6,7 +6,7 @@ from django.dispatch import receiver
 from django.conf import settings
 from competitions.validators import validate_file_extension
 from teams.models import TeamMembers
-
+from authentication.models import NewUser
 
 class Module(models.Model):
     id = models.SlugField(primary_key=True, default=uuid.uuid4)
@@ -57,6 +57,6 @@ class SubmitPerformance(models.Model):
 
 @receiver(post_save, sender=CompTeam)
 def comp_register_signal(sender, instance, *args, **kwargs):
-    user = settings.AUTH_USER_MODEL.objects.get(email=instance.leader.email)
+    user = NewUser.objects.get(email=instance.leader.email)
     user.no_of_events_registered+=1
     user.save()
