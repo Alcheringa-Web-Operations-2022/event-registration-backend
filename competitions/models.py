@@ -3,7 +3,7 @@ import uuid
 from django.db.models.base import Model
 from django.db.models.signals import m2m_changed, post_save
 from django.dispatch import receiver
-from authentication.models import NewUser
+from django.conf import settings
 from competitions.validators import validate_file_extension
 from teams.models import TeamMembers
 
@@ -40,7 +40,7 @@ class CompTeam(models.Model):
     event = models.ForeignKey(
         Competition, related_name="event_name1", on_delete=models.CASCADE)
     leader = models.ForeignKey(
-        NewUser, related_name="teams_leader", on_delete=models.CASCADE)
+        settings.AUTH_USER_MODEL, related_name="teams_leader", on_delete=models.CASCADE)
     members = models.ManyToManyField(
         "teams.TeamMembers", related_name="compteams")
     
@@ -58,6 +58,6 @@ class PreviousPerformance(models.Model):
 
 @receiver(post_save, sender=CompTeam)
 def comp_register_signal(sender, instance, *args, **kwargs):
-    user = NewUser.objects.get(email=instance.leader.email)
+    user = settings.AUTH_USER_MODEL.objects.get(email=instance.leader.email)
     user.no_of_events_registered+=1
     user.save()
