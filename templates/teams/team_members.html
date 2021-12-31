@@ -12,7 +12,7 @@
         display: flex
     }
 </style>
-<div  style="background-color: #F3F6F8;">
+<div  style="background-color: #F3F6F8;" class="mb-12">
     {% include 'navbar.html' %}
     <div class="flex mb-6 md:mb-1">
         <!-- left_nav -->
@@ -52,11 +52,11 @@
                                 <img class="my-9 mx-auto" width="120" src="{%static 'imgs/user-default.png'%}"
                                     alt="profile" border="0" />
                                 <!-- Add member form for mobile screens -->
-                                <form class="px-4 space-y-5"  method="POST" id="addform">
-                            <input type="text" name="addname" class="border-b" size="25" placeholder="Enter Name" maxlength="100" required="" id="addname">
-                            <input type="text" pattern="^\+91\d{10}$" name="addphone" class="border-b" size="25" placeholder="Enter Phone" maxlength="100" required="" id="addphone">
-                            <input type="email"  name="addemail" class="border-b" size="25" placeholder="Enter Email" maxlength="100" required="" id="addemail">
-                           <select name="addgender" class="border-b text-gray-400 pr-36" width="110%" placeholder="Gender" id="addgender">
+                                <form class="px-4 space-y-5"  method="POST" id="addform__mobile">
+                            <input type="text" name="addname" class="border-b" size="25" placeholder="Enter Name" maxlength="100" required="" id="addname__mobile">
+                            <input type="text" pattern="^\+91\d{10}$" name="addphone" class="border-b" size="25" placeholder="Enter Phone" maxlength="100" required="" id="addphone__mobile">
+                            <input type="email"  name="addemail" class="border-b" size="25" placeholder="Enter Email" maxlength="100" required="" id="addemail__mobile">
+                           <select name="addgender" class="border-b text-gray-400 pr-36" width="110%" placeholder="Gender" id="addgender__mobile">
                             <option value="M">M</option>
 
                             <option value="F">F</option>
@@ -115,13 +115,13 @@
                             <!-- Edit member form for mobile screens -->
                            <div class="hidden add-member-form-small">
                                 <div class="lg:hidden mt-5">
-                        <form class="px-4 space-y-5" method="POST" id="editform">
+                        <form class="px-4 space-y-5" method="POST" id="editform__mobile">
                             {% csrf_token %}
-                             <input type="text" name="editid" class="border-b" size="25" placeholder="" maxlength="100" required="" style="width:0px;overflow:hidden;"id="editid">
-                            <input type="text" name="editname" class="border-b" size="25" placeholder="Enter Name" maxlength="100" required="" id="editname">
-                            <input type="text" pattern="^\+91\d{10}$" name="editphone" class="border-b" size="25" placeholder="Enter Phone" maxlength="100" required="" id="editphone">
-                            <input type="email"  name="editemail" class="border-b" size="25" placeholder="Enter Email" maxlength="100" required="" id="editemail">
-                           <select name="editgender" class="border-b text-gray-400 pr-36" width="110%" placeholder="Gender" id="editgender">
+                             <input type="text" name="editid" class="border-b" size="25" placeholder="" maxlength="100" required="" style="width:0px;overflow:hidden;"id="editid__mobile">
+                            <input type="text" name="editname" class="border-b" size="25" placeholder="Enter Name" maxlength="100" required="" id="editname__mobile">
+                            <input type="text" pattern="^\+91\d{10}$" name="editphone" class="border-b" size="25" placeholder="Enter Phone" maxlength="100" required="" id="editphone__mobile">
+                            <input type="email"  name="editemail" class="border-b" size="25" placeholder="Enter Email" maxlength="100" required="" id="editemail__mobile">
+                           <select name="editgender" class="border-b text-gray-400 pr-36" width="110%" placeholder="Gender" id="editgender__mobile">
                             <option value="M">M</option>
 
                             <option value="F">F</option>
@@ -213,7 +213,6 @@
         </div>
     </div>
 </div>
-<h1>Team</h1>
 </div>
 <script>
     var emptyCard = document.getElementById("emptyCard");
@@ -279,6 +278,14 @@
         document.getElementById('editphone').value=phone
         document.getElementById('editgender').value=gender
     }
+    //Team Member edit part mobile
+    // function editmember(editid,name,email,phone,gender){
+    //     document.getElementById('editid__mobile').value=editid
+    //     document.getElementById('editname__mobile').value=name
+    //     document.getElementById('editemail__mobile').value=email
+    //     document.getElementById('editphone__mobile').value=phone
+    //     document.getElementById('editgender__mobile').value=gender
+    // }
     //edit form submission
     document.getElementById('editform').addEventListener('submit',function editformsubmit(editid){
         event.preventDefault()
@@ -305,8 +312,34 @@
             }
         })
     })
+    //edit form mobil
+    document.getElementById('editform__mobile').addEventListener('submit',function editformsubmitmobile(editid){
+        event.preventDefault()
+        $.ajax({
+            type: "POST",
+            data: {
+                'id':document.getElementById('editid__mobile').value,
+                'name':document.getElementById('editname__mobile').value,
+                'email':document.getElementById('editemail__mobile').value,
+                'phone':document.getElementById('editphone__mobile').value,
+                'gender': document.getElementById('editgender__mobile').value
+            },
+            url: `{% url 'update-member' %}`,
+
+            headers: {
+                "X-CSRFTOKEN": "{{ csrf_token }}"
+            },
+            success:(data)=>{
+                if(data!=='OK')
+                notifySuccess('Member updated successfully')
+                else
+                notifyError(data)
+                window.location.reload();
+            }
+        })
+    })
     //add form submission
-    document.getElementById('addform').addEventListener('submit',function editformsubmit(editid){
+    document.getElementById('addform').addEventListener('submit',function addformsubmit(editid){
         event.preventDefault()
         $.ajax({
             type: "POST",
@@ -315,6 +348,31 @@
                 'email':document.getElementById('addemail').value,
                 'phone':document.getElementById('addphone').value,
                 'gender': document.getElementById('addgender').value
+            },
+            url: `{% url 'add-member' %}`,
+
+            headers: {
+                "X-CSRFTOKEN": "{{ csrf_token }}"
+            },
+            success:(data)=>{
+                if(data=="OK")
+                notifySuccess('Member added successfully')
+                else
+                notifyError(data)
+                window.location.reload();
+            }
+        })
+    })
+    //add gorm for mobile
+    document.getElementById('addform__mobile').addEventListener('submit',function addformsubmitmobile(editid){
+        event.preventDefault()
+        $.ajax({
+            type: "POST",
+            data: {
+                'name':document.getElementById('addname__mobile').value,
+                'email':document.getElementById('addemail__mobile').value,
+                'phone':document.getElementById('addphone__mobile').value,
+                'gender': document.getElementById('addgender__mobile').value
             },
             url: `{% url 'add-member' %}`,
 

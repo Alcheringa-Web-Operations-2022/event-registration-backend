@@ -30,7 +30,7 @@ def showallcompetitions(request):
 @login_required(login_url='login')
 def viewrules(request, slug):
     comp = Competition.objects.get(id=slug)
-    return render(request, 'competitions/rules.html', {'comp': comp})
+    return render(request, 'competitions/rules.html', {'comp': comp,'active_page':'rulebook'})
 
 
 @login_required(login_url='login')

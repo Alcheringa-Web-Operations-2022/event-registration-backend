@@ -69,7 +69,7 @@ def register(request):
             return redirect('login')
     else:
         form = UserRegisterForm()
-    return render(request, 'authentication/register.html', {'form': form, 'title': 'reqister here'})
+    return render(request, 'authentication/register.html', {'form': form, 'title': 'reqister here','active_page':"signup"})
 
 ################ login forms###################################################
 
@@ -101,7 +101,7 @@ def Login(request):
             print("email not registered")
             messages.error(request, 'Email is not registered')
 
-    return render(request, 'authentication/login.html', {'title': 'log in'})
+    return render(request, 'authentication/login.html', {'title': 'log in','active_page':"Login"})
 
 
 def password_reset_request(request):
