@@ -1,7 +1,7 @@
 {% autoescape off %}
 Hello {{name}},
 
-Thank You for registering to {{event}}. You will soon receive more information about the competition.
+Thank You for registering to {{event}}. Your submission has been accepted. You will soon receive more information about the competition.
 
 Sincerely,
 Alcheringa Web Operations

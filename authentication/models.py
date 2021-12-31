@@ -39,12 +39,14 @@ class CustomAccountManager(BaseUserManager):
 
 
 class NewUser(AbstractBaseUser, PermissionsMixin):
+    GENDER=(('M','Male'),('F','Female'))
     alcherid = models.CharField(
         max_length=255, blank=True, unique=True)
     id = models.SlugField(primary_key=True, default=uuid.uuid4)
     img = models.ImageField(upload_to="image_uploads/userdp/",
                             default='user-default.png')
     email = models.EmailField(_('email address'), unique=True)
+    gender=models.CharField(choices=GENDER,default='M',max_length=20)
     username = models.CharField(max_length=150, unique=True)
     collegename = models.CharField(max_length=150, unique=False)
     city = models.CharField(max_length=150, unique=False)
