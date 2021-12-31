@@ -138,8 +138,14 @@
                                 onclick="mobchange('{{module.module_query_name_without_spaces_all_small}}'); changecolor('{{module.module_query_name_without_spaces_all_small}}')">
                                 <div class="bg-slate-100 m-3 mt-0 rounded-md flex align-middle ii"
                                     id="{{module.module_query_name_without_spaces_all_small}}">
-                                    <img width="50px" src="{{module.module_icon.url}}" alt="dance"
-                                        class="m-2">
+                                    {% if module.module_query_name_without_spaces_all_small == modulename %}
+                                    <img width="50px" src="{{module.module_icon_active.url}}" alt="dance"
+                                        class="m-2" id="{{modulename}}_icon">
+                                {% else %}
+                                <img width="50px" src="{{module.module_icon.url}}" alt="dance"
+                                    class="m-2" id="{{modulename}}_icon">
+                                {% endif %}
+                               
                                     <span class="inline-block mt-5 ml-2">{{module.module}}</span>
                                 </div>
                             </a>
@@ -264,6 +270,7 @@
                     changecolor(modulename)
                     mobchange(modulename)
                 }
+                
                 
             };
             function showrules(){
