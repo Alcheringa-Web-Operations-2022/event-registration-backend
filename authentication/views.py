@@ -11,7 +11,7 @@ from django.views import View
 from .utils import token_generator
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_text
+from django.utils.encoding import force_bytes
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, get_user_model
@@ -69,7 +69,7 @@ def register(request):
             return redirect('login')
     else:
         form = UserRegisterForm()
-    return render(request, 'authentication/register.html', {'form': form, 'title': 'reqister here'})
+    return render(request, 'authentication/register.html', {'form': form, 'title': 'reqister here','active_page':"signup"})
 
 ################ login forms###################################################
 
@@ -101,7 +101,7 @@ def Login(request):
             print("email not registered")
             messages.error(request, 'Email is not registered')
 
-    return render(request, 'authentication/login.html', {'title': 'log in'})
+    return render(request, 'authentication/login.html', {'title': 'log in','active_page':"Login"})
 
 
 def password_reset_request(request):
@@ -152,7 +152,7 @@ def profile(request):
         print(u_form.errors)
     else:
         u_form = UserUpdateForm(instance=request.user)
-    return render(request, 'authentication/profile.html', {'heading': 'Profile', 'form': u_form, 'modules': modules, 'totalmodules': modules.count()})
+    return render(request, 'authentication/profile.html', {'heading': 'Profile', 'form': u_form, 'modules': modules, 'totalmodules': modules.count(),'active_page':'profile'})
 
 
 @login_required(login_url='login')
@@ -168,7 +168,7 @@ def profileedit(request):
         print(u_form.errors)
     else:
         u_form = UserUpdateForm(instance=request.user)
-    return render(request, 'authentication/profile_edit.html', {'heading': 'Profile', 'form': u_form, 'modules': modules, 'totalmodules': modules.count()})
+    return render(request, 'authentication/profile_edit.html', {'heading': 'Profile', 'form': u_form, 'modules': modules, 'totalmodules': modules.count(),'active_page':'profile'})
 
 
 def logout(request):

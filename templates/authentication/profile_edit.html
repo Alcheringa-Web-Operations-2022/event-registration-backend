@@ -5,25 +5,25 @@
     input,textarea{
        border: none;
        border-bottom: 1px solid rgb(214, 206, 206);
-       margin: 16px 0px;
+       margin: 8px 0px;
    }
    input,textarea:focus{
     outline: none;
     }
 </Style>
 <body  x-data="{ showModal: false}" :class="{'overflow-y-hidden': showModal}">
-	<div class="flex" style="background-color: #F3F6F8;">
+	<div class="flex h-screen" style="background-color: #F3F6F8;">
 		{% include "../navbar.html" %}
-		<div class="flex-grow h-screen">
+		<div class="flex-grow h-screen bg-gray-100">
 			<div class="flex flex-grow" style="background-color: #F3F6F8;">
                 <div class="mx-4 flex-grow">
                     <br>
                     <div class="flex m-1">
-                        <div class=" bg-white max-w-4xl rounded-lg w-screen shadow-md">
+                        <div class=" bg-white max-w-4xl rounded-lg w-screen shadow-md text-md">
                             <div >
-                                <div class="py-3 pl-6  text-xl border-b-2 font-normal">Edit profile</div>
+                                <div class="py-3 pl-6  text-lg border-b-2 font-normal">Edit profile</div>
                                 <br>
-                                <div class="mx-10">
+                                <div class="mx-10 pb-20 md:pb-1">
                                     <ul class="errorlist" style="color:red">
                                             {% if form.non_field_errors %}
                                             <li>{{ form.non_field_errors }}</li>
@@ -52,7 +52,7 @@
                                     <!-- Hiden dp upload -->
                                     
                                     <form method="POST" enctype="multipart/form-data" class="">{% csrf_token %}
-                                        <div class="grid grid-cols-2 gap-2 place-content-end md:place-content-center">
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 place-content-end md:place-content-center pb-12 md:pb-1">
                                             <div style="height:0px;overflow:hidden">
                                                 {{ form.img }}
                                                 

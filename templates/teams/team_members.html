@@ -12,7 +12,7 @@
         display: flex
     }
 </style>
-<div  style="background-color: #F3F6F8;">
+<div  style="background-color: #F3F6F8;" class="mb-12">
     {% include 'navbar.html' %}
     <div class="flex mb-6 md:mb-1">
         <!-- left_nav -->
@@ -45,20 +45,28 @@
                             <div class="text-red-400 font-semibold text-4xl">+</div>
                             <div class="mt-2 text-red-400 font-medium">Add member</div>
                         </button>
-                        <!-- add_members_form-upto_large_screens -->
+                        <!-- add_members__mobile__screens -->
                         <div class="lg:hidden m-1 bg-white rounded-lg shadow col-span-2 md:col-span-1">
                             <div id="addMemberCardSmall" class="hidden">
                                 <div class="py-2 px-4 font-medium text-lg border-b">Add Member</div>
                                 <img class="my-9 mx-auto" width="120" src="{%static 'imgs/user-default.png'%}"
                                     alt="profile" border="0" />
-                                <form class="px-4 space-y-5" method="POST">
-                                    {% csrf_token %}
-                                    {{form.name}} {{form.phone}} {{form.email}} {{form.gender}}
-                                    <div class="flex justify-end pb-4">
-                                        <button class="text-red-500 mx-5 text-sm"  id="cancel-edit" onclick="toggleOpen(this.id)">Cancel</button>
-                                        <button class="bg-red-500 text-white py-1 px-2 text-sm rounded">Add</button>
-                                    </div>
-                                </form>
+                                <!-- Add member form for mobile screens -->
+                                <form class="px-4 space-y-5"  method="POST" id="addform__mobile">
+                            <input type="text" name="addname" class="border-b" size="25" placeholder="Enter Name" maxlength="100" required="" id="addname__mobile">
+                            <input type="text" pattern="^\+91\d{10}$" name="addphone" class="border-b" size="25" placeholder="Enter Phone" maxlength="100" required="" id="addphone__mobile">
+                            <input type="email"  name="addemail" class="border-b" size="25" placeholder="Enter Email" maxlength="100" required="" id="addemail__mobile">
+                           <select name="addgender" class="border-b text-gray-400 pr-36" width="110%" placeholder="Gender" id="addgender__mobile">
+                            <option value="M">M</option>
+
+                            <option value="F">F</option>
+                            </select>
+                            <div class="flex justify-end pb-4">
+                                <button type="button" class="text-red-500 mx-5 text-sm" id="cancel-edit" onclick="{toggleOpen(this.id)}">Cancel</button>
+                                <button type="submit" id="addformsubmit"
+                                    class="bg-red-500 text-white py-1 px-2 text-sm rounded">Add</button>
+                            </div>
+                        </form>
                             </div>
                         </div>
                         <!-- single-card-yellow_border -->
@@ -83,16 +91,16 @@
                                 </div>
                                 <div class="my-auto absolute top-1 right-1 hidden edit-delete">
                                     <div class="lg:flex hidden ">
-                                        <a href="{% url 'update-member' member.id %}"><button
-                                                onclick="toggleOpen(this.id)" id="editButton" class="-ml-2">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M2 11.5V14H4.5L11.8733 6.62665L9.37333 4.12666L2 11.5ZM13.8067 4.69332C14.0667 4.43332 14.0667 4.01332 13.8067 3.75332L12.2467 2.19332C11.9867 1.93332 11.5667 1.93332 11.3067 2.19332L10.0867 3.41332L12.5867 5.91332L13.8067 4.69332V4.69332Z"
-                                                        fill="#C2CFE0" />
-                                                </svg>
-                                            </button>
-                                        </a>
+                                       <button
+                                            onclick="editmember('{{member.id}}','{{member.name}}','{{member.email}}','{{member.phone}}','{{member.gender}}')" id="editButton" class="-ml-2">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M2 11.5V14H4.5L11.8733 6.62665L9.37333 4.12666L2 11.5ZM13.8067 4.69332C14.0667 4.43332 14.0667 4.01332 13.8067 3.75332L12.2467 2.19332C11.9867 1.93332 11.5667 1.93332 11.3067 2.19332L10.0867 3.41332L12.5867 5.91332L13.8067 4.69332V4.69332Z"
+                                                    fill="#C2CFE0" />
+                                            </svg>
+                                        </button>
+                                   
                                         <a><button
                                                 onclick="removeMember('{{member.id}}')" id="deleteButton" class="ml-2">
                                                 <svg width="16" height="16" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -104,17 +112,23 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- Edit member form for mobile screens -->
                             <div class="hidden add-member-form-small">
                                 <div class="lg:hidden mt-5">
-                                    <form class="px-2 space-y-5" method="POST">
+                                    <form class="px-4 space-y-5" onsubmit="return phoneditform('{{member.id}}')">
                                         {% csrf_token %}
-                                        {{form.name}} {{form.phone}} {{form.email}} {{form.gender}}
-                                        <div class="flex justify-between">
-                                            <button class="text-red-500 mx-1 text-sm">Remove</button>
-                                            <div><button class="text-red-500 mx-2 text-sm" id="cancel-edit" onclick="toggleOpen(this.id)" >Cancel</button>
-                                                <button
-                                                    class="bg-red-500 text-white py-1 px-2 text-sm rounded">Add</button>
-                                            </div>
+                                        <input type="text" value="{{member.id}}" name="editid" class="border-b" size="25" placeholder="" maxlength="100" required="" style="width:0px;overflow:hidden;"id="editid__mobile{{member.id}}">
+                                        <input type="text" value="{{member.name}}"  name="editname" class="border-b" size="25" placeholder="Enter Name" maxlength="100" required="" id="editname__mobile{{member.id}}">
+                                        <input type="text"  value="{{member.phone}}" pattern="^\+91\d{10}$" name="editphone" class="border-b" size="25" placeholder="Enter Phone" maxlength="100" required="" id="editphone__mobile{{member.id}}">
+                                        <input type="email"  value="{{member.email}}"  name="editemail" class="border-b" size="25" placeholder="Enter Email" maxlength="100" required="" id="editemail__mobile{{member.id}}">
+                                        <select name="editgender" value="{{member.gender}}" class="border-b text-gray-400 pr-36" width="110%" placeholder="Gender" id="editgender__mobile{{member.id}}">
+                                            <option value="M">M</option><option value="F">F</option>
+                                        </select>
+                                        <div class="flex justify-end pb-4">
+                                            <button   type="button"  class="text-red-500 mx-1 text-sm"onclick="removeMember('{{member.id}}')" >Remove</button>
+                                            <button type="button" class="text-red-500 mx-5 text-sm" id="cancel-edit-mobile" onclick="{toggleOpen(this.id)}">Cancel</button>
+                                            <button type="submit" id="editformsubmit"
+                                                class="bg-red-500 text-white py-1 px-2 text-sm rounded">Confirm Edit</button>
                                         </div>
                                     </form>
                                 </div>
@@ -137,45 +151,49 @@
                         </svg>
                         <div class="text-gray-300 font-light mx-auto">Select a member to edit details</div>
                     </div>
-                    <div style="height: 480px;" id="addMemberCard"
+                    <div style="height: 480px;" id="editProfileCard"
                         class="mr-3 mt-3 w-80 bg-white rounded-lg shadow hidden">
-                        <div class="py-2 px-4 font-medium text-lg border-b">Add Member</div>
+                        <div class="py-2 px-4 font-medium text-lg border-b">Edit Member</div>
                         <img class="my-9 mx-auto" width="120" src="{%static 'imgs/user-default.png'%}" alt="profile"
                             border="0" />
-                        <form class="px-4 space-y-5" method="POST">
+                            <!-- Edit member form -->
+                        <form class="px-4 space-y-5" method="POST" id="editform">
                             {% csrf_token %}
-                            {{form.name}} {{form.phone}} {{form.email}} {{form.gender}}
-                            <!-- <select class="border-b text-gray-400 pr-36">
-                                <option disabled selected hidden>Gender</option>
-                                <option value="male">male</option>
-                                <option value="female">female</option>
-                            </select> -->
+                             <input type="text" name="editid" class="border-b" size="25" placeholder="" maxlength="100" required="" style="width:0px;overflow:hidden;"id="editid">
+                            <input type="text" name="editname" class="border-b" size="25" placeholder="Enter Name" maxlength="100" required="" id="editname">
+                            <input type="text" pattern="^\+91\d{10}$" name="editphone" class="border-b" size="25" placeholder="Enter Phone" maxlength="100" required="" id="editphone">
+                            <input type="email"  name="editemail" class="border-b" size="25" placeholder="Enter Email" maxlength="100" required="" id="editemail">
+                           <select name="editgender" class="border-b text-gray-400 pr-36" width="110%" placeholder="Gender" id="editgender">
+                            <option value="M">M</option>
+
+                            <option value="F">F</option>
+                            </select>
                             <div class="flex justify-end pb-4">
-                                <button class="text-red-500 mx-5 text-sm" id="cancel-edit" onclick="toggleOpen(this.id)">Cancel</button>
-                                <button type="submit"
-                                    class="bg-red-500 text-white py-1 px-2 text-sm rounded">Add</button>
+                                <button type="button" class="text-red-500 mx-5 text-sm" id="cancel-edit" onclick="{toggleOpen(this.id)}">Cancel</button>
+                                <button type="submit" id="editformsubmit"
+                                    class="bg-red-500 text-white py-1 px-2 text-sm rounded">Confirm Edit</button>
                             </div>
                         </form>
                     </div>
-                    <div style="height: 460px;" id="editProfileCard"
+                    <!-- This is add member card -->
+                    <div style="height: 480px;" id="addMemberCard"
                         class="mr-3 mt-3 w-80 bg-white rounded-lg shadow hidden">
-                        <div class="py-2 px-4 font-medium text-lg border-b">Edit Profile</div>
+                        <div class="py-2 px-4 font-medium text-lg border-b" >Add Member</div>
                         <img class="my-9 mx-auto" width="120" src="{%static 'imgs/user-default.png'%}" alt="profile"
                             border="0" />
-                        <form class="px-4 space-y-5" action="">
-                            <input class="border-b" type="text" size="25" placeholder="Enter Name" />
-                            <input class="border-b" type="text" size="25" placeholder="Enter Phone Number" />
-                            <input class="border-b" type="text" size="25" placeholder="Enter Email" />
-                            <select class="border-b text-gray-400 pr-36">
-                                <option disabled selected hidden>Gender</option>
-                                <option value="male">male</option>
-                                <option value="female">female</option>
+                        <form class="px-4 space-y-5"  method="POST" id="addform">
+                            <input type="text" name="addname" class="border-b" size="25" placeholder="Enter Name" maxlength="100" required="" id="addname">
+                            <input type="text" pattern="^\+91\d{10}$" name="addphone" class="border-b" size="25" placeholder="Enter Phone" maxlength="100" required="" id="addphone">
+                            <input type="email"  name="addemail" class="border-b" size="25" placeholder="Enter Email" maxlength="100" required="" id="addemail">
+                           <select name="addgender" class="border-b text-gray-400 pr-36" width="110%" placeholder="Gender" id="addgender">
+                            <option value="M">M</option>
+
+                            <option value="F">F</option>
                             </select>
-                            <div class="flex justify-between pb-4">
-                                <button class="text-red-500 mx-1 text-sm">Remove</button>
-                                <div><button class="text-red-500 mx-5 text-sm" id="cancel-edit" onclick="toggleOpen(this.id)">Cancel</button>
-                                    <button class="bg-red-500 text-white py-1 px-2 text-sm rounded">Add</button>
-                                </div>
+                            <div class="flex justify-end pb-4">
+                                <button type="button" class="text-red-500 mx-5 text-sm" id="cancel-edit" onclick="{toggleOpen(this.id)}">Cancel</button>
+                                <button type="submit" id="addformsubmit"
+                                    class="bg-red-500 text-white py-1 px-2 text-sm rounded">Add</button>
                             </div>
                         </form>
                     </div>
@@ -189,72 +207,10 @@
         Are you sure you want to remove the member
         <div class="flex justify-end pt-4">
             <button class="text-red-500 mx-5 text-sm" id="modalCancel" onclick="toggleOpen(this.id)">Cancel</button>
-            <button class="bg-red-500 text-white py-1 px-2 text-sm rounded" id="modalCancelConfirm" onclick="toggleOpen(this.id)">Remove</button>
+            <button class="bg-red-500 text-white py-1 px-2 text-sm rounded" id="modalCancelConfirmDelete" onclick="toggleOpen(this.id)">Remove</button>
         </div>
     </div>
 </div>
-<h1>Team</h1>
 </div>
-<script>
-    function toggleOpen(id) {
-
-        var emptyCard = document.getElementById("emptyCard");
-        var addMemberCard = document.getElementById("addMemberCard");
-        var addMemberCardSmall = document.getElementById("addMemberCardSmall");
-        var editProfileCard = document.getElementById("editProfileCard");
-        if (id == "addMemberButton") {
-            // document.getElementById("cancel-edit").click()
-            emptyCard.style.display = 'none';
-            addMemberCard.style.display = 'block';
-            addMemberCardSmall.style.display = 'block';
-            editProfileCard.style.display = 'none';
-        }
-        if(id == "cancel-edit") {
-            emptyCard.style.display = 'flex';
-            addMemberCard.style.display = 'none';
-            addMemberCardSmall.style.display = 'none';
-            editProfileCard.style.display = 'none';
-        }
-        if (id == "editButton") {
-            emptyCard.style.display = 'none';
-            addMemberCard.style.display = 'none';
-            editProfileCard.style.display = 'block';
-        }
-        if (id == "deleteButton") {
-            document.getElementById("modalBackground").style.display = 'block';
-        }
-        if (id == "modalCancel") {
-            document.getElementById("modalBackground").style.display = 'none';
-            console.log(id)
-        }
-        if( id == "modalCancelConfirm"){
-            // console.log(remId);
-            $.ajax({
-                type: "POST",
-                data: {
-                    'id':remId ,
-                },
-                url: `{% url 'remove-member'%}` ,
-
-                headers: {
-                    "X-CSRFTOKEN": "{{ csrf_token }}"
-                },
-                success:(data)=>{
-                    notifySuccess('Member removed successfully')
-                    window.location.reload();
-                }
-            })
-        }
-    }
-    var remId = '';
-    function removeMember(id){
-        // console.log(id)
-        remId = id;
-        document.getElementById("modalBackground").style.display = 'block';
-
-    }
-    // window.onload = function() {
-    //     toggleOpen('addMemberButton')
-    // };
-</script>
+{%include 'teams/team_Scripts.html'%}
 {% endblock %}
