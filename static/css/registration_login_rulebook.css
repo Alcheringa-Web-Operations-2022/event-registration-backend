@@ -38,19 +38,26 @@ html {
   position: relative;
   background-color: rgb(255,255,255);
   border-radius: 12px;
-  padding: 15px;
+  padding: 2px;
   backdrop-filter: blur(5px);
 }
 .border_bottom {
-  padding: 0px 12px;
-  height: 28px;
+  align-items: center;
+  padding: 0px 0px;
+  height: 31px;
   border-bottom: 1px solid rgb(240, 233, 233);
 }
+.border_bottom>p{
+  margin-left: 11px;
+}
+
+
 .pad {
+  margin-top: 2rem;
   padding: 0px 12px;
 }
 .pad > p {
-  margin-top: 28px;
+  margin-top: 2px;
   font-family: "Poppins", sans-serif;
   font-weight: 300;
   font-size: 14px;
@@ -91,8 +98,19 @@ input:focus {
 .fontfam {
   font-family: "Poppins", sans-serif;
   color: #ee6337;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 12px;
+  
+}
+.fw-5{
+  font-weight: 500;
+}
+.btn_login{
+  width: 100%;
+}
+.btn_register{
+ padding: 4px 12px;
+ 
 }
 
 @media screen and (max-width: 514px) {
