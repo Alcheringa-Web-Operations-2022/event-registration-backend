@@ -6,7 +6,7 @@ from phonenumber_field.formfields import PhoneNumberField
 from competitions.models import Module
 User = get_user_model()
 
-
+OPTIONS= (('M', 'Male'), ('F', 'Female'))
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField(widget=forms.TextInput(
         attrs={'class': 'form__field', 'placeholder': 'Email *'}))
@@ -14,8 +14,10 @@ class UserRegisterForm(UserCreationForm):
         attrs={'class': 'form__field', 'placeholder': 'Username *'}))
     fullname = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'form__field', 'placeholder': 'Full Name *'}))
+    
     collegename = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'form__field', 'placeholder': 'College Name *'}))
+    
     city = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'form__field', 'placeholder': 'City *'}))
     phone = PhoneNumberField(widget=forms.TextInput(attrs={
@@ -37,7 +39,7 @@ class UserRegisterForm(UserCreationForm):
 
 
 class UserUpdateForm(forms.ModelForm):
-
+    gender = forms.ChoiceField(choices=OPTIONS)
     phone = PhoneNumberField(widget=forms.TextInput(
     ), label="Phone number (e.g. +12125552368)")
     alternate_phone = PhoneNumberField(widget=forms.TextInput(
@@ -50,6 +52,7 @@ class UserUpdateForm(forms.ModelForm):
         model = User
         fields = ['img', 'fullname',
                   'username',
+                  'gender',
                   'phone',
                   'collegename',
                   'city',
