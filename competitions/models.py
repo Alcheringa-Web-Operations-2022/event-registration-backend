@@ -14,6 +14,8 @@ class Module(models.Model):
     module_query_name_without_spaces_all_small = models.CharField(max_length=127)
     module_icon = models.ImageField(
         upload_to="image_uploads/moduleicons/", default='module_icon_default.png')
+    module_icon_active=models.ImageField(
+        upload_to="image_uploads/moduleicons/active/", default='module_icon_default.png')
     def __str__(self):
           return str(self.module)
 
