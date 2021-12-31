@@ -5,24 +5,29 @@
 <link rel="stylesheet" href={% static "css/registration_login_rulebook.css" %}> {% endblock %}
 
 {%block body%}
+<style>
+    input{
+        margin-bottom: 12px;
+    }
+</style>
 <div class="video-background">
     <video autoplay muted loop id="myVideo">
         <source src="{% static "videos/trailer.mp4" %}" type="video/mp4">
     </video>
 </div>
-<div class="flex center_ele">
+<div class="flex center_ele  my-4">
     <img class="logo_img" src={% static "imgs/alcher_logo.png" %} alt="">
 </div>
 <div class="flex center_ele flex_col">
     <h2 class="heading">Registration Portal</h2>
     <div class="form__wrapper">
-        <form class="form_border form__group field" method="POST">
-            <div class="border_bottom mb-2">
-                <p class="sub-heading mt-1">Register</p>
-                <br>
+        <form class="form_border form__group field py-2" method="POST">
+            <div class="border_bottom ">
+                <p class="sub-heading fw-5">Sign Up</p>
+              
             </div>
-            <div class="pad">
-                <p>Field marked * are mandatory</p>
+            <div class="mt-4 px-4">
+                <p class="mb-2">Field marked * are mandatory</p>
                 <ul class="font fontfam">
                     {% if form.non_field_errors %}
                     <li>{{ form.non_field_errors }}</li>
@@ -48,15 +53,15 @@
                     {{ form.password1}}
                     {{ form.password2}}
                     <div class="flex center_ele">
-                        <input type="submit" 
-                                 class="cursor-pointer hover:bg-red-700 text-white inline-block py-2 px-2 rounded shadow-sm font-semibold text-base" style="background-color: #EE6337;" value="Register" />
+                        <input type="submit " 
+                                 class="btn_register  my-4 btn_sub cursor-pointer hover:bg-red-700 text-white    rounded shadow-sm fw-5 font text-base" style="background-color: #EE6337;" value="Sign Up" />
 
                     </div>
                 </div>
                 <div class="flex center_ele font  mb-2">
-                    <p>Already registered?
-                    <p>
-                        <a href="{% url 'login'%}"> Login</a>
+                    <p class="fw-5">Already registered? &nbsp;
+                    </p>
+                        <a class="fw-5" href="{% url 'login'%}"> Login</a>
                 </div>
             </div>
         </form>
