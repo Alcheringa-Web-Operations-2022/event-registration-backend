@@ -44,7 +44,9 @@ def registercompetition(request, slug):
 
     members_reg = set(members_reg)
     team_members = team.members.exclude(id__in=members_reg)
-    
+    if(len(team_members)<comp.min_members or len(team_members)==0):
+        messages.error(request,'Not enough members to register')
+        return redirect('showallcompetitions')
     if request.method == 'POST':
         ######################### saving team ####################################
 

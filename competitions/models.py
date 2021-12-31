@@ -8,32 +8,37 @@ from competitions.validators import validate_file_extension
 from teams.models import TeamMembers
 from authentication.models import NewUser
 
+
 class Module(models.Model):
     id = models.SlugField(primary_key=True, default=uuid.uuid4)
     module = models.CharField(max_length=127)
-    module_query_name_without_spaces_all_small = models.CharField(max_length=127)
+    module_query_name_without_spaces_all_small = models.CharField(
+        max_length=127)
     module_icon = models.ImageField(
         upload_to="image_uploads/moduleicons/", default='module_icon_default.png')
-    module_icon_active=models.ImageField(
+    module_icon_active = models.ImageField(
         upload_to="image_uploads/moduleicons/active/", default='module_icon_default.png')
+
     def __str__(self):
-          return str(self.module)
+        return str(self.module)
+
 
 class Competition(models.Model):
-  id = models.SlugField(primary_key=True, default=uuid.uuid4)
-  module=models.ForeignKey(Module,related_name='modulename',on_delete=models.CASCADE)
-  event_name = models.CharField(max_length = 255)
-  event_desc = models.CharField(max_length = 255) 
-  event_rules=models.TextField()
+    id = models.SlugField(primary_key=True, default=uuid.uuid4)
+    module = models.ForeignKey(
+        Module, related_name='modulename', on_delete=models.CASCADE)
+    event_name = models.CharField(max_length=255)
+    event_desc = models.CharField(max_length=255)
+    event_rules = models.TextField()
 #   event_rules_pdf = models.FileField(upload_to="image_uploads/rulebooks/", validators=[validate_file_extension],  blank=True, null=True)
-  min_members = models.IntegerField(default=1)
-  max_members = models.IntegerField(default = 1)
-  prize_worth = models.IntegerField()
-  image = models.ImageField(upload_to="image_uploads/event_pics/", default='event_default.png')
-  
-  def __str__(self):
-      return str(self.event_name)
+    min_members = models.IntegerField(default=1)
+    max_members = models.IntegerField(default=1)
+    prize_worth = models.IntegerField()
+    image = models.ImageField(
+        upload_to="image_uploads/event_pics/", default='event_default.png')
 
+    def __str__(self):
+        return str(self.event_name)
 
 
 class CompTeam(models.Model):
@@ -44,21 +49,23 @@ class CompTeam(models.Model):
         settings.AUTH_USER_MODEL, related_name="teams_leader", on_delete=models.CASCADE)
     members = models.ManyToManyField(
         "teams.TeamMembers", related_name="compteams")
-    
+
     def __str__(self):
         return str(self.leader)
+
 
 class SubmitPerformance(models.Model):
     event = models.ForeignKey(
         Competition, related_name="event_name2", on_delete=models.CASCADE)
     team = models.ForeignKey(
         CompTeam, related_name="compteams2", on_delete=models.CASCADE)
-    link = models.CharField(max_length=2000,null=True,blank=True)
+    link = models.CharField(max_length=2000, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
-    
+
 
 @receiver(post_save, sender=CompTeam)
-def comp_register_signal(sender, instance, *args, **kwargs):
-    user = NewUser.objects.get(email=instance.leader.email)
-    user.no_of_events_registered+=1
-    user.save()
+def comp_register_signal(sender, instance, created, *args, **kwargs):
+    if(created):
+        user = NewUser.objects.get(email=instance.leader.email)
+        user.no_of_events_registered += 1
+        user.save()
