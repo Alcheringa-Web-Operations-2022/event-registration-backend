@@ -13,7 +13,7 @@ from teams.models import Team, TeamMembers
 
 @login_required(login_url='login')
 def showallcompetitions(request):
-    modulequery = request.GET.get('module') or 'dance'
+    modulequery = request.GET.get('module') or Competition.objects.first()
     module_comp = Competition.objects.all()
     module = None
     if modulequery:
