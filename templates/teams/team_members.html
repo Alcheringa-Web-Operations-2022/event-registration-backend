@@ -113,26 +113,24 @@
                                 </div>
                             </div>
                             <!-- Edit member form for mobile screens -->
-                           <div class="hidden add-member-form-small">
+                            <div class="hidden add-member-form-small">
                                 <div class="lg:hidden mt-5">
-                        <form class="px-4 space-y-5" method="POST" id="editform__mobile">
-                            {% csrf_token %}
-                             <input type="text" name="editid" class="border-b" size="25" placeholder="" maxlength="100" required="" style="width:0px;overflow:hidden;"id="editid__mobile">
-                            <input type="text" name="editname" class="border-b" size="25" placeholder="Enter Name" maxlength="100" required="" id="editname__mobile">
-                            <input type="text" pattern="^\+91\d{10}$" name="editphone" class="border-b" size="25" placeholder="Enter Phone" maxlength="100" required="" id="editphone__mobile">
-                            <input type="email"  name="editemail" class="border-b" size="25" placeholder="Enter Email" maxlength="100" required="" id="editemail__mobile">
-                           <select name="editgender" class="border-b text-gray-400 pr-36" width="110%" placeholder="Gender" id="editgender__mobile">
-                            <option value="M">M</option>
-
-                            <option value="F">F</option>
-                            </select>
-                            <div class="flex justify-end pb-4">
-                                <button class="text-red-500 mx-1 text-sm">Remove</button>
-                                <button type="button" class="text-red-500 mx-5 text-sm" id="cancel-edit" onclick="{toggleOpen(this.id)}">Cancel</button>
-                                <button type="submit" id="editformsubmit"
-                                    class="bg-red-500 text-white py-1 px-2 text-sm rounded">Confirm Edit</button>
-                            </div>
-                        </form>
+                                    <form class="px-4 space-y-5" onsubmit="return phoneditform('{{member.id}}')">
+                                        {% csrf_token %}
+                                        <input type="text" value="{{member.id}}" name="editid" class="border-b" size="25" placeholder="" maxlength="100" required="" style="width:0px;overflow:hidden;"id="editid__mobile{{member.id}}">
+                                        <input type="text" value="{{member.name}}"  name="editname" class="border-b" size="25" placeholder="Enter Name" maxlength="100" required="" id="editname__mobile{{member.id}}">
+                                        <input type="text"  value="{{member.phone}}" pattern="^\+91\d{10}$" name="editphone" class="border-b" size="25" placeholder="Enter Phone" maxlength="100" required="" id="editphone__mobile{{member.id}}">
+                                        <input type="email"  value="{{member.email}}"  name="editemail" class="border-b" size="25" placeholder="Enter Email" maxlength="100" required="" id="editemail__mobile{{member.id}}">
+                                        <select name="editgender" value="{{member.gender}}" class="border-b text-gray-400 pr-36" width="110%" placeholder="Gender" id="editgender__mobile{{member.id}}">
+                                            <option value="M">M</option><option value="F">F</option>
+                                        </select>
+                                        <div class="flex justify-end pb-4">
+                                            <button   type="button"  class="text-red-500 mx-1 text-sm"onclick="removeMember('{{member.id}}')" >Remove</button>
+                                            <button type="button" class="text-red-500 mx-5 text-sm" id="cancel-edit-mobile" onclick="{toggleOpen(this.id)}">Cancel</button>
+                                            <button type="submit" id="editformsubmit"
+                                                class="bg-red-500 text-white py-1 px-2 text-sm rounded">Confirm Edit</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -214,182 +212,5 @@
     </div>
 </div>
 </div>
-<script>
-    var emptyCard = document.getElementById("emptyCard");
-    var addMemberCard = document.getElementById("addMemberCard");
-    var addMemberCardSmall = document.getElementById("addMemberCardSmall");
-    var editProfileCard = document.getElementById("editProfileCard");
-    function toggleOpen(id) {
-
-        if (id == "addMemberButton") {
-            // document.getElementById("cancel-edit").click()
-            emptyCard.style.display = 'none';
-            addMemberCard.style.display = 'block';
-            addMemberCardSmall.style.display = 'block';
-            editProfileCard.style.display = 'none';
-        }
-        if(id == "cancel-edit") {
-            emptyCard.style.display = 'flex';
-            addMemberCard.style.display = 'none';
-            addMemberCardSmall.style.display = 'none';
-            editProfileCard.style.display = 'none';
-        }
-        if (id == "deleteButton") {
-            document.getElementById("modalBackground").style.display = 'block';
-        }
-        if (id == "modalCancel") {
-            document.getElementById("modalBackground").style.display = 'none';
-            console.log(id)
-        }
-    }
-    
-    //remove member part
-    var remId = '';
-    function removeMember(id){
-        // console.log(id)
-        remId = id;
-        document.getElementById("modalBackground").style.display = 'block';
-    }
-    document.getElementById('modalCancelConfirmDelete').addEventListener('click',function deletemember(){
-        $.ajax({
-            type: "POST",
-            data: {
-                'id':remId ,
-            },
-            url: `{% url 'remove-member'%}` ,
-
-            headers: {
-                "X-CSRFTOKEN": "{{ csrf_token }}"
-            },
-            success:(data)=>{
-                notifySuccess('Member removed successfully')
-                window.location.reload();
-            }
-        })
-    })
-    //Team Member edit part
-    function editmember(editid,name,email,phone,gender){
-        emptyCard.style.display = 'none';
-        addMemberCard.style.display = 'none';
-        editProfileCard.style.display = 'block';
-        document.getElementById('editid').value=editid
-        document.getElementById('editname').value=name
-        document.getElementById('editemail').value=email
-        document.getElementById('editphone').value=phone
-        document.getElementById('editgender').value=gender
-    }
-    //Team Member edit part mobile
-    // function editmember(editid,name,email,phone,gender){
-    //     document.getElementById('editid__mobile').value=editid
-    //     document.getElementById('editname__mobile').value=name
-    //     document.getElementById('editemail__mobile').value=email
-    //     document.getElementById('editphone__mobile').value=phone
-    //     document.getElementById('editgender__mobile').value=gender
-    // }
-    //edit form submission
-    document.getElementById('editform').addEventListener('submit',function editformsubmit(editid){
-        event.preventDefault()
-        $.ajax({
-            type: "POST",
-            data: {
-                'id':document.getElementById('editid').value,
-                'name':document.getElementById('editname').value,
-                'email':document.getElementById('editemail').value,
-                'phone':document.getElementById('editphone').value,
-                'gender': document.getElementById('editgender').value
-            },
-            url: `{% url 'update-member' %}`,
-
-            headers: {
-                "X-CSRFTOKEN": "{{ csrf_token }}"
-            },
-            success:(data)=>{
-                if(data!=='OK')
-                notifySuccess('Member updated successfully')
-                else
-                notifyError(data)
-                window.location.reload();
-            }
-        })
-    })
-    //edit form mobil
-    document.getElementById('editform__mobile').addEventListener('submit',function editformsubmitmobile(editid){
-        event.preventDefault()
-        $.ajax({
-            type: "POST",
-            data: {
-                'id':document.getElementById('editid__mobile').value,
-                'name':document.getElementById('editname__mobile').value,
-                'email':document.getElementById('editemail__mobile').value,
-                'phone':document.getElementById('editphone__mobile').value,
-                'gender': document.getElementById('editgender__mobile').value
-            },
-            url: `{% url 'update-member' %}`,
-
-            headers: {
-                "X-CSRFTOKEN": "{{ csrf_token }}"
-            },
-            success:(data)=>{
-                if(data!=='OK')
-                notifySuccess('Member updated successfully')
-                else
-                notifyError(data)
-                window.location.reload();
-            }
-        })
-    })
-    //add form submission
-    document.getElementById('addform').addEventListener('submit',function addformsubmit(editid){
-        event.preventDefault()
-        $.ajax({
-            type: "POST",
-            data: {
-                'name':document.getElementById('addname').value,
-                'email':document.getElementById('addemail').value,
-                'phone':document.getElementById('addphone').value,
-                'gender': document.getElementById('addgender').value
-            },
-            url: `{% url 'add-member' %}`,
-
-            headers: {
-                "X-CSRFTOKEN": "{{ csrf_token }}"
-            },
-            success:(data)=>{
-                if(data=="OK")
-                notifySuccess('Member added successfully')
-                else
-                notifyError(data)
-                window.location.reload();
-            }
-        })
-    })
-    //add gorm for mobile
-    document.getElementById('addform__mobile').addEventListener('submit',function addformsubmitmobile(editid){
-        event.preventDefault()
-        $.ajax({
-            type: "POST",
-            data: {
-                'name':document.getElementById('addname__mobile').value,
-                'email':document.getElementById('addemail__mobile').value,
-                'phone':document.getElementById('addphone__mobile').value,
-                'gender': document.getElementById('addgender__mobile').value
-            },
-            url: `{% url 'add-member' %}`,
-
-            headers: {
-                "X-CSRFTOKEN": "{{ csrf_token }}"
-            },
-            success:(data)=>{
-                if(data=="OK")
-                notifySuccess('Member added successfully')
-                else
-                notifyError(data)
-                window.location.reload();
-            }
-        })
-    })
-    // window.onload = function() {
-    //     toggleOpen('addMemberButton')
-    // };
-</script>
+{%include 'teams/team_Scripts.html'%}
 {% endblock %}

@@ -11,31 +11,10 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='login')
 def team_members(request):
     team = Team.objects.filter(leader=request.user).first()
-    if request.method == 'POST':
-        form = MemberForm(request.POST)
-        name = form['name'].value()
-        email = form['email'].value()
-        phone = form['phone'].value()
-        gender = form['gender'].value()
-        flag = 0
-        for member in team.members.all():
-            if member.email == email or member.phone == phone:
-                messages.error(request, "Member already exists in your team")
-                flag = 1
-                break
-        if flag == 0:
-            new_member = TeamMembers(
-                name=name, email=email, phone=phone, gender=gender)
-            new_member.save()
-            team.members.add(new_member)
-            team.save()
-            return redirect('team')
-    else:
-        form = MemberForm()
     all_members = []
     for member in team.members.all():
         all_members.append(member)
-    return render(request, 'teams/team_members.html', {'form': form, 'team': all_members,'active_page':'team'})
+    return render(request, 'teams/team_members.html', {'team': all_members,'active_page':'team'})
 
 
 @login_required(login_url='login')
@@ -47,7 +26,6 @@ def add_member(request):
             return HttpResponse('User with same email already exist')
 
         if (memberphone.count() > 0):
-            messages.error(request, 'User with same phone already exist')
             return HttpResponse('User with same phone already exist')
 
         TeamMembers(name=request.POST.get('name'),
@@ -65,10 +43,10 @@ def update_member(request):
     memberphone = TeamMembers.objects.filter(phone=request.POST.get('phone'))
     member = TeamMembers.objects.get(id=request.POST.get('id'))
     if request.method == 'POST':
-        if (memberemail.count() > 0):
+        if (memberemail.count() > 0 and member not in memberemail):
             return HttpResponse('User with same email already exist')
 
-        if (memberphone.count() > 0):
+        if (memberphone.count() > 0 and member not in memberphone):
             return HttpResponse('User with same phone already exist')
         member.name = request.POST.get('name')
         member.email = request.POST.get('email')
