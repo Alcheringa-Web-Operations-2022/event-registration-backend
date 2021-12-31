@@ -1,0 +1,65 @@
+{% extends './basictailwind.html'%}
+{% load static %}
+{%block title%}Contact Us | Alcheringa {%endblock%}
+{% block body %}
+
+<body>
+    <div class="flex"  style="background-color: #F3F6F8;">
+        {% include "./navbar.html" %}
+        <div class="flex">
+           
+                <!-- component -->
+                <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="w-full bg-white rounded-lg p-12 flex flex-col justify-center items-center">
+                            <div class="w-full rounded-md mb-5">
+                                <img src="{% static 'imgs/pr/vishal.jpg' %}" class="w-full rounded-md">
+                            </div>
+                            
+                            <div class="text-center">
+                                <p class="text-xl text-gray-700 font-bold mb-2">Vishal Ch</p>
+                                <p class="text-base text-gray-400 font-normal">Outreach and Media<br>Head</p><br>
+                                <p class="text-base text-gray-400 font-normal">vishal@alcheringa.in</p>
+                                <p class="text-base text-gray-400 font-normal">7331104679</p>
+                            </div>
+                        </div>
+                        <div class="w-full bg-white rounded-lg p-12 flex flex-col justify-center items-center">
+                            <div class="w-full rounded-md mb-5">
+                                <img src="{% static 'imgs/pr/vikas.jpg' %}" class="w-full rounded-md">
+                            </div>
+                            
+                            
+                            <div class="text-center">
+                                <p class="text-xl text-gray-700 font-bold mb-2">Venkat Vikas Ch</p>
+                                <p class="text-base text-gray-400 font-normal">Public Relations<br>Head</p><br>
+                                <p class="text-base text-gray-400 font-normal">vikas@alcheringa.in</p>
+                                <p class="text-base text-gray-400 font-normal">8919054329</p>
+                            </div>
+                        </div>
+                        <div class="w-full bg-white rounded-lg p-12 flex flex-col justify-center items-center">
+                            <div class="w-full rounded-md mb-5">
+                                <img src="{% static 'imgs/pr/ankit.jpg' %}" class="w-full rounded-md">
+                            </div>
+                            
+                            <div class="text-center">
+                                <p class="text-xl text-gray-700 font-bold mb-2">Ankit Agarwal</p>
+                                <p class="text-base text-gray-400 font-normal">Public Relations<br>Head</p><br>
+                                <p class="text-base text-gray-400 font-normal">ankit.a@alcheringa.in</p>
+                                <p class="text-base text-gray-400 font-normal">9983072631</p>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                    </div>
+                </section>
+          
+        </div>
+    </div>
+    </div>
+
+</body>
+{%endblock%}
+{% block script %}
+
+{% endblock %}
