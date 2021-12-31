@@ -59,7 +59,7 @@
     console.log(active);
     document.getElementById("{{active_page}}").style.color="#EE6337";
     document.getElementById("{{active_page}}").classList.add("border-0","bg-gray-100");
-    document.getElementById("{{active_page}}").children[0].src="{% static 'icons/nav/active/"+active+".png' %}";
+    document.getElementById("{{active_page}}").children[0].src=`{% static 'icons/nav/active/${active}.png' %}`;
    
   </script>
 

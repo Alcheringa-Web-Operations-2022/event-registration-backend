@@ -11,12 +11,9 @@ def home(request):
 
 @login_required(login_url='login')
 def rulebook(request):
-<<<<<<< HEAD
     return render(request, 'competitions/rules.html',{'active_page':'rulebooklet'})
-=======
     return render(request, 'rules.html')
 
 @login_required(login_url='login')
 def contact(request):
     return render(request, 'contactus.html')
->>>>>>> 9498543f694601d239e306246a6adc25ce41dd06
