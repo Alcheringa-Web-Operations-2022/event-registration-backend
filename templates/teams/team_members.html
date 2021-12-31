@@ -12,19 +12,20 @@
         display: flex
     }
 </style>
-<div  style="background-color: #F3F6F8;" class="mb-12">
+<div style="background-color: #F3F6F8;" class="mb-12">
     {% include 'navbar.html' %}
     <div class="flex mb-6 md:mb-1">
         <!-- left_nav -->
         <div class="w-80 bg-white h-screen hidden md:block"></div>
-        <div class="flex-grow">
-            <div class="m-3 font-medium text-2xl">Team Members<span
-                    class="mx-3 px-2 py-1 bg-gray-600 rounded-sm font-normal text-white text-sm">{{team|length}}</span></div>
-            <div class="flex gap-2">
+        <div class="flex-grow flex flex-col">
+            <div class="m-3 font-medium text-2xl">Team Members
+                <span class="mx-3 px-2 py-1 bg-gray-600 rounded-sm font-normal text-white text-sm">{{team|length}}</span>
+            </div>
+            <div class="flex gap-2 flex-grow">
                 <!-- members -->
                 <div class="m-3 bg-white rounded-lg shadow flex-grow">
                     <div class="py-2 px-4 font-medium text-lg border-b">Members</div>
-                    <div class="m-4 rounded-sm"  style="background-color: #F3F6F8;">
+                    <div class="m-4 rounded-sm" style="background-color: #F3F6F8;">
                         <span class="float-left p-1">
                             <svg width="20" height="20" viewBox="0 0 20 21" fill="none"
                                 xmlns="http://www.w3.org/2000/svg" class="mt-1">
@@ -34,7 +35,7 @@
                             </svg>
                         </span>
                         <span>
-                            <input type="search" class="py-1 font-light text-base"  style="background-color: #F3F6F8;"
+                            <input type="search" class="py-1 font-light text-base" style="background-color: #F3F6F8;"
                                 placeholder="search member" />
                         </span>
                     </div>
@@ -52,25 +53,31 @@
                                 <img class="my-9 mx-auto" width="120" src="{%static 'imgs/user-default.png'%}"
                                     alt="profile" border="0" />
                                 <!-- Add member form for mobile screens -->
-                                <form class="px-4 space-y-5"  method="POST" id="addform__mobile">
-                            <input type="text" name="addname" class="border-b" size="25" placeholder="Enter Name" maxlength="100" required="" id="addname__mobile">
-                            <input type="text" pattern="^\+91\d{10}$" name="addphone" class="border-b" size="25" placeholder="Enter Phone" maxlength="100" required="" id="addphone__mobile">
-                            <input type="email"  name="addemail" class="border-b" size="25" placeholder="Enter Email" maxlength="100" required="" id="addemail__mobile">
-                           <select name="addgender" class="border-b text-gray-400 pr-36" width="110%" placeholder="Gender" id="addgender__mobile">
-                            <option value="M">M</option>
+                                <form class="px-4 space-y-5" method="POST" id="addform__mobile">
+                                    <input type="text" name="addname" class="border-b" size="25"
+                                        placeholder="Enter Name" maxlength="100" required="" id="addname__mobile">
+                                    <input type="text" pattern="^\+91\d{10}$" name="addphone" class="border-b" size="25"
+                                        placeholder="Enter Phone" maxlength="100" required="" id="addphone__mobile">
+                                    <input type="email" name="addemail" class="border-b" size="25"
+                                        placeholder="Enter Email" maxlength="100" required="" id="addemail__mobile">
+                                    <select name="addgender" class="border-b text-gray-400 pr-36" width="110%"
+                                        placeholder="Gender" id="addgender__mobile">
+                                        <option value="M">M</option>
 
-                            <option value="F">F</option>
-                            </select>
-                            <div class="flex justify-end pb-4">
-                                <button type="button" class="text-red-500 mx-5 text-sm" id="cancel-edit" onclick="{toggleOpen(this.id)}">Cancel</button>
-                                <button type="submit" id="addformsubmit"
-                                    class="bg-red-500 text-white py-1 px-2 text-sm rounded">Add</button>
-                            </div>
-                        </form>
+                                        <option value="F">F</option>
+                                    </select>
+                                    <div class="flex justify-end pb-4">
+                                        <button type="button" class="text-red-500 mx-5 text-sm" id="cancel-edit"
+                                            onclick="{toggleOpen(this.id)}">Cancel</button>
+                                        <button type="submit" id="addformsubmit"
+                                            class="bg-red-500 text-white py-1 px-2 text-sm rounded">Add</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                         <!-- single-card-yellow_border -->
-                        <div class="m-1 p-4 h-28 flex bg-white border-yellow-400  w-full border-2 rounded-md col-span-2 md:col-span-1">
+                        <div
+                            class="m-1 p-4 h-28 flex bg-white border-yellow-400  w-full border-2 rounded-md col-span-2 md:col-span-1">
                             <img width="75" src="{%static 'imgs/user-default.png'%}" alt="profile" border="0" />
                             <div class="mx-5 my-auto">
                                 <div class="font-medium text-base">{{user.username}} (Leader)</div>
@@ -79,10 +86,10 @@
                         </div>
                         <!-- single-card -->
                         {% for member in team %}
-                        
+
                         {%if not member.email == user.email%}
-                        <div
-                            style="background-color: #F3F6F8;" class="col-span-2 md:col-span-1 m-1 p-4 lg:h-28 border-red-50 border rounded-md hover:bg-white hover:shadow-md  w-full edit-delete-parent">
+                        <div style="background-color: #F3F6F8;"
+                            class="col-span-2 md:col-span-1 m-1 p-4 lg:h-28 border-red-50 border rounded-md hover:bg-white hover:shadow-md  w-full edit-delete-parent">
                             <div class="flex relative">
                                 <img width="78" height="78" src="{%static 'imgs/user-default.png'%}" alt="profile" />
                                 <div class="mx-5 my-auto">
@@ -91,8 +98,9 @@
                                 </div>
                                 <div class="my-auto absolute top-1 right-1 hidden edit-delete">
                                     <div class="lg:flex hidden ">
-                                       <button
-                                            onclick="editmember('{{member.id}}','{{member.name}}','{{member.email}}','{{member.phone}}','{{member.gender}}')" id="editButton" class="-ml-2">
+                                        <button
+                                            onclick="editmember('{{member.id}}','{{member.name}}','{{member.email}}','{{member.phone}}','{{member.gender}}')"
+                                            id="editButton" class="-ml-2">
                                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -100,13 +108,16 @@
                                                     fill="#C2CFE0" />
                                             </svg>
                                         </button>
-                                   
-                                        <a><button
-                                                onclick="removeMember('{{member.id}}')" id="deleteButton" class="ml-2">
-                                                <svg width="16" height="16" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M6.00342 19.3989C6.00342 20.4989 6.90342 21.3989 8.00342 21.3989H16.0034C17.1034 21.3989 18.0034 20.4989 18.0034 19.3989V7.39893H6.00342V19.3989ZM19.0034 4.39893H15.5034L14.5034 3.39893H9.50342L8.50342 4.39893H5.00342V6.39893H19.0034V4.39893Z" fill="#FF4433"/>
-                                                    </svg>
-                                                    
+
+                                        <a><button onclick="removeMember('{{member.id}}')" id="deleteButton"
+                                                class="ml-2">
+                                                <svg width="16" height="16" viewBox="0 0 25 25" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M6.00342 19.3989C6.00342 20.4989 6.90342 21.3989 8.00342 21.3989H16.0034C17.1034 21.3989 18.0034 20.4989 18.0034 19.3989V7.39893H6.00342V19.3989ZM19.0034 4.39893H15.5034L14.5034 3.39893H9.50342L8.50342 4.39893H5.00342V6.39893H19.0034V4.39893Z"
+                                                        fill="#FF4433" />
+                                                </svg>
+
                                             </button>
                                         </a>
                                     </div>
@@ -117,18 +128,32 @@
                                 <div class="lg:hidden mt-5">
                                     <form class="px-4 space-y-5" onsubmit="return phoneditform('{{member.id}}')">
                                         {% csrf_token %}
-                                        <input type="text" value="{{member.id}}" name="editid" class="border-b" size="25" placeholder="" maxlength="100" required="" style="width:0px;overflow:hidden;"id="editid__mobile{{member.id}}">
-                                        <input type="text" value="{{member.name}}"  name="editname" class="border-b" size="25" placeholder="Enter Name" maxlength="100" required="" id="editname__mobile{{member.id}}">
-                                        <input type="text"  value="{{member.phone}}" pattern="^\+91\d{10}$" name="editphone" class="border-b" size="25" placeholder="Enter Phone" maxlength="100" required="" id="editphone__mobile{{member.id}}">
-                                        <input type="email"  value="{{member.email}}"  name="editemail" class="border-b" size="25" placeholder="Enter Email" maxlength="100" required="" id="editemail__mobile{{member.id}}">
-                                        <select name="editgender" value="{{member.gender}}" class="border-b text-gray-400 pr-36" width="110%" placeholder="Gender" id="editgender__mobile{{member.id}}">
-                                            <option value="M">M</option><option value="F">F</option>
+                                        <input type="text" value="{{member.id}}" name="editid" class="border-b"
+                                            size="25" placeholder="" maxlength="100" required=""
+                                            style="width:0px;overflow:hidden;" id="editid__mobile{{member.id}}">
+                                        <input type="text" value="{{member.name}}" name="editname" class="border-b"
+                                            size="25" placeholder="Enter Name" maxlength="100" required=""
+                                            id="editname__mobile{{member.id}}">
+                                        <input type="text" value="{{member.phone}}" pattern="^\+91\d{10}$"
+                                            name="editphone" class="border-b" size="25" placeholder="Enter Phone"
+                                            maxlength="100" required="" id="editphone__mobile{{member.id}}">
+                                        <input type="email" value="{{member.email}}" name="editemail" class="border-b"
+                                            size="25" placeholder="Enter Email" maxlength="100" required=""
+                                            id="editemail__mobile{{member.id}}">
+                                        <select name="editgender" value="{{member.gender}}"
+                                            class="border-b text-gray-400 pr-36" width="110%" placeholder="Gender"
+                                            id="editgender__mobile{{member.id}}">
+                                            <option value="M">M</option>
+                                            <option value="F">F</option>
                                         </select>
                                         <div class="flex justify-end pb-4">
-                                            <button   type="button"  class="text-red-500 mx-1 text-sm"onclick="removeMember('{{member.id}}')" >Remove</button>
-                                            <button type="button" class="text-red-500 mx-5 text-sm" id="cancel-edit-mobile" onclick="{toggleOpen(this.id)}">Cancel</button>
+                                            <button type="button" class="text-red-500 mx-1 text-sm"
+                                                onclick="removeMember('{{member.id}}')">Remove</button>
+                                            <button type="button" class="text-red-500 mx-5 text-sm"
+                                                id="cancel-edit-mobile" onclick="{toggleOpen(this.id)}">Cancel</button>
                                             <button type="submit" id="editformsubmit"
-                                                class="bg-red-500 text-white py-1 px-2 text-sm rounded">Confirm Edit</button>
+                                                class="bg-red-500 text-white py-1 px-2 text-sm rounded">Confirm
+                                                Edit</button>
                                         </div>
                                     </form>
                                 </div>
@@ -156,20 +181,26 @@
                         <div class="py-2 px-4 font-medium text-lg border-b">Edit Member</div>
                         <img class="my-9 mx-auto" width="120" src="{%static 'imgs/user-default.png'%}" alt="profile"
                             border="0" />
-                            <!-- Edit member form -->
+                        <!-- Edit member form -->
                         <form class="px-4 space-y-5" method="POST" id="editform">
                             {% csrf_token %}
-                             <input type="text" name="editid" class="border-b" size="25" placeholder="" maxlength="100" required="" style="width:0px;overflow:hidden;"id="editid">
-                            <input type="text" name="editname" class="border-b" size="25" placeholder="Enter Name" maxlength="100" required="" id="editname">
-                            <input type="text" pattern="^\+91\d{10}$" name="editphone" class="border-b" size="25" placeholder="Enter Phone" maxlength="100" required="" id="editphone">
-                            <input type="email"  name="editemail" class="border-b" size="25" placeholder="Enter Email" maxlength="100" required="" id="editemail">
-                           <select name="editgender" class="border-b text-gray-400 pr-36" width="110%" placeholder="Gender" id="editgender">
-                            <option value="M">M</option>
+                            <input type="text" name="editid" class="border-b" size="25" placeholder="" maxlength="100"
+                                required="" style="width:0px;overflow:hidden;" id="editid">
+                            <input type="text" name="editname" class="border-b" size="25" placeholder="Enter Name"
+                                maxlength="100" required="" id="editname">
+                            <input type="text" pattern="^\+91\d{10}$" name="editphone" class="border-b" size="25"
+                                placeholder="Enter Phone" maxlength="100" required="" id="editphone">
+                            <input type="email" name="editemail" class="border-b" size="25" placeholder="Enter Email"
+                                maxlength="100" required="" id="editemail">
+                            <select name="editgender" class="border-b text-gray-400 pr-36" width="110%"
+                                placeholder="Gender" id="editgender">
+                                <option value="M">M</option>
 
-                            <option value="F">F</option>
+                                <option value="F">F</option>
                             </select>
                             <div class="flex justify-end pb-4">
-                                <button type="button" class="text-red-500 mx-5 text-sm" id="cancel-edit" onclick="{toggleOpen(this.id)}">Cancel</button>
+                                <button type="button" class="text-red-500 mx-5 text-sm" id="cancel-edit"
+                                    onclick="{toggleOpen(this.id)}">Cancel</button>
                                 <button type="submit" id="editformsubmit"
                                     class="bg-red-500 text-white py-1 px-2 text-sm rounded">Confirm Edit</button>
                             </div>
@@ -178,20 +209,25 @@
                     <!-- This is add member card -->
                     <div style="height: 480px;" id="addMemberCard"
                         class="mr-3 mt-3 w-80 bg-white rounded-lg shadow hidden">
-                        <div class="py-2 px-4 font-medium text-lg border-b" >Add Member</div>
+                        <div class="py-2 px-4 font-medium text-lg border-b">Add Member</div>
                         <img class="my-9 mx-auto" width="120" src="{%static 'imgs/user-default.png'%}" alt="profile"
                             border="0" />
-                        <form class="px-4 space-y-5"  method="POST" id="addform">
-                            <input type="text" name="addname" class="border-b" size="25" placeholder="Enter Name" maxlength="100" required="" id="addname">
-                            <input type="text" pattern="^\+91\d{10}$" name="addphone" class="border-b" size="25" placeholder="Enter Phone" maxlength="100" required="" id="addphone">
-                            <input type="email"  name="addemail" class="border-b" size="25" placeholder="Enter Email" maxlength="100" required="" id="addemail">
-                           <select name="addgender" class="border-b text-gray-400 pr-36" width="110%" placeholder="Gender" id="addgender">
-                            <option value="M">M</option>
+                        <form class="px-4 space-y-5" method="POST" id="addform">
+                            <input type="text" name="addname" class="border-b" size="25" placeholder="Enter Name"
+                                maxlength="100" required="" id="addname">
+                            <input type="text" pattern="^\+91\d{10}$" name="addphone" class="border-b" size="25"
+                                placeholder="Enter Phone" maxlength="100" required="" id="addphone">
+                            <input type="email" name="addemail" class="border-b" size="25" placeholder="Enter Email"
+                                maxlength="100" required="" id="addemail">
+                            <select name="addgender" class="border-b text-gray-400 pr-36" width="110%"
+                                placeholder="Gender" id="addgender">
+                                <option value="M">M</option>
 
-                            <option value="F">F</option>
+                                <option value="F">F</option>
                             </select>
                             <div class="flex justify-end pb-4">
-                                <button type="button" class="text-red-500 mx-5 text-sm" id="cancel-edit" onclick="{toggleOpen(this.id)}">Cancel</button>
+                                <button type="button" class="text-red-500 mx-5 text-sm" id="cancel-edit"
+                                    onclick="{toggleOpen(this.id)}">Cancel</button>
                                 <button type="submit" id="addformsubmit"
                                     class="bg-red-500 text-white py-1 px-2 text-sm rounded">Add</button>
                             </div>
@@ -207,7 +243,8 @@
         Are you sure you want to remove the member
         <div class="flex justify-end pt-4">
             <button class="text-red-500 mx-5 text-sm" id="modalCancel" onclick="toggleOpen(this.id)">Cancel</button>
-            <button class="bg-red-500 text-white py-1 px-2 text-sm rounded" id="modalCancelConfirmDelete" onclick="toggleOpen(this.id)">Remove</button>
+            <button class="bg-red-500 text-white py-1 px-2 text-sm rounded" id="modalCancelConfirmDelete"
+                onclick="toggleOpen(this.id)">Remove</button>
         </div>
     </div>
 </div>

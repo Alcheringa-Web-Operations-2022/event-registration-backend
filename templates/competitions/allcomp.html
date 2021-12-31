@@ -31,10 +31,6 @@
             width: 23.4%;
         }
 
-        .content {
-            width: 76.6%;
-        }
-
         .dot {
             height: 4px;
             width: 4px;
@@ -50,7 +46,8 @@
         .changecolor1 {
             background-color: #C2CFE0;
         }
-        .rules-modal{
+
+        .rules-modal {
             height: 90vh;
             width: 90vw;
             position: absolute;
@@ -64,10 +61,12 @@
             border: 2px solid red;
             z-index: 99;
         }
-        .rules{
+
+        .rules {
             white-space: pre-wrap;
         }
-        .cancel-rules-modal{
+
+        .cancel-rules-modal {
             position: fixed;
             top: 5vh;
             right: 5vw;
@@ -81,7 +80,7 @@
             border-radius: 2px;
         }
 
-        @media (max-width: 768px) {
+        /* @media (max-width: 768px) {
             .hideitems {
                 display: none;
             }
@@ -100,12 +99,25 @@
                 width: 31%;
                 height: 100%;
             }
+        } */
+        ::-webkit-scrollbar {
+            width: 4px;
+            padding-right: 2px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: rgb(255, 255, 255);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #e07e60;
+            border-radius: 3px;
         }
     </style>
     </head>
 
-    <body>
-        <div class="md:flex md:flex-row sm:flex-col">
+    <body x-data="{ showModal: false }" :class="{'overflow-y-hidden': showModal}">
+        <div class="sm:flex md:flex-row sm:flex-col">
             {% include 'navbar.html' %}
 
             <span style="display: grid; grid-template-rows: 8% 92%;" class="content bg-slate-100 h-screen w-full">
@@ -117,7 +129,7 @@
                 </nav>
                 <div class="md:ml-5 md:grid md:grid-cols-7 pb-4">
                     <div class="m-0 p-0 md:col-span-2 md:rounded-md bg-white inline overflow-auto competitions-list shadow-md ">
-                        <div class="mb-3">
+                        <div class="mb-3 hidden sm:block">
                             <p class="pl-5 py-3 border-b-2 font-medium hideitems">Modules</p>
                         </div>
 
@@ -127,14 +139,15 @@
                             <span class="inline align-middle mt-2 pl-4 tracking-wide align-middle"
                                 id="headspan">Dance</span>
                             <button onclick="dropdown(); inversion('arrow');">
-                                <img src="{% static 'icons/dropdownbtn.png' %}" alt="drowdown"
-                                    class="h-2/6 m-3 mr-4" id="arrow">
+                                <img src="{% static 'icons/dropdownbtn.png' %}" alt="drowdown" class="h-2/6 m-3 mr-4"
+                                    id="arrow">
                             </button>
                         </div>
                         
                         <div class="flex flex-col flex-nowrap overflow-auto mydropdown">
                             {% for module in allmod %}
-                            <a href="?module={{module.module_query_name_without_spaces_all_small}}" class="hideitems moduleitems"
+                            <a href="?module={{module.module_query_name_without_spaces_all_small}}"
+                                class="hideitems moduleitems"
                                 onclick="mobchange('{{module.module_query_name_without_spaces_all_small}}'); changecolor('{{module.module_query_name_without_spaces_all_small}}')">
                                 <div class="bg-slate-100 m-3 mt-0 rounded-md flex align-middle ii"
                                     id="{{module.module_query_name_without_spaces_all_small}}">
@@ -158,31 +171,40 @@
                         </div>
                         <div class="competitions-list overflow-auto w-full">
                             {% for comp in allcomp %}
-                            
+
                             <div class="flex flex-col justify-center">
                                 <div class="relative bg-gray-100 rounded-lg shadow-md my-3 ml-2 flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 lg:pr-3 max-w-xs md:max-w-3xl">
                                     <div class="w-full md:w-1/3 bg-white grid place-items-center">
                                         <img src="{{comp.image.url}}" class="lg:rounded-l-lg w-full h-full" />
                                     </div>
-                                    <div class="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3  bg-gray-100 rounded-md ">
-                                        
-                                        <h3 class="font-medium md:text-xl text-xl" style="font-weight: 700;">{{comp.event_name}}</h3>
-                                        <p class="md:text-sm text-gray-500 text-base">{{comp.module}} &#xb7; <span style="color: #EE6337;text-decoration:none;"><a onclick="showrules()"><span class="md:text-sm text-zinc-500 text-amber-600 font-medium">
-                                                View Rules
+                                    <div
+                                        class="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3  bg-gray-100 rounded-md ">
+
+                                        <h3 class="font-medium md:text-xl text-xl" style="font-weight: 700;">
+                                            {{comp.event_name}}</h3>
+                                        <p class="md:text-sm text-gray-500 text-base">{{comp.module}} &#xb7; <span
+                                                style="color: #EE6337;text-decoration:none;"><button
+                                                    onclick="showrules(this)" data-rules= '{{comp.event_rules}}' @click="showModal = true"><span class="cursor md:text-sm text-zinc-500
+                                                    text-amber-600 font-medium">
+                                                        View Rules
+                                                    </span>
+                                                </button>
                                             </span>
-                                        </a></span></p>
+                                        </p>
                                         <p class="md:text-sm text-gray-500 text-base">
                                             {%if comp.min_members == 1 and comp.max_members == 1 %}
                                             <i class="fa fa-user" aria-hidden="true"></i> Single
                                             {%else%}
-                                            <i class="fa fa-users" aria-hidden="true"></i> Group {{comp.min_members}}-{{comp.max_members}} members
+                                            <i class="fa fa-users" aria-hidden="true"></i> Group
+                                            {{comp.min_members}}-{{comp.max_members}} members
                                             {%endif%}
-                                                &#xb7; 
-                                                <!-- <i class="fas fa-map-marker-alt" aria-hidden="true" style="color:green;"></i><span style="text-gray-600"> {{comp.location}}</span> -->
+                                            &#xb7;
+                                            <!-- <i class="fas fa-map-marker-alt" aria-hidden="true" style="color:green;"></i><span style="text-gray-600"> {{comp.location}}</span> -->
                                         </p>
                                         <p class="text-sm text-gray-800">
-                                            
-                                            <span class="font-normal text-gray-600 text-base">Total prizes worth</span><br>
+
+                                            <span class="font-normal text-gray-600 text-base">Total prizes
+                                                worth</span><br>
                                             <span class="font-medium">₹{{comp.prize_worth}}</span>
                                         </p>
                                     </div>
@@ -191,25 +213,63 @@
                                             class="orcolor text-white md:ml-5 pt-1 pb-1 pl-4 pr-4 rounded font-medium">Register</button></a>
                                     </div>
                                 </div>
-                                <div class="absolute rules-modal" id="rules_modal">
+                                <!-- <div class="absolute rules-modal" id="rules_modal">
                                     <div class="cancel-rules-modal" onclick="hiderules()">
                                         X
                                     </div>
-                                    <h1>Rules</h1>
-                                    <p class="rules" >
-                                        {{comp.event_rules}}
+                                    <h1 class="text-md">Rules</h1>
+                                    <p class="rules">{{comp.event_rules}}
                                     </p>
 
-                                </div>
+                                </div> -->
+
+                                {% endfor%}
                             </div>
-                            {% endfor%}
                         </div>
                     </div>
-                </div>
             </span>
         </div>
 
-
+    <div
+      class="fixed inset-0 w-full h-full z-20 bg-black bg-opacity-50 duration-300 overflow-y-auto"
+      x-show="showModal"
+      x-transition:enter="transition duration-300"
+      x-transition:enter-start="opacity-0"
+      x-transition:enter-end="opacity-100"
+      x-transition:leave="transition duration-300"
+      x-transition:leave-start="opacity-100"
+      x-transition:leave-end="opacity-0"
+    >
+      <div class="fixed inset-0 sm:w-3/4 md:w-1/2 lg:w-3/4 mx-2 sm:mx-auto h-4/5 overflow-y-scroll my-10 opacity-100">
+        <div
+          class="relative p-5 bg-white shadow-lg rounded-md text-gray-900 z-20"
+          @click.away="showModal = false"
+          x-show="showModal"
+          x-transition:enter="transition transform duration-300"
+          x-transition:enter-start="scale-0"
+          x-transition:enter-end="scale-100"
+          x-transition:leave="transition transform duration-300"
+          x-transition:leave-start="scale-100"
+          x-transition:leave-end="scale-0"
+        >
+          <header class="flex items-center justify-between p-2">
+            <h2 class="font-semibold">Rules</h2>
+            <button class="focus:outline-none p-2" @click="showModal = false">
+              <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                <path
+                  d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
+                ></path>
+              </svg>
+            </button>
+          </header>
+          <main class="p-2">
+            <p id = "rules_body">
+              
+            </p>
+          </main>
+        </div>
+      </div>
+    </div>
 
         <!-- js code -->
         <script>
@@ -264,21 +324,30 @@
 
             }
             //onload change color of the active button
-            window.onload = function() {
-                var modulename='{{modulename}}'
-                if(modulename.length>0){
+            window.onload = function () {
+                var modulename = '{{modulename}}'
+                if (modulename.length > 0) {
                     changecolor(modulename)
                     mobchange(modulename)
                 }
                 
                 
             };
-            function showrules(){
-                document.getElementById('rules_modal').style.display = 'block';
+            function showrules(ele) {
+                const rules = ele.getAttribute("data-rules")
+                document.getElementById("rules_body").innerText = rules;
             }
-            function hiderules(){
+            function hiderules() {
                 document.getElementById('rules_modal').style.display = 'none';
+                // document.body.style.filter = 'blur(0px)';
             }
+            // $(document).ready(function () {
+            //     function showrules(rules) {
+            //         // document.getElementById('rules_modal').style.display = 'block';
+            //         document.getElementById("rules_body").innerText = rules;
+    
+            //     }
+            // });
         </script>
     </body>
 
