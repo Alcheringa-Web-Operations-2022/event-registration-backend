@@ -7,6 +7,7 @@ from . import views as reg_views
 from django.views.generic import RedirectView
 urlpatterns = [
     path('' , reg_views.home,name="home"),
+    path('rulebook/', reg_views.rulebook, name="rulebook"),
     path('admin/', admin.site.urls),
     path('auth/', include('authentication.urls')),
     path('teams/', include('teams.urls')),
