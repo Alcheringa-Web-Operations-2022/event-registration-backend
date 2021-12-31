@@ -24,7 +24,7 @@ def showallcompetitions(request):
     modules = Module.objects.all()
     if module:
         modulename = module.module_query_name_without_spaces_all_small
-    return render(request, 'competitions/allcomp.html', {'allmod': modules, 'allcomp': module_comp, 'modulename': modulename})
+    return render(request, 'competitions/allcomp.html', {'allmod': modules, 'allcomp': module_comp, 'modulename': modulename,'active_page':'competitions'})
 
 
 @login_required(login_url='login')
@@ -84,4 +84,4 @@ def registercompetition(request, slug):
         messages.success(
             request, 'You have registered your team for this event successfully')
         return HttpResponse("OK")
-    return render(request, 'competitions/compreg.html', {'comp': comp, 'team_members': team_members, })
+    return render(request, 'competitions/compreg.html', {'comp': comp, 'team_members': team_members,'active_page':'competitions' })

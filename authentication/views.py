@@ -152,7 +152,7 @@ def profile(request):
         print(u_form.errors)
     else:
         u_form = UserUpdateForm(instance=request.user)
-    return render(request, 'authentication/profile.html', {'heading': 'Profile', 'form': u_form, 'modules': modules, 'totalmodules': modules.count()})
+    return render(request, 'authentication/profile.html', {'heading': 'Profile', 'form': u_form, 'modules': modules, 'totalmodules': modules.count(),'active_page':'profile'})
 
 
 @login_required(login_url='login')
@@ -168,7 +168,7 @@ def profileedit(request):
         print(u_form.errors)
     else:
         u_form = UserUpdateForm(instance=request.user)
-    return render(request, 'authentication/profile_edit.html', {'heading': 'Profile', 'form': u_form, 'modules': modules, 'totalmodules': modules.count()})
+    return render(request, 'authentication/profile_edit.html', {'heading': 'Profile', 'form': u_form, 'modules': modules, 'totalmodules': modules.count(),'active_page':'profile'})
 
 
 def logout(request):
