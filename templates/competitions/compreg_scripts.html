@@ -112,14 +112,17 @@ $("#add-member-form").submit(function (event) {
         notifyError("ERROR", "Members not within valid range")
         return
     }
-
+    if($("#link").val().length==0 || $("#description").val().length==0 ){
+        notifyError('ERROR','Enter submission link and description')
+        return
+    }
     //Enable Loading
     document.getElementById("loading-dot").classList.remove("invisible")
+    
     $.ajax({
         type: "POST",
         data: {
             'members':JSON.stringify(team),
-            'teamname':$("#teamname").val(),
             'link':$("#link").val(),
             'description':$("#description").val(),
         },
@@ -129,7 +132,7 @@ $("#add-member-form").submit(function (event) {
         },
         success:(data)=>{
             window.location.replace("{%url 'showallcompetitions'%}")
-            notifySuccess('You have registered your team for this event successfully')
+            notifySuccess('SUCCESS','You have registered your team for this event successfully')
             document.getElementById("loading-dot").classList.add("invisible")
         }
     })
