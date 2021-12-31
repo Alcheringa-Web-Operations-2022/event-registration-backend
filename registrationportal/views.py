@@ -8,3 +8,7 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='login')
 def home(request):
     return redirect('showallcompetitions')
+
+@login_required(login_url='login')
+def rulebook(request):
+    return render(request, 'competitions/rules.html')
