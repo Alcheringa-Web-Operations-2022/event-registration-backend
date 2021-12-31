@@ -112,8 +112,8 @@
         <div class="md:flex md:flex-row sm:flex-col">
             {% include 'navbar.html' %}
 
-            <span class="content bg-slate-100 h-screen">
-                <span class="flex flex-row items-end h-10 mt-3 mb-3">
+            <span class="content bg-slate-100 h-screen flex flex-col">
+                <nav class="flex flex-row items-end h-10 mt-3 mb-3">
                     <span
                         class="competition-title font-poppins inline w-11/12 align-middle md:pl-5 font-bold text-2xl sm:justify-center sm:text-center">
                         <p class="text-center pl-5 md:text-left md:pl-0"> Competitions</p>
@@ -124,11 +124,11 @@
                                 class="object-right">
                         </button>
                     </div> -->
-                </span>
-                <div class="md:m-5 bg-inherit flex md:flex-row md:h-5/6 flex-col">
-                    <div class="m-0 p-0 md:rounded-md bg-white md:w-1/3 h-full inline overflow-auto shadow-md">
-                        <div>
-                            <p class="pl-5 pt-3 font-medium hideitems">Modules</p>
+                </nav>
+                <div class="md:ml-5 bg-inherit md:grid md:grid-cols-7 pb-4">
+                    <div class="m-0 p-0 md:col-span-2 md:rounded-md bg-white inline overflow-y-scroll shadow-md ">
+                        <div class="mb-3">
+                            <p class="pl-5 py-3 border-b-2 font-medium hideitems">Modules</p>
                         </div>
 
                         <div class="mb-0 text-white mb-3 h-10 orcolor flex align-middle changecoloritem md:hidden justify-between"
@@ -141,24 +141,271 @@
                                     class="h-2/6 m-3 mr-4" id="arrow">
                             </button>
                         </div>
-                        <div class="flex flex-col flex-nowrap overflow-auto competitions-list mydropdown">
+                        
+                        <div class="flex flex-col flex-nowrap overflow-auto mydropdown">
                             {% for module in allmod %}
                             <a href="?module={{module.module_query_name_without_spaces_all_small}}" class="hideitems moduleitems"
                                 onclick="mobchange('{{module.module_query_name_without_spaces_all_small}}'); changecolor('{{module.module_query_name_without_spaces_all_small}}')">
-                                <div class="h-10 bg-slate-100 m-3 mt-0 rounded-md flex align-middle ii"
+                                <div class="bg-slate-100 m-3 mt-0 rounded-md flex align-middle ii"
                                     id="{{module.module_query_name_without_spaces_all_small}}">
-                                    <img src="{{module.module_icon.url}}" alt="dance"
-                                        class="h-4/6 ml-3 m-2">
-                                    <span class="inline-block align-middle mt-2 tracking-wide">{{module.module}}</span>
+                                    <img width="50px" src="{{module.module_icon.url}}" alt="dance"
+                                        class="m-2">
+                                    <span class="inline-block mt-5 ml-2">{{module.module}}</span>
+                                </div>
+                            </a>
+                            {%endfor%}
+                        </div>
+                        <div class="flex flex-col flex-nowrap overflow-auto mydropdown">
+                            {% for module in allmod %}
+                            <a href="?module={{module.module_query_name_without_spaces_all_small}}" class="hideitems moduleitems"
+                                onclick="mobchange('{{module.module_query_name_without_spaces_all_small}}'); changecolor('{{module.module_query_name_without_spaces_all_small}}')">
+                                <div class="bg-slate-100 m-3 mt-0 rounded-md flex align-middle ii"
+                                    id="{{module.module_query_name_without_spaces_all_small}}">
+                                    <img width="50px" src="{{module.module_icon.url}}" alt="dance"
+                                        class="m-2">
+                                    <span class="inline-block mt-5 ml-2">{{module.module}}</span>
+                                </div>
+                            </a>
+                            {%endfor%}
+                        </div>
+                        <div class="flex flex-col flex-nowrap overflow-auto mydropdown">
+                            {% for module in allmod %}
+                            <a href="?module={{module.module_query_name_without_spaces_all_small}}" class="hideitems moduleitems"
+                                onclick="mobchange('{{module.module_query_name_without_spaces_all_small}}'); changecolor('{{module.module_query_name_without_spaces_all_small}}')">
+                                <div class="bg-slate-100 m-3 mt-0 rounded-md flex align-middle ii"
+                                    id="{{module.module_query_name_without_spaces_all_small}}">
+                                    <img width="50px" src="{{module.module_icon.url}}" alt="dance"
+                                        class="m-2">
+                                    <span class="inline-block mt-5 ml-2">{{module.module}}</span>
+                                </div>
+                            </a>
+                            {%endfor%}
+                        </div>
+                        <div class="flex flex-col flex-nowrap overflow-auto mydropdown">
+                            {% for module in allmod %}
+                            <a href="?module={{module.module_query_name_without_spaces_all_small}}" class="hideitems moduleitems"
+                                onclick="mobchange('{{module.module_query_name_without_spaces_all_small}}'); changecolor('{{module.module_query_name_without_spaces_all_small}}')">
+                                <div class="bg-slate-100 m-3 mt-0 rounded-md flex align-middle ii"
+                                    id="{{module.module_query_name_without_spaces_all_small}}">
+                                    <img width="50px" src="{{module.module_icon.url}}" alt="dance"
+                                        class="m-2">
+                                    <span class="inline-block mt-5 ml-2">{{module.module}}</span>
+                                </div>
+                            </a>
+                            {%endfor%}
+                        </div>
+                        <div class="flex flex-col flex-nowrap overflow-auto mydropdown">
+                            {% for module in allmod %}
+                            <a href="?module={{module.module_query_name_without_spaces_all_small}}" class="hideitems moduleitems"
+                                onclick="mobchange('{{module.module_query_name_without_spaces_all_small}}'); changecolor('{{module.module_query_name_without_spaces_all_small}}')">
+                                <div class="bg-slate-100 m-3 mt-0 rounded-md flex align-middle ii"
+                                    id="{{module.module_query_name_without_spaces_all_small}}">
+                                    <img width="50px" src="{{module.module_icon.url}}" alt="dance"
+                                        class="m-2">
+                                    <span class="inline-block mt-5 ml-2">{{module.module}}</span>
+                                </div>
+                            </a>
+                            {%endfor%}
+                        </div>
+                        <div class="flex flex-col flex-nowrap overflow-auto mydropdown">
+                            {% for module in allmod %}
+                            <a href="?module={{module.module_query_name_without_spaces_all_small}}" class="hideitems moduleitems"
+                                onclick="mobchange('{{module.module_query_name_without_spaces_all_small}}'); changecolor('{{module.module_query_name_without_spaces_all_small}}')">
+                                <div class="bg-slate-100 m-3 mt-0 rounded-md flex align-middle ii"
+                                    id="{{module.module_query_name_without_spaces_all_small}}">
+                                    <img width="50px" src="{{module.module_icon.url}}" alt="dance"
+                                        class="m-2">
+                                    <span class="inline-block mt-5 ml-2">{{module.module}}</span>
+                                </div>
+                            </a>
+                            {%endfor%}
+                        </div>
+                        <div class="flex flex-col flex-nowrap overflow-auto mydropdown">
+                            {% for module in allmod %}
+                            <a href="?module={{module.module_query_name_without_spaces_all_small}}" class="hideitems moduleitems"
+                                onclick="mobchange('{{module.module_query_name_without_spaces_all_small}}'); changecolor('{{module.module_query_name_without_spaces_all_small}}')">
+                                <div class="bg-slate-100 m-3 mt-0 rounded-md flex align-middle ii"
+                                    id="{{module.module_query_name_without_spaces_all_small}}">
+                                    <img width="50px" src="{{module.module_icon.url}}" alt="dance"
+                                        class="m-2">
+                                    <span class="inline-block mt-5 ml-2">{{module.module}}</span>
+                                </div>
+                            </a>
+                            {%endfor%}
+                        </div>
+                        <div class="flex flex-col flex-nowrap overflow-auto mydropdown">
+                            {% for module in allmod %}
+                            <a href="?module={{module.module_query_name_without_spaces_all_small}}" class="hideitems moduleitems"
+                                onclick="mobchange('{{module.module_query_name_without_spaces_all_small}}'); changecolor('{{module.module_query_name_without_spaces_all_small}}')">
+                                <div class="bg-slate-100 m-3 mt-0 rounded-md flex align-middle ii"
+                                    id="{{module.module_query_name_without_spaces_all_small}}">
+                                    <img width="50px" src="{{module.module_icon.url}}" alt="dance"
+                                        class="m-2">
+                                    <span class="inline-block mt-5 ml-2">{{module.module}}</span>
+                                </div>
+                            </a>
+                            {%endfor%}
+                        </div>
+                        <div class="flex flex-col flex-nowrap overflow-auto mydropdown">
+                            {% for module in allmod %}
+                            <a href="?module={{module.module_query_name_without_spaces_all_small}}" class="hideitems moduleitems"
+                                onclick="mobchange('{{module.module_query_name_without_spaces_all_small}}'); changecolor('{{module.module_query_name_without_spaces_all_small}}')">
+                                <div class="bg-slate-100 m-3 mt-0 rounded-md flex align-middle ii"
+                                    id="{{module.module_query_name_without_spaces_all_small}}">
+                                    <img width="50px" src="{{module.module_icon.url}}" alt="dance"
+                                        class="m-2">
+                                    <span class="inline-block mt-5 ml-2">{{module.module}}</span>
+                                </div>
+                            </a>
+                            {%endfor%}
+                        </div>
+                        <div class="flex flex-col flex-nowrap overflow-auto mydropdown">
+                            {% for module in allmod %}
+                            <a href="?module={{module.module_query_name_without_spaces_all_small}}" class="hideitems moduleitems"
+                                onclick="mobchange('{{module.module_query_name_without_spaces_all_small}}'); changecolor('{{module.module_query_name_without_spaces_all_small}}')">
+                                <div class="bg-slate-100 m-3 mt-0 rounded-md flex align-middle ii"
+                                    id="{{module.module_query_name_without_spaces_all_small}}">
+                                    <img width="50px" src="{{module.module_icon.url}}" alt="dance"
+                                        class="m-2">
+                                    <span class="inline-block mt-5 ml-2">{{module.module}}</span>
+                                </div>
+                            </a>
+                            {%endfor%}
+                        </div>
+                        <div class="flex flex-col flex-nowrap overflow-auto mydropdown">
+                            {% for module in allmod %}
+                            <a href="?module={{module.module_query_name_without_spaces_all_small}}" class="hideitems moduleitems"
+                                onclick="mobchange('{{module.module_query_name_without_spaces_all_small}}'); changecolor('{{module.module_query_name_without_spaces_all_small}}')">
+                                <div class="bg-slate-100 m-3 mt-0 rounded-md flex align-middle ii"
+                                    id="{{module.module_query_name_without_spaces_all_small}}">
+                                    <img width="50px" src="{{module.module_icon.url}}" alt="dance"
+                                        class="m-2">
+                                    <span class="inline-block mt-5 ml-2">{{module.module}}</span>
+                                </div>
+                            </a>
+                            {%endfor%}
+                        </div>
+                        <div class="flex flex-col flex-nowrap overflow-auto mydropdown">
+                            {% for module in allmod %}
+                            <a href="?module={{module.module_query_name_without_spaces_all_small}}" class="hideitems moduleitems"
+                                onclick="mobchange('{{module.module_query_name_without_spaces_all_small}}'); changecolor('{{module.module_query_name_without_spaces_all_small}}')">
+                                <div class="bg-slate-100 m-3 mt-0 rounded-md flex align-middle ii"
+                                    id="{{module.module_query_name_without_spaces_all_small}}">
+                                    <img width="50px" src="{{module.module_icon.url}}" alt="dance"
+                                        class="m-2">
+                                    <span class="inline-block mt-5 ml-2">{{module.module}}</span>
+                                </div>
+                            </a>
+                            {%endfor%}
+                        </div>
+                        <div class="flex flex-col flex-nowrap overflow-auto mydropdown">
+                            {% for module in allmod %}
+                            <a href="?module={{module.module_query_name_without_spaces_all_small}}" class="hideitems moduleitems"
+                                onclick="mobchange('{{module.module_query_name_without_spaces_all_small}}'); changecolor('{{module.module_query_name_without_spaces_all_small}}')">
+                                <div class="bg-slate-100 m-3 mt-0 rounded-md flex align-middle ii"
+                                    id="{{module.module_query_name_without_spaces_all_small}}">
+                                    <img width="50px" src="{{module.module_icon.url}}" alt="dance"
+                                        class="m-2">
+                                    <span class="inline-block mt-5 ml-2">{{module.module}}</span>
+                                </div>
+                            </a>
+                            {%endfor%}
+                        </div>
+                        <div class="flex flex-col flex-nowrap overflow-auto mydropdown">
+                            {% for module in allmod %}
+                            <a href="?module={{module.module_query_name_without_spaces_all_small}}" class="hideitems moduleitems"
+                                onclick="mobchange('{{module.module_query_name_without_spaces_all_small}}'); changecolor('{{module.module_query_name_without_spaces_all_small}}')">
+                                <div class="bg-slate-100 m-3 mt-0 rounded-md flex align-middle ii"
+                                    id="{{module.module_query_name_without_spaces_all_small}}">
+                                    <img width="50px" src="{{module.module_icon.url}}" alt="dance"
+                                        class="m-2">
+                                    <span class="inline-block mt-5 ml-2">{{module.module}}</span>
+                                </div>
+                            </a>
+                            {%endfor%}
+                        </div>
+                        <div class="flex flex-col flex-nowrap overflow-auto mydropdown">
+                            {% for module in allmod %}
+                            <a href="?module={{module.module_query_name_without_spaces_all_small}}" class="hideitems moduleitems"
+                                onclick="mobchange('{{module.module_query_name_without_spaces_all_small}}'); changecolor('{{module.module_query_name_without_spaces_all_small}}')">
+                                <div class="bg-slate-100 m-3 mt-0 rounded-md flex align-middle ii"
+                                    id="{{module.module_query_name_without_spaces_all_small}}">
+                                    <img width="50px" src="{{module.module_icon.url}}" alt="dance"
+                                        class="m-2">
+                                    <span class="inline-block mt-5 ml-2">{{module.module}}</span>
+                                </div>
+                            </a>
+                            {%endfor%}
+                        </div>
+                        <div class="flex flex-col flex-nowrap overflow-auto mydropdown">
+                            {% for module in allmod %}
+                            <a href="?module={{module.module_query_name_without_spaces_all_small}}" class="hideitems moduleitems"
+                                onclick="mobchange('{{module.module_query_name_without_spaces_all_small}}'); changecolor('{{module.module_query_name_without_spaces_all_small}}')">
+                                <div class="bg-slate-100 m-3 mt-0 rounded-md flex align-middle ii"
+                                    id="{{module.module_query_name_without_spaces_all_small}}">
+                                    <img width="50px" src="{{module.module_icon.url}}" alt="dance"
+                                        class="m-2">
+                                    <span class="inline-block mt-5 ml-2">{{module.module}}</span>
+                                </div>
+                            </a>
+                            {%endfor%}
+                        </div>
+                        <div class="flex flex-col flex-nowrap overflow-auto mydropdown">
+                            {% for module in allmod %}
+                            <a href="?module={{module.module_query_name_without_spaces_all_small}}" class="hideitems moduleitems"
+                                onclick="mobchange('{{module.module_query_name_without_spaces_all_small}}'); changecolor('{{module.module_query_name_without_spaces_all_small}}')">
+                                <div class="bg-slate-100 m-3 mt-0 rounded-md flex align-middle ii"
+                                    id="{{module.module_query_name_without_spaces_all_small}}">
+                                    <img width="50px" src="{{module.module_icon.url}}" alt="dance"
+                                        class="m-2">
+                                    <span class="inline-block mt-5 ml-2">{{module.module}}</span>
+                                </div>
+                            </a>
+                            {%endfor%}
+                        </div>
+                        <div class="flex flex-col flex-nowrap overflow-auto mydropdown">
+                            {% for module in allmod %}
+                            <a href="?module={{module.module_query_name_without_spaces_all_small}}" class="hideitems moduleitems"
+                                onclick="mobchange('{{module.module_query_name_without_spaces_all_small}}'); changecolor('{{module.module_query_name_without_spaces_all_small}}')">
+                                <div class="bg-slate-100 m-3 mt-0 rounded-md flex align-middle ii"
+                                    id="{{module.module_query_name_without_spaces_all_small}}">
+                                    <img width="50px" src="{{module.module_icon.url}}" alt="dance"
+                                        class="m-2">
+                                    <span class="inline-block mt-5 ml-2">{{module.module}}</span>
+                                </div>
+                            </a>
+                            {%endfor%}
+                        </div>
+                        <div class="flex flex-col flex-nowrap overflow-auto mydropdown">
+                            {% for module in allmod %}
+                            <a href="?module={{module.module_query_name_without_spaces_all_small}}" class="hideitems moduleitems"
+                                onclick="mobchange('{{module.module_query_name_without_spaces_all_small}}'); changecolor('{{module.module_query_name_without_spaces_all_small}}')">
+                                <div class="bg-slate-100 m-3 mt-0 rounded-md flex align-middle ii"
+                                    id="{{module.module_query_name_without_spaces_all_small}}">
+                                    <img width="50px" src="{{module.module_icon.url}}" alt="dance"
+                                        class="m-2">
+                                    <span class="inline-block mt-5 ml-2">{{module.module}}</span>
+                                </div>
+                            </a>
+                            {%endfor%}
+                        </div>
+                        <div class="flex flex-col flex-nowrap overflow-auto mydropdown">
+                            {% for module in allmod %}
+                            <a href="?module={{module.module_query_name_without_spaces_all_small}}" class="hideitems moduleitems"
+                                onclick="mobchange('{{module.module_query_name_without_spaces_all_small}}'); changecolor('{{module.module_query_name_without_spaces_all_small}}')">
+                                <div class="bg-slate-100 m-3 mt-0 rounded-md flex align-middle ii"
+                                    id="{{module.module_query_name_without_spaces_all_small}}">
+                                    <img width="50px" src="{{module.module_icon.url}}" alt="dance"
+                                        class="m-2">
+                                    <span class="inline-block mt-5 ml-2">{{module.module}}</span>
                                 </div>
                             </a>
                             {%endfor%}
                         </div>
                     </div>
-                    <div class="m-0 pr-3 rounded-md bg-white md:w-2/3 h-full inline ml-3 sm:w-full shadow-md">
+                    <div class="m-0 pr-3 md:col-span-5 rounded-md bg-white inline ml-3 sm:w-full  shadow-md">
                         <div class="justify-between flex hideitems">
                             <p class="pl-5 pt-3 font-medium inline-block" id="mod">{{modulename}}</p>
-                            <span class="pt-3 inline-block mr-4 text-sm">Module Bounty: 200</span>
                         </div>
                         <div class="competitions-list overflow-auto w-full">
                             {% for comp in allcomp %}
