@@ -16,6 +16,8 @@ class TeamMembers(models.Model):
         ('F', 'Female'),
     ]
     id = models.SlugField(primary_key=True, default=uuid.uuid4)
+    img = models.ImageField(upload_to="image_uploads/userdp/",
+                            default='user-default.png')
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=150, blank=True)
     phone = PhoneNumberField(unique=False, blank=True)
