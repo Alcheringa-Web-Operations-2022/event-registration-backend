@@ -35,7 +35,7 @@ def team_members(request):
     all_members = []
     for member in team.members.all():
         all_members.append(member)
-    return render(request, 'teams/team_members.html', {'form': form, 'team': all_members})
+    return render(request, 'teams/team_members.html', {'form': form, 'team': all_members,'active_page':'team'})
 
 
 @login_required(login_url='login')
@@ -62,7 +62,7 @@ def update_member(request, id):
         form.fields['email'].widget.attrs['value'] = member.email
         form.fields['phone'].widget.attrs['value'] = member.phone
         form.fields['gender'].widget.attrs['value'] = member.gender
-    return render(request, 'teams/update_member.html', {'form': form, 'member': member, 'team': all_members})
+    return render(request, 'teams/update_member.html', {'form': form, 'member': member, 'team': all_members,'active_page':'team'})
 
 
 @login_required(login_url='login')
