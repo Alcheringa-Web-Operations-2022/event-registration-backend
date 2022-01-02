@@ -78,7 +78,7 @@
                         <!-- single-card-yellow_border -->
                         <div
                             class="m-1 p-4 h-28 flex bg-white border-yellow-400  w-full border-2 rounded-md col-span-2 md:col-span-1">
-                            <img width="75" src="{%static 'imgs/user-default.png'%}" alt="profile" border="0" />
+                            <img style="height : 100px; width : 100px; border-radius: 50%;"src="{{user.img.url}}" alt="profile" border="0" />
                             <div class="mx-5 my-auto">
                                 <div class="font-medium text-base">{{user.username}} (Leader)</div>
                                 <div class="font-light text-sm">{{user.email}}</div>
@@ -91,7 +91,7 @@
                         <div style="background-color: #F3F6F8;"
                             class="col-span-2 md:col-span-1 m-1 p-4 lg:h-28 border-red-50 border rounded-md hover:bg-white hover:shadow-md  w-full edit-delete-parent">
                             <div class="flex relative">
-                                <img width="78" height="78" src="{%static 'imgs/user-default.png'%}" alt="profile" />
+                                <img style="height : 78px; width : 78px; border-radius: 50%;" src="{{member.img.url}}" alt="profile" />
                                 <div class="mx-5 my-auto">
                                     <div class="font-medium text-base">{{member.name}}</div>
                                     <div class="font-light text-sm">{{member.email}}</div>
@@ -99,7 +99,7 @@
                                 <div class="my-auto absolute top-1 right-1 hidden edit-delete">
                                     <div class="lg:flex hidden ">
                                         <button
-                                            onclick="editmember('{{member.id}}','{{member.name}}','{{member.email}}','{{member.phone}}','{{member.gender}}')"
+                                            onclick="editmember('{{member.img.url}}','{{member.id}}','{{member.name}}','{{member.email}}','{{member.phone}}','{{member.gender}}')"
                                             id="editButton" class="-ml-2">
                                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -179,11 +179,21 @@
                     <div style="height: 480px;" id="editProfileCard"
                         class="mr-3 mt-3 w-80 bg-white rounded-lg shadow hidden">
                         <div class="py-2 px-4 font-medium text-lg border-b">Edit Member</div>
-                        <img class="my-9 mx-auto" width="120" src="{%static 'imgs/user-default.png'%}" alt="profile"
+                      <img class="my-9 mx-auto" style="height : 100px; width : 100px; border-radius: 50%;" id="dp-set-edit" src="{%static 'imgs/user-default.png'%}" alt="profile"
                             border="0" />
+                        <button class="mx-6 bg-gray-200 rounded-full border-black" onclick="dpuploadedit()" style = "transform:translate(30px,-18px) scale(1.5,1.5)">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path
+                                        d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                </svg>
+                            </button>
                         <!-- Edit member form -->
-                        <form class="px-4 space-y-5" method="POST" id="editform">
+                        <form class="px-4 space-y-5" method="POST" id="editform"  enctype="multipart/form-data" >
                             {% csrf_token %}
+                            
+                            
+                            <input type="file" id="editimg" name="editimg" accept="image/*" value="{%static 'imgs/user-default.png'%}" style="width:0px; overflow:none;">
                             <input type="text" name="editid" class="border-b" size="25" placeholder="" maxlength="100"
                                 required="" style="width:0px;overflow:hidden;" id="editid">
                             <input type="text" name="editname" class="border-b" size="25" placeholder="Enter Name"
@@ -210,9 +220,17 @@
                     <div style="height: 480px;" id="addMemberCard"
                         class="mr-3 mt-3 w-80 bg-white rounded-lg shadow hidden">
                         <div class="py-2 px-4 font-medium text-lg border-b">Add Member</div>
-                        <img class="my-9 mx-auto" width="120" src="{%static 'imgs/user-default.png'%}" alt="profile"
+                        <img class="my-9 mx-auto" style="height : 100px; width : 100px; border-radius: 50%;" id="dp-set-add" src="{%static 'imgs/user-default.png'%}" alt="profile"
                             border="0" />
-                        <form class="px-4 space-y-5" method="POST" id="addform">
+                        <button class="mx-6 bg-gray-200 rounded-full border-black" onclick="dpuploadadd()" style = "transform:translate(30px,-18px) scale(1.5,1.5)">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path
+                                    d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                            </svg>
+                        </button>
+                        <form class="px-4 space-y-5" method="POST" id="addform"  enctype="multipart/form-data">
+                            <input type="file" id="addimg" name="addimg" accept="image/*" value="{%static 'imgs/user-default.png'%}" style="width:0px; overflow:none;">
                             <input type="text" name="addname" class="border-b" size="25" placeholder="Enter Name"
                                 maxlength="100" required="" id="addname">
                             <input type="text" pattern="^\+91\d{10}$" name="addphone" class="border-b" size="25"

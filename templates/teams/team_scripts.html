@@ -56,10 +56,11 @@
         })
     })
     //Team Member edit part
-    function editmember(editid,name,email,phone,gender){
+    function editmember(editimg,editid,name,email,phone,gender){
         emptyCard.style.display = 'none';
         addMemberCard.style.display = 'none';
         editProfileCard.style.display = 'block';
+        document.getElementById('dp-set-edit').src=editimg
         document.getElementById('editid').value=editid
         document.getElementById('editname').value=name
         document.getElementById('editemail').value=email
@@ -79,15 +80,10 @@
         event.preventDefault()
         $.ajax({
             type: "POST",
-            data: {
-                'id':document.getElementById('editid').value,
-                'name':document.getElementById('editname').value,
-                'email':document.getElementById('editemail').value,
-                'phone':document.getElementById('editphone').value,
-                'gender': document.getElementById('editgender').value
-            },
+            data: new FormData($('#editform')[0]),
             url: `{% url 'update-member' %}`,
-
+ processData: false,
+contentType: false,
             headers: {
                 "X-CSRFTOKEN": "{{ csrf_token }}"
             },
@@ -122,32 +118,27 @@
                 notifySuccess('SUCCESS','Member updated successfully')
                 else
                 notifyError('ERROR',data)
-                window.location.reload();
             }
         })
     }
     //add form submission
-    document.getElementById('addform').addEventListener('submit',function addformsubmit(editid){
+    document.getElementById('addform').addEventListener('submit',function addformsubmit(){
         event.preventDefault()
         $.ajax({
             type: "POST",
-            data: {
-                'name':document.getElementById('addname').value,
-                'email':document.getElementById('addemail').value,
-                'phone':document.getElementById('addphone').value,
-                'gender': document.getElementById('addgender').value
-            },
+            data: new FormData($('#addform')[0]),
             url: `{% url 'add-member' %}`,
 
             headers: {
                 "X-CSRFTOKEN": "{{ csrf_token }}"
             },
+            processData: false,
+contentType: false,
             success:(data)=>{
                 if(data=="OK")
                 notifySuccess('SUCCESS','Member added successfully')
                 else
                 notifyError('ERROR',data)
-                window.location.reload();
             }
         })
     })
@@ -176,6 +167,22 @@
             }
         })
     })
+    function dpuploadadd() {
+    $("#addimg").click();
+  }
+  function dpuploadedit() {
+    $("#editimg").click();
+  }
+  document.getElementById("addimg").addEventListener("change", (event) => {
+    document.getElementById("dp-set-add").src = URL.createObjectURL(
+      event.target.files[0]
+    );
+  });
+    document.getElementById("editimg").addEventListener("change", (event) => {
+    document.getElementById("dp-set-edit").src = URL.createObjectURL(
+      event.target.files[0]
+    );
+  });
 
 
     // window.onload = function() {
