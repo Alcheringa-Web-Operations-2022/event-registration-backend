@@ -88,11 +88,12 @@ contentType: false,
                 "X-CSRFTOKEN": "{{ csrf_token }}"
             },
             success:(data)=>{
-                if(data=='OK')
-                notifySuccess('SUCCESS','Member updated successfully')
+                if(data=="OK"){
+                    notifySuccess('SUCCESS','Member updated successfully')
+                    window.location.reload()
+                }
                 else
                 notifyError('ERROR',data)
-                window.location.reload();
             }
         })
     })
@@ -135,8 +136,10 @@ contentType: false,
             processData: false,
 contentType: false,
             success:(data)=>{
-                if(data=="OK")
-                notifySuccess('SUCCESS','Member added successfully')
+                if(data=="OK"){
+                    notifySuccess('SUCCESS','Member added successfully')
+                    window.location.reload()
+                }
                 else
                 notifyError('ERROR',data)
             }
