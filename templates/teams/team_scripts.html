@@ -27,7 +27,7 @@
             console.log(id)
         }
         if (id == "cancel-edit-mobile") {
-            window.location.reload()
+        //    window.location.replace(window.location.href)
         }
     }
     
@@ -103,11 +103,11 @@ contentType: false,
         $.ajax({
             type: "POST",
             data: {
-                'id':document.getElementById(`editid__mobile${id}`).value,
-                'name':document.getElementById(`editname__mobile${id}`).value,
-                'email':document.getElementById(`editemail__mobile${id}`).value,
-                'phone':document.getElementById(`editphone__mobile${id}`).value,
-                'gender': document.getElementById(`editgender__mobile${id}`).value
+                'editid':document.getElementById(`editid__mobile${id}`).value,
+                'editname':document.getElementById(`editname__mobile${id}`).value,
+                'editemail':document.getElementById(`editemail__mobile${id}`).value,
+                'editphone':document.getElementById(`editphone__mobile${id}`).value,
+                'editgender': document.getElementById(`editgender__mobile${id}`).value
             },
             url: `{% url 'update-member' %}`,
 
@@ -115,10 +115,13 @@ contentType: false,
                 "X-CSRFTOKEN": "{{ csrf_token }}"
             },
             success:(data)=>{
-                if(data!=='OK')
-                notifySuccess('SUCCESS','Member updated successfully')
+                if(data=='OK'){
+                    notifySuccess('SUCCESS','Member updated successfully')
+                    window.location.reload()
+                }
                 else
                 notifyError('ERROR',data)
+
             }
         })
     }
@@ -147,37 +150,43 @@ contentType: false,
     })
     //add gorm for mobile
     document.getElementById('addform__mobile').addEventListener('submit',function addformsubmitmobile(editid){
-        event.preventDefault()
+      event.preventDefault()
         $.ajax({
             type: "POST",
-            data: {
-                'name':document.getElementById('addname__mobile').value,
-                'email':document.getElementById('addemail__mobile').value,
-                'phone':document.getElementById('addphone__mobile').value,
-                'gender': document.getElementById('addgender__mobile').value
-            },
+            data: new FormData($('#addform__mobile')[0]),
             url: `{% url 'add-member' %}`,
 
             headers: {
                 "X-CSRFTOKEN": "{{ csrf_token }}"
             },
+            processData: false,
+contentType: false,
             success:(data)=>{
-                if(data=="OK")
-                notifySuccess('SUCCESS','Member added successfully')
+                if(data=="OK"){
+                    notifySuccess('SUCCESS','Member added successfully')
+                    window.location.reload()
+                }
                 else
                 notifyError('ERROR',data)
-                window.location.reload();
             }
         })
     })
     function dpuploadadd() {
     $("#addimg").click();
   }
+      function dpuploadaddmobile() {
+    $("#addimgmobile").click();
+  }
   function dpuploadedit() {
     $("#editimg").click();
   }
   document.getElementById("addimg").addEventListener("change", (event) => {
     document.getElementById("dp-set-add").src = URL.createObjectURL(
+      event.target.files[0]
+    );
+  });
+    document.getElementById("addimgmobile").addEventListener("change", (event) => {
+    document.getElementById("dp-set-add-mobile").src = URL.createObjectURL(
       event.target.files[0]
     );
   });

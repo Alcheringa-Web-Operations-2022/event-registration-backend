@@ -112,8 +112,8 @@ $("#add-member-form").submit(function (event) {
         notifyError("ERROR", "Members not within valid range")
         return
     }
-    if($("#link").val().length==0 || $("#description").val().length==0 ){
-        notifyError('ERROR','Enter submission link and description')
+    if($("#link").val().length==0){
+        notifyError('ERROR','Submission link cannot be empty')
         return
     }
     //Enable Loading

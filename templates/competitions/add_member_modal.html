@@ -34,16 +34,29 @@
                     
                     <!-- single-card -->
                     {%for member in team_members%}
+                    {%if member.email == request.user.email%}
                     <div class="m-1 p-3 flex border-2 rounded-md shadow-md relative cursor-pointer team_members_card" id="card{{member.id}}"onclick="select('{{member.id}}')">
-                        <img width="70" height="70" src="{%static 'imgs/user-default.png'%}" alt="profile" border="0" />
+                        <img style="height : 70px; width : 70px; border-radius: 50%;" src="{{request.user.img.url}}" alt="profile" border="0" />
                         <div class="absolute right-0 text-right px-2 invisible" style="top:40%; bottom:40%;"id="{{member.id}}"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M17.7869 17.7692L2.22168 2.22173M2.22259 17.778L17.7789 2.22168" stroke="#FF4433" stroke-width="3" stroke-linecap="round"/>
 </svg></div>
                         <div class="mx-5 my-auto">
-                            <div class="font-medium text-base">{{member.name}}  {%if member.email == request.user.email%}(Leader){%endif%}</div>
+                            <div class="font-medium text-base">{{member.name}}(Leader)</div>
                             <div class="font-light text-sm">{{member.email}}</div>
                         </div>
                     </div>
+                    {%else%}
+                    <div class="m-1 p-3 flex border-2 rounded-md shadow-md relative cursor-pointer team_members_card" id="card{{member.id}}"onclick="select('{{member.id}}')">
+                        <img style="height : 70px; width : 70px; border-radius: 50%;" src="{{member.img.url}}" alt="profile" border="0" />
+                        <div class="absolute right-0 text-right px-2 invisible" style="top:40%; bottom:40%;"id="{{member.id}}"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.7869 17.7692L2.22168 2.22173M2.22259 17.778L17.7789 2.22168" stroke="#FF4433" stroke-width="3" stroke-linecap="round"/>
+</svg></div>
+                        <div class="mx-5 my-auto">
+                            <div class="font-medium text-base">{{member.name}}</div>
+                            <div class="font-light text-sm">{{member.email}}</div>
+                        </div>
+                    </div>
+                    {%endif%}
                     {%endfor%}
                     
             

@@ -37,16 +37,17 @@ class Team(models.Model) :
 
 
 @receiver(post_save,sender=settings.AUTH_USER_MODEL)
-def create_profile_pre_save(sender,instance,created,*args,**kwargs) :
+def create_profile_post_save(sender,instance,created,*args,**kwargs) :
     if created:
-        TeamMembers(email=instance.email,name=instance.username,phone=instance.phone, gender='M').save()
-        team=Team.objects.create(leader=instance)
-        team.members.add(TeamMembers.objects.get(email=instance.email))
-        team.save()
+        if not TeamMembers.objects.filter(email=instance.email):
+            TeamMembers(email=instance.email,name=instance.username,phone=instance.phone, gender='M').save()
+            team=Team.objects.create(leader=instance)
+            team.members.add(TeamMembers.objects.get(email=instance.email))
+            team.save()
 
         
 @receiver(pre_save, sender=settings.AUTH_USER_MODEL)
-def create_profile_post_save(sender, instance,*args, **kwargs):
+def create_profile_pre_save(sender, instance,*args, **kwargs):
     if instance is None:
         pass
     else:

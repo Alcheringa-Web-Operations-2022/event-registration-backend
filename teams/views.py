@@ -21,14 +21,10 @@ def team_members(request):
 def add_member(request):
     memberemail = TeamMembers.objects.filter(
         email=request.POST.get('addemail'))
-    memberphone = TeamMembers.objects.filter(
-        phone=request.POST.get('addphone'))
     if request.method == 'POST':
         if (memberemail.count() > 0):
             return HttpResponse('User with same email already exist')
 
-        if (memberphone.count() > 0):
-            return HttpResponse('User with same phone already exist')
         if(request.FILES.getlist('addimg')):
             TeamMembers(img=request.FILES.getlist('addimg')[0], name=request.POST.get('addname'),
                     email=request.POST.get('addemail'), phone=request.POST.get('addphone'), gender=request.POST.get('addgender')).save()
@@ -46,14 +42,11 @@ def add_member(request):
 @login_required(login_url='login')
 def update_member(request):
     memberemail = TeamMembers.objects.filter(email=request.POST.get('editemail'))
-    memberphone = TeamMembers.objects.filter(phone=request.POST.get('editphone'))
     member = TeamMembers.objects.get(id=request.POST.get('editid'))
     if request.method == 'POST':
         if (memberemail.count() > 0 and member not in memberemail):
             return HttpResponse('User with same email already exist')
 
-        if (memberphone.count() > 0 and member not in memberphone):
-            return HttpResponse('User with same phone already exist')
         if(request.FILES.getlist('editimg')):
             member.img = request.FILES.getlist('editimg')[0]
         member.name = request.POST.get('editname')
@@ -68,5 +61,8 @@ def update_member(request):
 def remove_member(request):
     if request.POST["id"]:
         member = TeamMembers.objects.filter(id=request.POST["id"]).first()
+        team=Team.objects.get(leader=request.user)
+        team.members.remove(member)
+        team.save()
         member.delete()
         return HttpResponse("ok")

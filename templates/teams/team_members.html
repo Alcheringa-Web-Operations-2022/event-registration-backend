@@ -50,10 +50,17 @@
                         <div class="lg:hidden m-1 bg-white rounded-lg shadow col-span-2 md:col-span-1">
                             <div id="addMemberCardSmall" class="hidden">
                                 <div class="py-2 px-4 font-medium text-lg border-b">Add Member</div>
-                                <img class="my-9 mx-auto" width="120" src="{%static 'imgs/user-default.png'%}"
-                                    alt="profile" border="0" />
                                 <!-- Add member form for mobile screens -->
+                                <img class="my-4 mx-auto" style="height : 100px; width : 100px; border-radius: 50%;" id="dp-set-add-mobile" src="{%static 'imgs/user-default.png'%}" alt="profile" border="0" />
+                                <button class="mx-6 bg-gray-200 rounded-full border-black" onclick="dpuploadaddmobile()" style = "transform:translate(152px,-47px) scale(1.5,1.5)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                        fill="currentColor">
+                                        <path
+                                            d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                    </svg>
+                                </button>
                                 <form class="px-4 space-y-5" method="POST" id="addform__mobile">
+                                    <input type="file" id="addimgmobile" name="addimg" accept="image/*" value="{%static 'imgs/user-default.png'%}" style="width:0px; overflow:none;">
                                     <input type="text" name="addname" class="border-b" size="25"
                                         placeholder="Enter Name" maxlength="100" required="" id="addname__mobile">
                                     <input type="text" pattern="^\+91\d{10}$" name="addphone" class="border-b" size="25"
@@ -76,7 +83,7 @@
                             </div>
                         </div>
                         <!-- single-card-yellow_border -->
-                        <div
+                        <div style="overflow: hidden; "
                             class="m-1 p-4 h-28 flex bg-white border-yellow-400  w-full border-2 rounded-md col-span-2 md:col-span-1">
                             <img style="height : 78px; width : 78px; border-radius: 50%;"src="{{user.img.url}}" alt="profile" border="0" />
                             <div class="mx-5 my-auto">
@@ -88,8 +95,8 @@
                         {% for member in team %}
 
                         {%if not member.email == user.email%}
-                        <div style="background-color: #F3F6F8;"
-                            class="col-span-2 md:col-span-1 m-1 p-4 lg:h-28 border-red-50 border rounded-md hover:bg-white hover:shadow-md  w-full edit-delete-parent">
+                        <div style="background-color: #F3F6F8; overflow: hidden;" 
+                             class="col-span-2 md:col-span-1 m-1 p-4 lg:h-28 border-red-50 border rounded-md hover:bg-white hover:shadow-md  w-full edit-delete-parent">
                             <div class="flex relative">
                                 <img style="height : 78px; width : 78px; border-radius: 50%;" src="{{member.img.url}}" alt="profile" />
                                 <div class="mx-5 my-auto">
@@ -101,7 +108,7 @@
                                         <button
                                             onclick="editmember('{{member.img.url}}','{{member.id}}','{{member.name}}','{{member.email}}','{{member.phone}}','{{member.gender}}')"
                                             id="editButton" class="-ml-2">
-                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                            <svg width="20" height="20" viewBox="0 0 16 16" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     d="M2 11.5V14H4.5L11.8733 6.62665L9.37333 4.12666L2 11.5ZM13.8067 4.69332C14.0667 4.43332 14.0667 4.01332 13.8067 3.75332L12.2467 2.19332C11.9867 1.93332 11.5667 1.93332 11.3067 2.19332L10.0867 3.41332L12.5867 5.91332L13.8067 4.69332V4.69332Z"
@@ -111,13 +118,12 @@
 
                                         <a><button onclick="removeMember('{{member.id}}')" id="deleteButton"
                                                 class="ml-2">
-                                                <svg width="16" height="16" viewBox="0 0 25 25" fill="none"
+                                                <svg width="20" height="20" viewBox="0 0 25 25" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
                                                         d="M6.00342 19.3989C6.00342 20.4989 6.90342 21.3989 8.00342 21.3989H16.0034C17.1034 21.3989 18.0034 20.4989 18.0034 19.3989V7.39893H6.00342V19.3989ZM19.0034 4.39893H15.5034L14.5034 3.39893H9.50342L8.50342 4.39893H5.00342V6.39893H19.0034V4.39893Z"
                                                         fill="#FF4433" />
                                                 </svg>
-
                                             </button>
                                         </a>
                                     </div>
@@ -125,32 +131,32 @@
                             </div>
                             <!-- Edit member form for mobile screens -->
                             <div class="hidden add-member-form-small">
-                                <div class="lg:hidden mt-5">
+                                <div class="lg:hidden">
                                     <form class="px-4 space-y-5" onsubmit="return phoneditform('{{member.id}}')">
                                         {% csrf_token %}
-                                        <input type="text" value="{{member.id}}" name="editid" class="border-b"
-                                            size="25" placeholder="" maxlength="100" required=""
-                                            style="width:0px;overflow:hidden;" id="editid__mobile{{member.id}}">
-                                        <input type="text" value="{{member.name}}" name="editname" class="border-b"
+                                        <input type="text" value="{{member.id}}" readonly name="editid"
+                                            size="0" placeholder="" maxlength="100"
+                                            style="width:0px; height:0px; overflow:hidden;" id="editid__mobile{{member.id}}">
+                                        <input type="text"style="background-color: #F3F6F8;" value="{{member.name}}" name="editname" class="border-b"
                                             size="25" placeholder="Enter Name" maxlength="100" required=""
                                             id="editname__mobile{{member.id}}">
-                                        <input type="text" value="{{member.phone}}" pattern="^\+91\d{10}$"
+                                        <input type="text" style="background-color: #F3F6F8;"value="{{member.phone}}" pattern="^\+91\d{10}$"
                                             name="editphone" class="border-b" size="25" placeholder="Enter Phone"
-                                            maxlength="100" required="" id="editphone__mobile{{member.id}}">
-                                        <input type="email" value="{{member.email}}" name="editemail" class="border-b"
+                                            maxlength="100" style="background-color: #F3F6F8;"required="" id="editphone__mobile{{member.id}}">
+                                        <input type="email" style="background-color: #F3F6F8;" value="{{member.email}}" name="editemail" class="border-b"
                                             size="25" placeholder="Enter Email" maxlength="100" required=""
                                             id="editemail__mobile{{member.id}}">
-                                        <select name="editgender" value="{{member.gender}}"
+                                        <select name="editgender" style="background-color: #F3F6F8;" value="{{member.gender}}"
                                             class="border-b text-gray-400 pr-36" width="110%" placeholder="Gender"
                                             id="editgender__mobile{{member.id}}">
                                             <option value="M">M</option>
                                             <option value="F">F</option>
                                         </select>
                                         <div class="flex justify-end pb-4">
-                                            <button type="button" class="text-red-500 mx-1 text-sm"
+                                            <button type="button" class="text-red-500 mx-2 text-sm"
                                                 onclick="removeMember('{{member.id}}')">Remove</button>
-                                            <button type="button" class="text-red-500 mx-5 text-sm"
-                                                id="cancel-edit-mobile" onclick="{toggleOpen(this.id)}">Cancel</button>
+                                            <button type="button" class="text-red-500 mx-5 text-sm" id="cancel-edit-mobile"
+                                               onclick="toggleOpen(this.id)">Cancel</button>
                                             <button type="submit" id="editformsubmit"
                                                 class="bg-red-500 text-white py-1 px-2 text-sm rounded">Confirm
                                                 Edit</button>
@@ -179,9 +185,9 @@
                     <div style="height: 480px;" id="editProfileCard"
                         class="mr-3 mt-3 w-80 bg-white rounded-lg shadow hidden">
                         <div class="py-2 px-4 font-medium text-lg border-b">Edit Member</div>
-                      <img class="my-9 mx-auto" style="height : 100px; width : 100px; border-radius: 50%;" id="dp-set-edit" src="{%static 'imgs/user-default.png'%}" alt="profile"
+                      <img class="my-4 mx-auto" style="height : 100px; width : 100px; border-radius: 50%;" id="dp-set-edit" src="{%static 'imgs/user-default.png'%}" alt="profile"
                             border="0" />
-                        <button class="mx-6 bg-gray-200 rounded-full border-black" onclick="dpuploadedit()" style = "transform:translate(30px,-18px) scale(1.5,1.5)">
+                        <button class="mx-6 bg-gray-200 rounded-full border-black" onclick="dpuploadedit()" style = "transform:translate(165px,-47px) scale(1.5,1.5)">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                     fill="currentColor">
                                     <path
@@ -194,7 +200,7 @@
                             
                             
                             <input type="file" id="editimg" name="editimg" accept="image/*" value="{%static 'imgs/user-default.png'%}" style="width:0px; overflow:none;">
-                            <input type="text" name="editid" class="border-b" size="25" placeholder="" maxlength="100"
+                            <input type="text" name="editid" class="border-b" size="25" readonly placeholder="" maxlength="100"
                                 required="" style="width:0px;overflow:hidden;" id="editid">
                             <input type="text" name="editname" class="border-b" size="25" placeholder="Enter Name"
                                 maxlength="100" required="" id="editname">
@@ -218,11 +224,11 @@
                     </div>
                     <!-- This is add member card -->
                     <div style="height: 480px;" id="addMemberCard"
-                        class="mr-3 mt-3 w-80 bg-white rounded-lg shadow hidden">
+                        class="mr-3 mt-3 w-80 bg-white rounded-lg shadow hidden" ">
                         <div class="py-2 px-4 font-medium text-lg border-b">Add Member</div>
-                        <img class="my-9 mx-auto" style="height : 100px; width : 100px; border-radius: 50%;" id="dp-set-add" src="{%static 'imgs/user-default.png'%}" alt="profile"
+                        <img class="my-4 mx-auto" style="height : 100px; width : 100px; border-radius: 50%;" id="dp-set-add" src="{%static 'imgs/user-default.png'%}" alt="profile"
                             border="0" />
-                        <button class="mx-6 bg-gray-200 rounded-full border-black" onclick="dpuploadadd()" style = "transform:translate(30px,-18px) scale(1.5,1.5)">
+                        <button class="mx-6 bg-gray-200 rounded-full border-black" onclick="dpuploadadd()" style = "transform:translate(165px,-47px) scale(1.5,1.5)">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                 fill="currentColor">
                                 <path
