@@ -96,20 +96,20 @@
         <div class="sm:flex md:flex-row sm:flex-col">
             {% include 'navbar.html' %}
 
-            <span style="display: grid; grid-template-rows: 8% 92%;" class="content bg-slate-100 h-screen w-full">
+            <span style="display: grid; grid-template-rows: 8% 92%;" class="content bg-slate-100 h-screen w-full overflow-hidden">
                 <nav class="mx-5 my-3">
                     <span
                         class="competition-title align-middle font-medium text-2xl sm:text-center">
                         <p class="text-center pl-5 md:text-left md:pl-0"> Competitions</p>
                     </span>
                 </nav>
-                <div class="md:ml-5 md:grid md:grid-cols-7 pb-4">
+                <div class="md:mx-5 md:grid md:grid-cols-7 pb-4">
                     <div class="m-0 p-0 md:col-span-2 md:rounded-md bg-white inline overflow-auto competitions-list shadow-md ">
                         <div class="mb-3 hidden sm:block">
                             <p class="pl-5 py-3 border-b-2 font-medium hideitems">Modules</p>
                         </div>
 
-                        <div class="mb-0 text-white mb-3 h-10 orcolor flex align-middle changecoloritem md:hidden justify-between"
+                        <div class="mb-0 text-white h-10 orcolor flex align-middle changecoloritem md:hidden justify-between"
                             id="headmob">
                             <img src="{% static 'icons/dance.png' %}" alt="dance" class="h-4/6 m-1">
                             <span class="inline align-middle mt-2 pl-4 tracking-wide align-middle"
