@@ -13,10 +13,10 @@
     }
 </style>
 <div style="background-color: #F3F6F8;" class="mb-12">
-    {% include 'navbar.html' %}
-    <div class="flex mb-6 md:mb-1">
+    <div class="h-screen flex mb-6 md:mb-1">
+        {% include 'navbar.html' %}
         <!-- left_nav -->
-        <div class="w-80 bg-white h-screen hidden md:block"></div>
+        <!-- <div class="w-80 bg-white h-screen hidden md:block"></div> -->
         <div class="flex-grow flex flex-col">
             <div class="m-3 font-medium text-2xl">Team Members
                 <span class="mx-3 px-2 py-1 bg-gray-600 rounded-sm font-normal text-white text-sm">{{team|length}}</span>
