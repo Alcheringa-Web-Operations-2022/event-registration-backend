@@ -73,5 +73,6 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
         return str(self.email)
     
     def save(self, *args, **kwargs):
-        self.alcherid = create_new_ref_number()
+        if not self.alcherid:
+            self.alcherid = create_new_ref_number()
         return super(NewUser,self).save(*args,**kwargs)
