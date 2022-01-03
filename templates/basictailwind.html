@@ -81,8 +81,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
 {% include 'loading.html' %}
 {% include 'messages.html' %}
+{% include 'guidelines_popup.html' %}
 <script>
     var active="{{active_page}}";
     document.getElementById("{{active_page}}").style.color="#EE6337";
