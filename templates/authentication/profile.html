@@ -2,96 +2,105 @@
 {%block title%}My Profile | Alcheringa {%endblock%}
 {% block body %}
 <Style>
-    input,textarea{
-       border: none;
-       border-bottom: 1px solid rgb(214, 206, 206);
-       margin: 16px 0px;
-   }
-   input,textarea:focus{
-    outline: none;
+    input,
+    textarea {
+        border: none;
+        border-bottom: 1px solid rgb(214, 206, 206);
+        margin: 16px 0px;
+    }
+
+    input,
+    textarea:focus {
+        outline: none;
     }
 </Style>
-<body  x-data="{ showModal: false}" :class="{'overflow-y-hidden': showModal}">
-	<div class="flex" style="background-color: #F3F6F8;">
-		{% include "../navbar.html" %}
-		<div class="flex-grow h-screen bg-gray-100">
-			<div class="flex flex-grow" style="background-color: #F3F6F8;">
-                <div class="mx-4 flex-grow">
-                    <br>
-                    <div class="flex m-1">
-                        <div class=" bg-white max-w-4xl rounded-lg w-screen shadow-md">
-                            <div >
-                                <div class="py-3 pl-6 flex flex-row text-xl border-b-2 font-normal justify-between">
+
+<body x-data="{ showModal: false}" :class="{'overflow-y-hidden': showModal}">
+    <div class="flex" style="background-color: #F3F6F8;">
+        {% include "../navbar.html" %}
+        <div class="flex-grow h-screen bg-gray-100">
+            <div class="flex flex-grow h-full" style="background-color: #F3F6F8;">
+                <div class="mx-4 flex-grow h-full">
+                    <div class="flex h-full">
+                        <div class=" my-4 bg-white max-w-4xl rounded-lg w-screen shadow-md">
+                            <div>
+                                <div class="pt-2 pl-6 flex flex-row text-xl border-b-2 font-normal justify-between">
                                     <div>My Profile</div>
-                                     <div><a href="{%url 'profileedit'%}"> <button
-                                            class="orcolor mr-4 text-white md:ml-5 pt-1 pb-1 pl-4 pr-4 rounded-md font-medium">Edit Profile</button></a></div></div>
+                                    <div><a href="{%url 'profileedit'%}"> <button
+                                                class="orcolor mr-4 text-white md:ml-5 pt-1 pb-1 pl-4 pr-4 rounded-md font-small text-base">Edit
+                                                Profile</button></a></div>
+                                </div>
                                 <br>
                                 <div class="mx-10">
-                                    
+
                                     <div class="container p-2">
-                                        <img style="height : 70px; width : 70px; border-radius: 50%;" src="{{request.user.img.url}}" id="dp-set"class="justify-self-start"
-                                            alt="profile pic" border="0" class="mx-auto" style="border-radius:9999px;" />
-                                        
+                                        <img style="height : 70px; width : 70px; border-radius: 50%;"
+                                            src="{{request.user.img.url}}" id="dp-set" class="justify-self-start"
+                                            alt="profile pic" border="0" class="mx-auto"
+                                            style="border-radius:9999px;" />
+
                                     </div>
-                                  
-                                        <div class="grid grid-cols-2 gap-2 place-content-end md:place-content-center">
-                                            
-                                            
-                                            <div class="my-4">
-                                                <div class="font-medium text-xs text-gray-500 text-left">Full name *</div>
-                                                {{ request.user.fullname }}
-                                            </div>
+
+                                    <div class="grid grid-cols-2 gap-2 place-content-end md:place-content-center">
+
+
+                                        <div class="my-4">
+                                            <div class="font-medium text-xs text-gray-500 text-left">Full name *</div>
+                                            {{ request.user.fullname }}
+                                        </div>
 
 
 
-                                            <div  class="my-4">
-                                                <div class="font-medium text-xs text-gray-500 text-left ">Username *</div>
-                                                {{ request.user.username }}
-                                            </div>
+                                        <div class="my-4">
+                                            <div class="font-medium text-xs text-gray-500 text-left ">Username *</div>
+                                            {{ request.user.username }}
+                                        </div>
 
 
-                                            
 
-                                            <div  class="my-4">
-                                                <div class="font-medium text-xs text-gray-500 text-left">Email ID *</div>
-                                                {{ request.user.email }}
-                                            </div>
 
-                                            <div  class="my-4">
-                                                <div class="font-medium text-xs text-gray-500 text-left">Gender *</div>
-                                                {{ request.user.gender }}
-                                            </div>
+                                        <div class="my-4">
+                                            <div class="font-medium text-xs text-gray-500 text-left">Email ID *</div>
+                                            {{ request.user.email }}
+                                        </div>
 
-                                            <div  class="my-4">
-                                                <div class="font-medium text-xs text-gray-500 text-left">College *</div>
-                                                {{ request.user.collegename }}
-                                            </div>
+                                        <div class="my-4">
+                                            <div class="font-medium text-xs text-gray-500 text-left">Gender *</div>
+                                            {{ request.user.gender }}
+                                        </div>
 
-                                            <div class="my-4">
-                                                <div class="font-medium text-xs text-gray-500 text-left">City *</div>
-                                                {{ request.user.city }}
-                                            </div>
+                                        <div class="my-4">
+                                            <div class="font-medium text-xs text-gray-500 text-left">College *</div>
+                                            {{ request.user.collegename }}
+                                        </div>
 
-                                            <div class="my-4">
-                                                <div class="font-medium text-xs text-gray-500 text-left">Phone *</div>
-                                                {{  request.user.phone }}
-                                            </div class="my-4">
+                                        <div class="my-4">
+                                            <div class="font-medium text-xs text-gray-500 text-left">City *</div>
+                                            {{ request.user.city }}
+                                        </div>
 
-                                            <div class="my-4">
-                                                <div class="font-medium text-xs text-gray-500 text-left">Alternate Phone number</div>
-                                                {{  request.user.alternate_phone }}
-                                            </div>
-<div style="height:0px;overflow:hidden">
+                                        <div class="my-4">
+                                            <div class="font-medium text-xs text-gray-500 text-left">Phone *</div>
+                                            {{ request.user.phone }}
+                                        </div class="my-4">
+
+                                        <div class="my-4">
+                                            <div class="font-medium text-xs text-gray-500 text-left">Alternate Phone
+                                                number</div>
+                                            {{ request.user.alternate_phone }}
+                                        </div>
+                                        <div style="height:0px;overflow:hidden">
                                             {{form.interest}}</div>
-                                        </div>
-                                        <div class="container">
-                                            <div>
-                                                <div class="pt-6 font-medium text-xs text-gray-500 text-left">Interests</div>
-                                            </div>
-                                            <div class="flex flex-wrap py-3" id="chip-interest">
-                                            
+                                    </div>
+                                    <div class="container">
+                                        <div>
+                                            <div class="pt-6 font-medium text-xs text-gray-500 text-left">Interests
                                             </div>
                                         </div>
+                                        <div class="flex flex-wrap py-3" id="chip-interest">
+
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="  w-80 border-gray-400 rounded mx-4 m-{5}"></div>
                             </div>
@@ -99,107 +108,48 @@
                     </div>
                 </div>
             </div>
-        </div>        
-	</div>
+        </div>
+    </div>
 </body>
 <script>
-  var interests=[]
-  //add chip
-  function addchip(interests) {
-    $("#chip-interest").empty();
-    $.each(interests, function (i) {
-      var templateString = `<span
+    var interests = []
+    //add chip
+    function addchip(interests) {
+        $("#chip-interest").empty();
+        $.each(interests, function (i) {
+            var templateString = `<span
                 id="chip${interests[i].id}" class="mx-2 my-2 rounded-full text-white orcolor font-semibold text-sm flex align-center cursor-pointer active:bg-gray-300 transition duration-300 ease w-max">
                 <span class="flex items-center px-3 py-2">
                 ${interests[i].name}
                 </span>
                 
             </span>`;
-      $("#chip-interest").append(templateString);
-      
-    });
-  }
+            $("#chip-interest").append(templateString);
 
-
-  window.onload = function() {
-    var labels = document.getElementsByTagName('label');
-    for (var i = 0; i < labels.length; i++) {
-        if (labels[i].htmlFor != '') {
-            var elem = document.getElementById(labels[i].htmlFor);
-            if (elem)
-                elem.label = labels[i];         
-        }
+        });
     }
-    for (var i = 0;i < {{totalmodules}};i++) {
-        if(document.getElementById(`id_interest_${i}`).checked == true){
+
+
+    window.onload = function () {
+        var labels = document.getElementsByTagName('label');
+        for (var i = 0; i < labels.length; i++) {
+            if (labels[i].htmlFor != '') {
+                var elem = document.getElementById(labels[i].htmlFor);
+                if (elem)
+                    elem.label = labels[i];
+            }
+        }
+        for (var i = 0; i < {{ totalmodules }}; i++) {
+        if (document.getElementById(`id_interest_${i}`).checked == true) {
             var html = document.getElementById(`id_interest_${i}`).label.innerHTML;
             var div = document.createElement("div");
             div.innerHTML = html;
-            interests.push({'id':document.getElementById(`id_interest_${i}`).value,'name':div.innerText})                
+            interests.push({ 'id': document.getElementById(`id_interest_${i}`).value, 'name': div.innerText })
         }
     }
-    if(interests.length>0)
-    addchip(interests)
+    if (interests.length > 0)
+        addchip(interests)
     console.log(interests)
     };
 </script>
 {% endblock %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
