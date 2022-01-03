@@ -50,13 +50,14 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=150, unique=True)
     collegename = models.CharField(max_length=150, unique=False)
     city = models.CharField(max_length=150, unique=False)
-    fullname = models.CharField(max_length=150, blank=True)
-    phone = PhoneNumberField(unique=False, blank=True)
-    alternate_phone = PhoneNumberField(unique=False, blank=True,null=True)
+    fullname = models.CharField(max_length=150, )
+    phone = PhoneNumberField(unique=False, )
+    alternate_phone = PhoneNumberField(unique=False, blank=True)
     interest = models.ManyToManyField(
         "competitions.Module", related_name="interest")
     team_members=models.IntegerField(default=0)
-    no_of_events_registered=models.IntegerField(default=0)
+    events_registered = models.ManyToManyField(
+        "competitions.Competition", related_name="competition",null=True,blank=True)
 
     date_joined = models.DateTimeField(default=timezone.now)
     provider = models.CharField(max_length=200, unique=False, default="email")

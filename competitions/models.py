@@ -67,5 +67,5 @@ class SubmitPerformance(models.Model):
 def comp_register_signal(sender, instance, created, *args, **kwargs):
     if(created):
         user = NewUser.objects.get(email=instance.leader.email)
-        user.no_of_events_registered += 1
+        user.events_registered.add(instance.event)
         user.save()
